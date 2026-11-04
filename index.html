@@ -194,10 +194,12 @@ function renderList(f=""){
 /* ===== viewer ===== */
 function vs(){return[vp.clientWidth,vp.clientHeight]}
 function minS(){const[w,h]=vs();return Math.min(w/W,h/H)*.5}
-function clamp(){const[w,h]=vs();V.s=Math.min(6,Math.max(minS(),V.s));const m=60;
+function clamp(){const[w,h]=vs();V.s=Math.min(4.5,Math.max(minS(),V.s));const m=60;
  V.x=Math.min(w-m,Math.max(m-W*V.s,V.x));V.y=Math.min(h-m,Math.max(m-H*V.s,V.y))}
 function apply(anim){st.style.transition=anim?"transform .6s cubic-bezier(.2,.8,.2,1)":"none";clamp();st.style.transform=`translate(${V.x}px,${V.y}px) scale(${V.s})`}
-function setPage(p){if(page===p)return;page=p;$("#i1").classList.toggle("on",p===1);$("#i2").classList.toggle("on",p===2);$("#pg").textContent=`Halaman ${p} dari 2`}
+const HD={1:"img/halaman-1-hd.jpg",2:"img/halaman-2-hd.jpg"},hdDone={};
+function loadHD(p){if(hdDone[p])return;hdDone[p]=1;const im=new Image();im.onload=()=>{document.getElementById("i"+p).src=HD[p]};im.src=HD[p]}
+function setPage(p){if(page===p)return;page=p;loadHD(p);setTimeout(()=>loadHD(p===1?2:1),2500);$("#i1").classList.toggle("on",p===1);$("#i2").classList.toggle("on",p===2);$("#pg").textContent=`Halaman ${p} dari 2`}
 function fitBox(b,anim=true,pad=.05){
  const[w,h]=vs(),bw=b[2]-b[0],bh=b[3]-b[1];
  V.s=Math.min(w/(bw*(1+2*pad)),h/(bh*(1+2*pad)));
@@ -215,7 +217,7 @@ function go(i,anim=true){
  const on=$("#list .mi.on");on&&on.scrollIntoView({block:"nearest"});
  history.replaceState(null,"","#"+m.id);closeDrawer();
 }
-function zoomAt(f,cx,cy,anim){const ns=Math.min(6,Math.max(minS(),V.s*f));f=ns/V.s;V.x=cx-(cx-V.x)*f;V.y=cy-(cy-V.y)*f;V.s=ns;apply(anim)}
+function zoomAt(f,cx,cy,anim){const ns=Math.min(4.5,Math.max(minS(),V.s*f));f=ns/V.s;V.x=cx-(cx-V.x)*f;V.y=cy-(cy-V.y)*f;V.s=ns;apply(anim)}
 function center(){const[w,h]=vs();return[w/2,h/2]}
 /* pointer: geser & cubit */
 const P=new Map();let pd=0;
