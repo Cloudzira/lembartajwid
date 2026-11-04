@@ -1,0 +1,4 @@
+{
+ "name":"Lembar Tajwid Tartili","short_name":"Tajwid Tartili","description":"Panduan hukum tajwid bergambar: Mad, Makhraj, Sifat Huruf, Qalqalah, Nun & Mim, Waqaf.",
+ "lang":"id","start_url":"./","scope":"./","display":"standalone","orientation":"any","background_color":"#8d7ede","theme_color":"#7461cf",
+ "icons":[{"src":"icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},{"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},{"src":"icons/maskable-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"},{"src":"icons/icon.svg","sizes":"any","type":"image/svg+xml"}]}

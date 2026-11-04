@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a698f4"/><stop offset="1" stop-color="#5a48bb"/></linearGradient><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#e6dfff"/></linearGradient></defs>
+<rect width="512" height="512" rx="112" fill="url(#g)"/>
+<g transform="translate(256 256) scale(1) translate(-256 -256)">
+<g fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="6"><rect x="96" y="96" width="320" height="320"/><rect x="96" y="96" width="320" height="320" transform="rotate(45 256 256)"/></g>
+<path d="M256 388C212 352 148 344 92 358V196C148 182 212 190 256 224Z" fill="url(#pg)"/>
+<path d="M256 388C300 352 364 344 420 358V196C364 182 300 190 256 224Z" fill="url(#pg)"/>
+<path d="M256 224V388" stroke="#7d6bd8" stroke-width="6"/>
+<g stroke="#b9acf0" stroke-width="7" stroke-linecap="round" fill="none"><path d="M132 232c30-4 62 0 94 14M132 262c30-4 62 0 94 14M132 292c30-4 62 0 94 14"/><path d="M380 232c-30-4-62 0-94 14M380 262c-30-4-62 0-94 14M380 292c-30-4-62 0-94 14"/></g>
+<path d="M78 372C146 358 212 366 256 402C300 366 366 358 434 372" fill="none" stroke="#f1cf73" stroke-width="14" stroke-linecap="round"/>
+<path d="M188 150c20-44 52-46 68-12 16 34 48 32 68-12" fill="none" stroke="#ff5470" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg>
