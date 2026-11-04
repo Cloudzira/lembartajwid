@@ -10,13 +10,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-:root{--p:#7461cf;--p2:#a595ec;--ink:#2b2750;--mut:#7b779c;--card:#fffdfb;--line:#ece6fb}
+:root{--af:'Amiri','Noto Naskh Arabic','Scheherazade New','Traditional Arabic',serif;--rd:#d62f4a;--az:1;--p:#7461cf;--p2:#a595ec;--ink:#2b2750;--mut:#7b779c;--card:#fffdfb;--line:#ece6fb}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;font-family:'Poppins',system-ui,sans-serif;color:var(--ink);background:linear-gradient(160deg,#ddd5f8,#b7a8ee);min-height:100vh;padding:18px}
 a{color:inherit;text-decoration:none}
 .app{display:grid;grid-template-columns:236px 1fr;gap:18px;max-width:1440px;margin:0 auto}
-.side{background:linear-gradient(180deg,#8d7ede,#6c5bc7);border-radius:30px;padding:24px 14px;color:#fff;position:sticky;top:18px;height:calc(100vh - 36px);display:flex;flex-direction:column;box-shadow:0 18px 40px rgba(94,76,190,.35)}
+.side{background:linear-gradient(180deg,#8d7ede,#6c5bc7);border-radius:30px;padding:24px 14px;color:#fff;position:sticky;top:18px;height:calc(100vh - 36px);display:flex;flex-direction:column;overflow-y:auto;box-shadow:0 18px 40px rgba(94,76,190,.35)}
 .av{width:92px;height:92px;border-radius:50%;margin:0 auto 10px;display:grid;place-items:center;font-weight:700;font-size:28px;background:linear-gradient(135deg,#9c8df0,#6d5cc8);border:4px solid rgba(255,255,255,.55);position:relative;box-shadow:0 8px 20px rgba(0,0,0,.18)}
 .av:after{content:"";position:absolute;right:4px;bottom:6px;width:16px;height:16px;border-radius:50%;background:#37d67a;border:3px solid #fff}
 .hi{text-align:center;font-weight:600;margin-bottom:22px;font-size:15px}
@@ -35,7 +35,7 @@ a{color:inherit;text-decoration:none}
 .hero h2{margin:0 0 8px;font-size:24px}
 .hero p{margin:0 0 18px;color:#5d5890;font-size:14px;max-width:430px;line-height:1.6}
 .btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:14px;color:#fff;background:linear-gradient(135deg,#8f7fe6,#6d5bcb);padding:12px 24px;border-radius:999px;box-shadow:0 10px 20px rgba(110,90,200,.35)}
-.hero .art{font-family:'Amiri',serif;font-size:76px;color:#fff;text-shadow:0 8px 24px rgba(90,70,190,.45);line-height:1.5;direction:rtl;padding:0 10px}
+.hero .art{font-family:var(--af);font-size:76px;color:#fff;text-shadow:0 8px 24px rgba(90,70,190,.45);line-height:1.5;direction:rtl;padding:0 10px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-bottom:22px}
 .st{border-radius:22px;padding:18px;box-shadow:0 10px 24px rgba(110,90,200,.12)}
 .st .ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#fff;margin-bottom:12px}
@@ -49,20 +49,20 @@ a{color:inherit;text-decoration:none}
 .gh h2{margin:0;font-size:18px}
 .gh .ar{font-size:24px;color:var(--p)}
 .tag{font-size:12px;font-weight:600;background:#fff;color:var(--p);padding:5px 12px;border-radius:999px;box-shadow:0 4px 10px rgba(110,90,200,.12)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(290px,100%),1fr));gap:16px}
 .card{background:var(--card);border-radius:22px;padding:18px;box-shadow:0 10px 26px rgba(110,90,200,.13);border:1px solid #f1ecfd}
 .card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .card h3{margin:0 0 6px;font-size:15px;font-weight:600}
 .bd{display:inline-block;font-size:11px;font-weight:600;color:#7a5a00;background:#fff0c4;padding:3px 10px;border-radius:999px}
 .card p{margin:10px 0 0;font-size:13px;line-height:1.6;color:#5b5782}
-.ar{font-family:'Amiri','Scheherazade New','Traditional Arabic',serif;direction:rtl;unicode-bidi:isolate;line-height:2}
-.card .big{font-size:25px;color:#d62f4a;text-align:right;white-space:nowrap}
-.lt{margin-top:8px;font-size:22px;letter-spacing:2px;color:var(--p);text-align:right;background:#f3efff;border-radius:14px;padding:4px 14px}
+.ar{font-family:var(--af);direction:rtl;unicode-bidi:isolate;line-height:2;letter-spacing:0!important;font-kerning:normal;font-feature-settings:"liga","calt","mark","mkmk"}
+.card .top>div:first-child{min-width:0}.card .big{font-size:calc(26px*var(--az));color:var(--p);text-align:right}.card.red .big,.rd{color:var(--rd)}.rd{font-style:normal}
+.lt{margin-top:10px;font-size:calc(24px*var(--az));word-spacing:.35em;color:var(--p);text-align:right;background:#f3efff;border-radius:14px;padding:4px 14px}
 .ex{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;justify-content:flex-end;direction:rtl}
-.ex span{font-size:21px;background:#e9f6ff;color:#17496e;border-radius:12px;padding:0 12px}
+.ex span{font-size:calc(23px*var(--az));background:#e9f6ff;color:#17496e;border-radius:12px;padding:0 12px}
 .rows{list-style:none;margin:12px 0 0;padding:0}
-.rows li{display:grid;grid-template-columns:90px 1fr;gap:10px;align-items:center;padding:8px 0;border-top:1px dashed var(--line);font-size:13px;color:#5b5782}
-.rows .ar{font-size:21px;color:var(--p);text-align:center}
+.rows li{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;padding:8px 0;border-top:1px dashed var(--line);font-size:13px;color:#5b5782}
+.rows .ar{font-size:calc(22px*var(--az));color:var(--p);text-align:center}
 .empty{padding:40px;text-align:center;color:var(--mut)}
 .note{margin-top:14px;font-size:12.5px;color:#7c4a4a;background:#fff0f0;border-radius:14px;padding:10px 14px;line-height:1.6}
 footer{margin-top:34px;text-align:center;color:var(--mut);font-size:13px}
@@ -70,6 +70,11 @@ footer{margin-top:34px;text-align:center;color:var(--mut);font-size:13px}
 .soc a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--p);box-shadow:0 6px 14px rgba(110,90,200,.18);transition:.2s}
 .soc a:hover{transform:translateY(-3px);background:var(--p);color:#fff}
 .dock{display:none}
+.lead{color:var(--mut);font-size:14px;margin:0;line-height:1.7}.lead .ar,.card p .ar{font-size:1.3em;color:var(--p);line-height:1.6}
+.card.sg .lt{color:var(--rd);font-size:calc(28px*var(--az));text-align:center}
+.lat{font:500 11px/1 'Poppins',sans-serif;direction:ltr;unicode-bidi:isolate;color:var(--mut);margin-inline-start:4px}
+.tools{display:flex;gap:6px}.tb{border:0;cursor:pointer;font:600 14px 'Poppins',sans-serif;color:var(--p);background:#fff;min-width:44px;height:44px;border-radius:999px;box-shadow:0 4px 10px rgba(110,90,200,.15)}.tb:active{transform:scale(.95)}
+.up{position:fixed;right:16px;bottom:24px;width:46px;height:46px;border:0;border-radius:50%;background:var(--p);color:#fff;font-size:18px;cursor:pointer;box-shadow:0 8px 20px rgba(70,50,170,.4);opacity:0;pointer-events:none;transition:.2s;z-index:30}.up.show{opacity:1;pointer-events:auto}
 a:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid #ffb703;outline-offset:2px}
 @media(max-width:900px){
  body{padding:10px 10px 90px}.app{grid-template-columns:1fr}.side{display:none}
@@ -78,6 +83,8 @@ a:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid #ffb7
  .dock a{flex:1 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:#e8e2ff;padding:8px 12px;border-radius:999px;font-weight:500}
  .dock a.on{background:#fff;color:var(--p)}
 }
+@media(max-width:900px){.up{bottom:calc(86px + env(safe-area-inset-bottom,0px))}.dock a i{font-size:16px}.dock a{font-size:11px}}
+@media(max-width:600px){.bar h1{font-size:22px}.sr{order:3;flex-basis:100%;max-width:none}.card .top{flex-direction:column-reverse}.hero{padding:22px}.stats{grid-template-columns:repeat(2,1fr)}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -92,7 +99,8 @@ a:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid #ffb7
  <main class="main">
   <div class="bar">
    <h1 id="ttl">Beranda</h1>
-   <label class="sr"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Cari hukum, huruf, atau contoh…" autocomplete="off"></label>
+   <label class="sr"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Cari hukum, huruf, atau contoh…" autocomplete="off" aria-label="Cari"></label>
+   <div class="tools" role="group" aria-label="Ukuran huruf Arab"><button class="tb" id="azm" aria-label="Perkecil huruf Arab">A−</button><button class="tb" id="azp" aria-label="Perbesar huruf Arab">A+</button></div>
   </div>
   <div id="view"></div>
   <footer>
@@ -106,29 +114,30 @@ a:focus-visible,input:focus-visible,button:focus-visible{outline:3px solid #ffb7
   </footer>
  </main>
 </div>
-<nav class="dock" id="dock"></nav>
+<nav class="dock" id="dock" aria-label="Menu utama"></nav>
+<button class="up" id="up" aria-label="Kembali ke atas">↑</button>
 
 <script>
 /* ================= DATA MATERI ================= */
 const D={
 mad:{t:"Hukum Mad",i:"fa-wave-square",s:"Bacaan panjang: mad pokok (2 harokat) dan mad cabang (lebih dari 2 harokat).",g:[
 {h:"Mad Ashli (Pokok)",ar:"مَدٌّ أَصْلِيٌّ",n:"2 harokat",items:[
-{n:"Mad Thabi'i",a:"مَدٌّ طَبِيعِيٌّ",b:"2 harokat",d:"Mad berkarakter panjang 2 harakat, yaitu alif setelah fathah, wawu sukun setelah dhommah, dan ya sukun setelah kasroh.",x:["قَالَ","يَقُولُ","قِيلَ"]},
-{n:"Mad 'Iwadh",a:"مَدٌّ عِوَضٍ",b:"2 harokat",d:"Mad pengganti tanwin fathah.",x:["مَاءً","أَفْوَاجًا"]},
-{n:"Mad Harfi",a:"مَدٌّ حَرْفِيٌّ",b:"2 harokat",d:"Mad pada huruf-huruf awal surat.",x:["حم","الر","يس","طه","طس"]},
-{n:"Mad Shilah Shughra",a:"مَدُّ صِلَةٍ صُغْرَى",b:"2 harokat",d:"Mad pada ha' dhamir.",x:["رُسُلِهِ","إِنَّهُ","لَهُ","بِهِ"]}]},
+{n:"Mad Thabi'i",a:"مَدٌّ طَبِيعِيٌّ",b:"2 harokat",d:"Mad berkarakter panjang 2 harakat, yaitu alif setelah fathah, wawu sukun setelah dhommah, dan ya sukun setelah kasroh.",x:["قَ*ا*لَ","يَقُ*و*لُ","قِ*ي*لَ"]},
+{n:"Mad 'Iwadh",a:"مَدٌّ عِوَضٍ",b:"2 harokat",d:"Mad pengganti tanwin fathah.",x:["مَا*ءً*","أَفْوَا*جًا*"]},
+{n:"Mad Harfi",a:"مَدٌّ حَرْفِيٌّ",b:"2 harokat",d:"Mad pada huruf-huruf awal surat.",x:["حم","الر","المر","يس","طه","طس"]},
+{n:"Mad Shilah Shughra",a:"مَدُّ صِلَةٍ صُغْرَى",b:"2 harokat",d:"Mad pada ha' dhamir.",x:["رُسُلِ*هِ*","إِنَّ*هُ*","لَ*هُ*","بِ*هِ*"]}]},
 {h:"Mad Far'i (Cabang) — Sebab Bertemu Hamzah",ar:"مَدٌّ فَرْعِيٌّ",n:"lebih dari 2 harokat",items:[
-{n:"Mad Wajib Muttashil",a:"مَدٌّ (وَاجِبٌ) مُتَّصِلٌ",b:"4 harokat",d:"Mad bertemu hamzah dalam satu kata.",x:["جَاءَ","السَّمَاءِ","أُولَئِكَ","الْمَلَائِكَةُ","وَالْفَحْشَاءِ"]},
-{n:"Mad Jaiz Munfashil",a:"مَدٌّ (جَائِزٌ) مُنْفَصِلٌ",b:"4 harokat",d:"Mad bertemu hamzah dalam dua kata.",x:["قَالُوا آمَنَّا","إِنَّا أَعْطَيْنَاكَ","وَفِي أَنْفُسِكُمْ"]},
-{n:"Mad Shilah Kubra",a:"مَدُّ صِلَةٍ كُبْرَى",b:"4 harokat",d:"Mad pada ha' dhamir bertemu hamzah.",x:["بِنِعْمَتِهِ إِخْوَانًا","أَنَّ مَالَهُ أَخْلَدَهُ"]},
-{n:"Mad Badal",a:"مَدٌّ بَدَلٍ",b:"2 harokat",d:"Mad pengganti hamzah. Menurut thariq Syathibiyah, panjang 2 harakat.",x:["آمَنُوا","إِيمَانًا","أُوتُوا"]}]},
+{n:"Mad Wajib Muttashil",a:"مَدٌّ (وَاجِبٌ) مُتَّصِلٌ",b:"4 harokat",d:"Mad bertemu hamzah dalam satu kata.",x:["جَ*اءَ*","جِ*يءَ*","السَّمَ*اءِ*","الْمَلَ*ائِ*كَةُ","وَالْفَحْشَ*اءِ*","ثَلَاثَةَ قُرُ*وءٍ*"]},
+{n:"Mad Jaiz Munfashil",a:"مَدٌّ (جَائِزٌ) مُنْفَصِلٌ",b:"4 harokat",d:"Mad bertemu hamzah dalam dua kata.",x:["قَالُ*وا* *آ*مَنَّا","إِنَّ*ا* *أَ*عْطَيْنَاكَ","وَفِ*ي* *أَ*نْفُسِكُمْ"]},
+{n:"Mad Shilah Kubra",a:"مَدُّ صِلَةٍ كُبْرَى",b:"4 harokat",d:"Mad pada ha' dhamir bertemu hamzah.",x:["بِنِعْمَتِ*هِ* *إِ*خْوَانًا","أَنَّ مَالَ*هُ* *أَ*خْلَدَهُ"]},
+{n:"Mad Badal",a:"مَدٌّ بَدَلٍ",b:"2 harokat",d:"Mad pengganti hamzah. Menurut thariq Syathibiyah, panjang 2 harakat.",x:["*آ*مَنُوا","إِ*ي*مَانًا","أُ*و*تُوا"]}]},
 {h:"Mad Far'i (Cabang) — Sebab Bertemu Sukun",ar:"مَدٌّ فَرْعِيٌّ",n:"sebab sukun",items:[
-{n:"Mad Lazim Kilmi Mutsaqqal",a:"مَدٌّ لَازِمٌ كَلِمِيٌّ مُثَقَّلٌ",b:"6 harokat",d:"Mad bertemu sukun asli, pada kata, dengan tasydid.",x:["اللهُ","الدَّابَّةُ","الطَّامَّةُ","الضَّالِّينَ"]},
+{n:"Mad Lazim Kilmi Mutsaqqal",a:"مَدٌّ لَازِمٌ كَلِمِيٌّ مُثَقَّلٌ",b:"6 harokat",d:"Mad bertemu sukun asli, pada kata, dengan tasydid.",x:["آللّهُ","الدَّ*ا*بَّةُ","الطَّ*ا*مَّةُ","الضَّ*ا*لِّينَ"]},
 {n:"Mad Lazim Kilmi Mukhaffaf",a:"مَدٌّ لَازِمٌ كَلِمِيٌّ مُخَفَّفٌ",b:"6 harokat",d:"Mad bertemu sukun asli, pada kata, tanpa tasydid.",x:["آلْآنَ"]},
 {n:"Mad Lazim Harfi Mutsaqqal",a:"مَدٌّ لَازِمٌ حَرْفِيٌّ مُثَقَّلٌ",b:"6 harokat",d:"Mad bertemu sukun asli, pada huruf awal surat, dengan tasydid.",x:["الم","طسم"]},
 {n:"Mad Lazim Harfi Mukhaffaf",a:"مَدٌّ لَازِمٌ حَرْفِيٌّ مُخَفَّفٌ",b:"6 harokat",d:"Mad bertemu sukun asli, pada huruf awal surat, tanpa tasydid.",x:["ص","ن","ق","يس","حم","عسق","كهيعص"]},
-{n:"Mad 'Aridh Lissukun",a:"مَدٌّ عَارِضٌ لِلسُّكُونِ",b:"2/4/6 harokat",d:"Mad bertemu sukun tidak asli, yaitu huruf yang disukun karena dibaca waqof.",x:["النَّاسِ","يَعْلَمُونَ","عَلِيمٌ","رَسُولُ اللهِ","إِلَّا بِسُلْطَانٍ"]},
-{n:"Mad Liyn",a:"مَدٌّ لِينٌ",b:"2/4/6 harokat",d:"Bacaan liyn bertemu huruf berharokat hidup namun dibaca sukun karena waqof.",x:["قُرَيْشٍ","خَوْفٍ","مَطَرِ السَّوْءِ"]}]}
+{n:"Mad 'Aridh Lissukun",a:"مَدٌّ عَارِضٌ لِلسُّكُونِ",b:"2/4/6 harokat",d:"Mad bertemu sukun tidak asli, yaitu huruf yang disukun karena dibaca waqof.",x:["النَّا*سِ*","يَعْلَمُو*نَ*","عَلِي*مٌ*","رَسُولُ اللَّ*هِ*","إِلَّا بِسُلْطَا*نٍ*"]},
+{n:"Mad Liyn",a:"مَدٌّ لِينٌ",b:"2/4/6 harokat",d:"Bacaan liyn bertemu huruf berharokat hidup namun dibaca sukun karena waqof.",x:["قُرَ*يْشٍ*","خَ*وْفٍ*","مَطَرِ السَّ*وْءِ*"]}]}
 ]},
 
 sifat:{t:"Sifat Huruf",i:"fa-sliders",s:"Sifat-sifat huruf hijaiyah: yang mempunyai lawan, yang tak punya lawan, dan qalqalah.",g:[
@@ -154,9 +163,9 @@ sifat:{t:"Sifat Huruf",i:"fa-sliders",s:"Sifat-sifat huruf hijaiyah: yang mempun
 {n:"Tafasysyi",a:"تَفَشِّي",d:"Tersebarnya udara di rongga mulut.",l:"ش"},
 {n:"Istithalah",a:"اِسْتِطَالَةٌ",d:"Memanjang sepanjang sisi kanan/kiri lidah.",l:"ض"}]},
 {h:"Qalqalah (Bacaan Memantul)",ar:"قَلْقَلَةٌ",n:"huruf qolqolah ada 5: ب ج د ط ق",items:[
-{n:"Qalqalah Shughra (kecil)",a:"قَلْقَلَةٌ صُغْرَى",b:"1",d:"Bacaan langsung memantul sedikit pada huruf qolqolah yang bertanda sukun asli, terdapat pada tengah dan akhir kata.",x:["هُوَ يُبْدِئُ","نَجْوَى","نَزِدْ","أَطْعَمَهُمْ","يَقْتُلُونَ"]},
-{n:"Qalqalah Wustha (sedang)",a:"قَلْقَلَةٌ وُسْطَى",b:"2",d:"Bacaan langsung memantul pada huruf qolqolah pada akhir kata, yang berharokat hidup namun dibaca sukun karena dibaca waqof.",x:["مِنَ الْمَغْرِبِ","الْخُرُوجِ","أَحَدٌ","مُحِيطٌ","صِدْقٍ"]},
-{n:"Qalqalah Kubra (besar)",a:"قَلْقَلَةٌ كُبْرَى",b:"3",d:"Bacaan ditekan satu harokat, baru memantul pada huruf qolqolah di akhir kata yang bertasydid dan berharokat, namun dibaca sukun karena waqof.",x:["وَتَبَّ","وَالْحَجِّ","حَقٌّ","أَشَدُّ"]}]}
+{n:"Qalqalah Shughra (kecil)",a:"قَلْقَلَةٌ صُغْرَى",b:"1",d:"Bacaan langsung memantul sedikit pada huruf qolqolah yang bertanda sukun asli, terdapat pada tengah dan akhir kata.",x:["هُوَ يُ*بْ*دِئُ","نَ*جْ*وَى","نَزِ*دْ*","أَ*طْ*عَمَهُمْ","يَ*قْ*تُلُونَ"]},
+{n:"Qalqalah Wustha (sedang)",a:"قَلْقَلَةٌ وُسْطَى",b:"2",d:"Bacaan langsung memantul pada huruf qolqolah pada akhir kata, yang berharokat hidup namun dibaca sukun karena dibaca waqof.",x:["مِنَ الْمَغْرِ*بِ*","الْخُرُو*جِ*","أَحَ*دٌ*","مُحِي*طٌ*","صِدْ*قٍ*"]},
+{n:"Qalqalah Kubra (besar)",a:"قَلْقَلَةٌ كُبْرَى",b:"3",d:"Bacaan ditekan satu harokat, baru memantul pada huruf qolqolah di akhir kata yang bertasydid dan berharokat, namun dibaca sukun karena waqof.",x:["وَتَ*بَّ*","وَالْحَ*جِّ*","حَ*قٌّ*","أَشَ*دُّ*"]}]}
 ]},
 
 makhraj:{t:"Makhraj Huruf",i:"fa-microphone-lines",s:"Nama dan tempat keluar huruf-huruf (أَلْقَابُ الْحُرُوفِ وَمَخَارِجُهَا).",g:[
@@ -176,23 +185,23 @@ makhraj:{t:"Makhraj Huruf",i:"fa-microphone-lines",s:"Nama dan tempat keluar hur
 
 nun:{t:"Nun Sukun & Tanwin",i:"fa-circle-nodes",s:"Hukum nun sukun dan tanwin (أَحْكَامُ النُّونِ السَّاكِنَةِ وَالتَّنْوِينِ).",note:"Sifat nun sukun, huruf berharokat tanwin, dan mim sukun itu diucapkan dengan unsur dengung 1 harokat. Dan yang bergaris merah memiliki unsur dengung 2 harokat.",g:[
 {h:"Izhhar",ar:"إِظْهَارٌ",n:"membaca jelas bunyi nun sukun/tanwin",items:[
-{n:"Izhhar Halqi",a:"إِظْهَارٌ حَلْقِيٌّ",b:"6 huruf tenggorokan",d:"Membaca jelas bunyi nun sukun/tanwin ketika bertemu salah satu dari 6 huruf tenggorokan.",l:"غ خ ع ح ء ه",x:["مِيثَاقًا غَلِيظًا","الْأَنْهَارُ"]},
-{n:"Izhhar Muthlaq",a:"إِظْهَارٌ مُطْلَقًا",b:"ي و",d:"Membaca jelas bunyi nun sukun ketika bertemu Ya atau Wawu dalam satu kata.",l:"و ي",x:["بُنْيَانٌ","صِنْوَانٌ","الدُّنْيَا","قِنْوَانٌ"]}]},
+{n:"Izhhar Halqi",a:"إِظْهَارٌ حَلْقِيٌّ",b:"6 huruf tenggorokan",d:"Membaca jelas bunyi nun sukun/tanwin ketika bertemu salah satu dari 6 huruf tenggorokan.",l:"غ خ ع ح ء ه",x:["مِيثَا*قًا غَ*لِيظًا","الْأَ*نْهَ*ارُ"]},
+{n:"Izhhar Muthlaq",a:"إِظْهَارٌ مُطْلَقًا",b:"ي و",d:"Membaca jelas bunyi nun sukun ketika bertemu Ya atau Wawu dalam satu kata.",l:"و ي",x:["بُ*نْيَ*انٌ","صِ*نْوَ*انٌ","الدُّ*نْيَ*ا","قِ*نْوَ*انٌ"]}]},
 {h:"Idgham",ar:"إِدْغَامٌ",n:"memasukkan bunyi nun sukun/tanwin ke dalam huruf berikutnya",items:[
-{n:"Idgham Bilaghunnah",a:"إِدْغَامٌ بِلَا غُنَّةٍ",b:"tanpa dengung",d:"Memasukkan bunyi nun sukun atau tanwin ke dalam huruf lam atau ra dengan tanpa dengung.",l:"ل ر",x:["مِنْ لَدُنْكَ","ثَمَرَةٍ رِزْقًا"]},
-{n:"Idgham Bighunnah",a:"إِدْغَامٌ بِغُنَّةٍ",b:"dengung",d:"Memasukkan bunyi nun sukun atau tanwin ke dalam salah satu huruf dari ya, nun, mim, wawu.",l:"ي ن م و",x:["مِنْ وَرَائِهِمْ","خَيْرٌ وَأَبْقَى"]}]},
+{n:"Idgham Bilaghunnah",a:"إِدْغَامٌ بِلَا غُنَّةٍ",b:"tanpa dengung",d:"Memasukkan bunyi nun sukun atau tanwin ke dalam huruf lam atau ra dengan tanpa dengung.",l:"ل ر",x:["مِ*نْ لَ*دُنْكَ","ثَمَرَ*ةٍ رِ*زْقًا"]},
+{n:"Idgham Bighunnah",a:"إِدْغَامٌ بِغُنَّةٍ",b:"dengung",d:"Memasukkan bunyi nun sukun atau tanwin ke dalam salah satu huruf dari ya, nun, mim, wawu.",l:"ي ن م و",x:["مِ*نْ وَ*رَائِهِمْ","خَيْ*رٌ وَ*أَبْقَى"]}]},
 {h:"Iqlab dan Ikhfa'",ar:"إِقْلَابٌ وَإِخْفَاءٌ",items:[
-{n:"Iqlab",a:"إِقْلَابٌ",b:"dengung",d:"Mengganti bunyi nun sukun/tanwin ketika bertemu huruf ba menjadi bunyi mim sukun.",l:"ب",x:["أَنْبِيَاءَ","مِنْ بَعْدِ"]},
-{n:"Ikhfa' Haqiqi",a:"إِخْفَاءٌ حَقِيقِيٌّ",b:"dengung",d:"Membaca samar bunyi nun sukun/tanwin ketika bertemu salah satu huruf 15.",l:"ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك",x:["أَنْدَادًا","دَكًّا"]}]}
+{n:"Iqlab",a:"إِقْلَابٌ",b:"dengung",d:"Mengganti bunyi nun sukun/tanwin ketika bertemu huruf ba menjadi bunyi mim sukun.",l:"ب",x:["أَ*نْبِ*يَاءَ","مِ*نْ بَ*عْدِ"]},
+{n:"Ikhfa' Haqiqi",a:"إِخْفَاءٌ حَقِيقِيٌّ",b:"dengung",d:"Membaca samar bunyi nun sukun/tanwin ketika bertemu salah satu huruf 15.",l:"ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك",x:["أَ*نْدَ*ادًا","دَ*كًّا دَ*كًّا"]}]}
 ]},
 
 mim:{t:"Mim Sukun & Tasydid",i:"fa-comment-dots",s:"Hukum mim sukun serta nun dan mim bertasydid.",g:[
 {h:"Hukum Mim Sukun",ar:"أَحْكَامُ الْمِيمِ السَّاكِنَةِ",items:[
-{n:"Ikhfa' Syafawi",a:"إِخْفَاءٌ شَفَوِيٌّ",b:"dengung",d:"Membaca samar bunyi mim mati ketika bertemu ba.",l:"ب",x:["تَرْمِيهِمْ بِحِجَارَةٍ"]},
-{n:"Idgham Mimi",a:"إِدْغَامٌ مِيمِيٌّ",b:"dengung",d:"Memasukkan bunyi mim mati ke dalam mim berikutnya.",l:"م",x:["وَآمَنَهُمْ مِنْ خَوْفٍ"]},
-{n:"Izhhar Syafawi",a:"إِظْهَارٌ شَفَوِيٌّ",b:"selain mim dan ba",d:"Membaca jelas bunyi mim sukun saat bertemu huruf selain mim dan ba.",x:["الْحَمْدُ"]}]},
+{n:"Ikhfa' Syafawi",a:"إِخْفَاءٌ شَفَوِيٌّ",b:"dengung",d:"Membaca samar bunyi mim mati ketika bertemu ba.",l:"ب",x:["تَرْمِيهِ*مْ بِ*حِجَارَةٍ"]},
+{n:"Idgham Mimi",a:"إِدْغَامٌ مِيمِيٌّ",b:"dengung",d:"Memasukkan bunyi mim mati ke dalam mim berikutnya.",l:"م",x:["وَآمَنَهُ*مْ مِ*نْ خَوْفٍ"]},
+{n:"Izhhar Syafawi",a:"إِظْهَارٌ شَفَوِيٌّ",b:"selain mim dan ba",d:"Membaca jelas bunyi mim sukun saat bertemu huruf selain mim dan ba.",x:["الْحَ*مْدُ*"]}]},
 {h:"Hukum Nun dan Mim Bertasydid",ar:"أَحْكَامُ النُّونِ وَالْمِيمِ الْمُشَدَّدَتَيْنِ",items:[
-{n:"Ghunnah",a:"غُنَّةٌ",b:"dengung 2 harokat",d:"Membaca nun dan mim bertasydid dengan dengung 2 harokat.",l:"نّ  مّ",x:["وَأَمَّا","مِنَ الْجِنَّةِ"]}]}
+{n:"Ghunnah",a:"غُنَّةٌ",b:"dengung 2 harokat",d:"Membaca nun dan mim bertasydid dengan dengung 2 harokat.",l:"نّ  مّ",x:["وَأَ*مَّ*ا","مِنَ الْجِ*نَّ*ةِ"]}]}
 ]},
 
 waqaf:{t:"Tanda Waqaf",i:"fa-hand",s:"Tanda-tanda waqaf (عَلَامَاتُ الْوَقْفِ) dan cara menyikapinya.",g:[
@@ -202,7 +211,7 @@ waqaf:{t:"Tanda Waqaf",i:"fa-hand",s:"Tanda-tanda waqaf (عَلَامَاتُ ا
 {n:"Boleh berhenti",a:"وَقْفٌ جَائِزٌ",d:"Meskipun lebih baik terus.",l:"ج"},
 {n:"Lebih baik berhenti",a:"الْوَقْفُ أَوْلَى",d:"Meskipun boleh terus.",l:"قلى"},
 {n:"Lebih baik terus",a:"الْوَصْلُ أَوْلَى",d:"Meskipun boleh berhenti.",l:"صلى"},
-{n:"Waqof merangkul salah satu",a:"وَقْفُ الْمُعَانَقَةِ",d:"Berhenti di salah satu, tidak boleh berhenti di dua-duanya.",l:"∴ ∴"},
+{n:"Waqof merangkul salah satu",a:"وَقْفُ الْمُعَانَقَةِ",d:"Berhenti di salah satu, tidak boleh berhenti di dua-duanya.",l:"ۛ ۛ"},
 {n:"Berhenti sejenak",a:"سَكْتَةٌ لَطِيفَةٌ",d:"Berhenti selama 2 harokat tanpa bernafas.",l:"س"},
 {n:"Tidak boleh waqof di situ",a:"لَا وَقْفَ فِيهِ",d:"Tanda lam alif di tengah ayat tidak boleh berhenti. Jika terpaksa berhenti, maka mengulang dari kalimat sebelumnya.",l:"لا"},
 {n:"Tidak boleh memutus bacaan di situ",a:"لَا قَطْعَ فِيهِ",d:"Tanda lam alif di akhir ayat, boleh berhenti untuk bernafas, tapi harus melanjutkan bacaan berikutnya.",l:"لا"},
@@ -216,49 +225,56 @@ const $=s=>document.querySelector(s);
 const cnt=k=>D[k].g.reduce((a,g)=>a+g.items.length,0);
 
 /* ================= RENDER ================= */
-const card=it=>`<article class="card"><div class="top"><div><h3>${it.n}</h3>${it.b?`<span class="bd">${it.b}</span>`:""}</div>${it.a?`<div class="ar big">${it.a}</div>`:""}</div>${it.d?`<p>${it.d}</p>`:""}${it.l?`<div class="ar lt">${it.l}</div>`:""}${it.r?`<ul class="rows">${it.r.map(r=>`<li><span class="ar">${r[0]}</span><span>${r[1]}</span></li>`).join("")}</ul>`:""}${it.x?`<div class="ex">${it.x.map(e=>`<span class="ar">${e}</span>`).join("")}</div>`:""}</article>`;
-
-const group=g=>`<div class="gh"><h2>${g.h}</h2>${g.ar?`<span class="ar">${g.ar}</span>`:""}${g.n?`<span class="tag">${g.n}</span>`:""}</div><div class="grid">${g.items.map(card).join("")}</div>`;
+const R=s=>s.replace(/\*(.+?)\*/g,'<em class="rd">$1</em>').replace(/\(([^)]*)\)/g,'<small class="lat">($1)</small>');
+const L=s=>s.replace(/[\u0600-\u06FF][\u0600-\u06FF\s]*[\u0600-\u06FF]/g,'<span class="ar" lang="ar">$&</span>');
+const N=s=>s.replace(/\*/g,"").normalize("NFKD").replace(/[\u064B-\u065F\u0670\u06D6-\u06ED\u0640]/g,"").toLowerCase();
+const A=(c,t)=>`<div class="ar ${c}" lang="ar">${R(t)}</div>`;
+const card=(it,k)=>`<article class="card${k==="mad"?" red":k==="waqaf"?" sg":""}"><div class="top"><div><h3>${it.n}</h3>${it.b?`<span class="bd">${it.b}</span>`:""}</div>${it.a?A("big",it.a):""}</div>${it.d?`<p>${it.d}</p>`:""}${it.l?A("lt",it.l):""}${it.r?`<ul class="rows">${it.r.map(r=>`<li><span class="ar" lang="ar">${R(r[0])}</span><span>${r[1]}</span></li>`).join("")}</ul>`:""}${it.x?`<div class="ex">${it.x.map(e=>`<span class="ar" lang="ar">${R(e)}</span>`).join("")}</div>`:""}</article>`;
+const group=(g,k)=>`<div class="gh"><h2>${g.h}</h2>${g.ar?`<span class="ar" lang="ar">${g.ar}</span>`:""}${g.n?`<span class="tag">${L(g.n)}</span>`:""}</div><div class="grid">${g.items.map(i=>card(i,k)).join("")}</div>`;
 
 function home(){
  const q=[["s1","fa-wave-square","mad","Hukum Mad"],["s2","fa-sliders","sifat","Sifat Huruf"],["s3","fa-microphone-lines","makhraj","Kelompok Makhraj"],["s4","fa-hand","waqaf","Tanda Waqaf"]];
  return `<section class="hero"><div><h2>Assalamu'alaikum! 👋</h2><p>Lembar Tajwid Tartili dalam satu aplikasi: mad, sifat huruf, makhraj, nun sukun &amp; tanwin, mim sukun, dan tanda waqaf — lengkap dengan teks Arab dan penjelasannya.</p><a class="btn" href="#mad"><i class="fa-solid fa-book-open"></i> Mulai Belajar</a></div><div class="art">تَجْوِيدٌ</div></section>
  <div class="stats">${q.map(([c,i,k,l])=>`<a class="st ${c}" href="#${k}"><div class="ic"><i class="fa-solid ${i}"></i></div><b>${cnt(k)}</b><span>${l}</span></a>`).join("")}</div>
- <div class="gh"><h2>Materi</h2></div><div class="grid">${ORDER.map(k=>`<a class="card" href="#${k}"><div class="top"><div><h3>${D[k].t}</h3></div><i class="fa-solid ${D[k].i}" style="color:var(--p);font-size:20px"></i></div><p>${D[k].s}</p></a>`).join("")}</div>`;
+ <div class="gh"><h2>Materi</h2></div><div class="grid">${ORDER.map(k=>`<a class="card" href="#${k}"><div class="top"><div><h3>${D[k].t}</h3></div><i class="fa-solid ${D[k].i}" style="color:var(--p);font-size:20px"></i></div><p>${L(D[k].s)}</p></a>`).join("")}</div>`;
 }
 
-function section(k){
- const s=D[k];
- return `<p style="color:var(--mut);font-size:14px;margin:0">${s.s}</p>${s.note?`<div class="note">${s.note}</div>`:""}${s.g.map(group).join("")}`;
-}
+function section(k){const s=D[k];return `<p class="lead">${L(s.s)}</p>${s.note?`<div class="note">${s.note}</div>`:""}${s.g.map(g=>group(g,k)).join("")}`}
 
 function search(v){
- const t=v.trim().toLowerCase();
- const hit=[];
+ const t=N(v.trim()),hit=[];
  ORDER.forEach(k=>D[k].g.forEach(g=>g.items.forEach(it=>{
-  const hay=[it.n,it.a,it.b,it.d,it.l,...(it.x||[]),...(it.r||[]).flat(),g.h].join(" ").toLowerCase();
-  if(hay.includes(t))hit.push(it);
+  if(N([it.n,it.a,it.b,it.d,it.l,...(it.x||[]),...(it.r||[]).flat(),g.h].filter(Boolean).join(" ")).includes(t))hit.push([it,k]);
  })));
- return hit.length?`<div class="gh"><h2>${hit.length} hasil untuk “${v.replace(/</g,"&lt;")}”</h2></div><div class="grid">${hit.map(card).join("")}</div>`:`<div class="empty"><i class="fa-regular fa-face-frown" style="font-size:30px"></i><p>Tidak ada hasil. Coba kata lain, misalnya “ikhfa”, “mad”, atau huruf Arab.</p></div>`;
+ const e=v.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+ return hit.length?`<div class="gh"><h2>${hit.length} hasil untuk “${e}”</h2></div><div class="grid">${hit.map(h=>card(...h)).join("")}</div>`:`<div class="empty"><i class="fa-regular fa-face-frown" style="font-size:30px"></i><p>Tidak ada hasil untuk “${e}”. Coba kata lain, misalnya “ikhfa”, “mad”, atau huruf Arab.</p></div>`;
 }
 
+const SH={home:"Beranda",mad:"Mad",sifat:"Sifat",makhraj:"Makhraj",nun:"Nun",mim:"Mim",waqaf:"Waqaf"};
 function nav(cur){
- const html=[["home",HOME],...ORDER.map(k=>[k,D[k]])].map(([k,s])=>`<a href="#${k==="home"?"":k}" class="${k===cur?"on":""}"><i class="fa-solid ${s.i}"></i>${k==="home"?"Beranda":s.t.split(" ")[0]==="Hukum"?s.t:s.t}</a>`).join("");
- $("#nav").innerHTML=html;
- $("#dock").innerHTML=html.replace(/(<i[^>]*><\/i>)([^<]+)/g,(m,a,b)=>a+"<span>"+b.split(" ")[0]+"</span>");
+ const l=[["home",HOME],...ORDER.map(k=>[k,D[k]])];
+ const h=f=>l.map(([k,s])=>`<a href="#${k==="home"?"":k}"${k===cur?' class="on" aria-current="page"':""}><i class="fa-solid ${s.i}"></i>${f?SH[k]:k==="home"?"Beranda":s.t}</a>`).join("");
+ $("#nav").innerHTML=h(0);$("#dock").innerHTML=h(1);
 }
 
 function route(){
- const k=location.hash.slice(1);
- const cur=D[k]?k:"home";
- const v=$("#q").value;
+ const k=location.hash.slice(1),cur=D[k]?k:"home",v=$("#q").value.trim();
  nav(cur);
- $("#ttl").textContent=cur==="home"?"Beranda":D[cur].t;
- $("#view").innerHTML=v.trim()?search(v):(cur==="home"?home():section(cur));
- if(!v.trim())window.scrollTo({top:0});
+ $("#ttl").textContent=v?"Hasil Pencarian":cur==="home"?"Beranda":D[cur].t;
+ $("#view").innerHTML=v?search(v):cur==="home"?home():section(cur);
+ if(!v)scrollTo({top:0});
 }
 $("#q").addEventListener("input",route);
 addEventListener("hashchange",()=>{$("#q").value="";route()});
+document.addEventListener("click",e=>{if(e.target.closest('a[href^="#"]')&&$("#q").value){$("#q").value="";route()}});
+
+/* ukuran huruf Arab */
+let AZ=1;try{AZ=+localStorage.az||1}catch(e){}
+const setAZ=v=>{AZ=Math.min(1.5,Math.max(.8,Math.round(v*100)/100));document.documentElement.style.setProperty("--az",AZ);try{localStorage.az=AZ}catch(e){}};
+setAZ(AZ);
+$("#azm").onclick=()=>setAZ(AZ-.1);$("#azp").onclick=()=>setAZ(AZ+.1);
+const up=$("#up");up.onclick=()=>scrollTo({top:0,behavior:"smooth"});
+addEventListener("scroll",()=>up.classList.toggle("show",scrollY>500),{passive:true});
 route();
 </script>
 </body>
