@@ -70,6 +70,10 @@ footer{margin-top:34px;text-align:center;color:var(--mut);font-size:13px}
 .soc a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--p);box-shadow:0 6px 14px rgba(110,90,200,.18);transition:.2s}
 .soc a:hover{transform:translateY(-3px);background:var(--p);color:#fff}
 .dock{display:none}
+.ring{display:inline-block;width:.75em;height:.75em;border:2px solid #8b7aa8;border-radius:50%;margin:0 .25em;vertical-align:middle}.card.red .ring,.card.sg .ring{border-color:var(--rd)}
+.card.rb{outline:2px solid var(--rd);outline-offset:-2px}
+.card.k-mad .ex span{color:#0c6b85}.card.k-mad.brn .ex span{color:#6b2a1e;background:#fbffd6}.card.k-sifat .ex span{color:#4b1a5c;background:#f3efff}.card.k-nun .ex span,.card.k-mim .ex span{color:#1b1b1b;background:#fff}.card.sg .big{color:#6b2a2a}
+.ex span{white-space:normal}
 .lead{color:var(--mut);font-size:14px;margin:0;line-height:1.7}.lead .ar,.card p .ar{font-size:1.3em;color:var(--p);line-height:1.6}
 .card.sg .lt{color:var(--rd);font-size:calc(28px*var(--az));text-align:center}
 .lat{font:500 11px/1 'Poppins',sans-serif;direction:ltr;unicode-bidi:isolate;color:var(--mut);margin-inline-start:4px}
@@ -123,21 +127,21 @@ const D={
 mad:{t:"Hukum Mad",i:"fa-wave-square",s:"Bacaan panjang: mad pokok (2 harokat) dan mad cabang (lebih dari 2 harokat).",g:[
 {h:"Mad Ashli (Pokok)",ar:"مَدٌّ أَصْلِيٌّ",n:"2 harokat",items:[
 {n:"Mad Thabi'i",a:"مَدٌّ طَبِيعِيٌّ",b:"2 harokat",d:"Mad berkarakter panjang 2 harakat, yaitu alif setelah fathah, wawu sukun setelah dhommah, dan ya sukun setelah kasroh.",x:["قَ*ا*لَ","يَقُ*و*لُ","قِ*ي*لَ"]},
-{n:"Mad 'Iwadh",a:"مَدٌّ عِوَضٍ",b:"2 harokat",d:"Mad pengganti tanwin fathah.",x:["مَا*ءً*","أَفْوَا*جًا*"]},
-{n:"Mad Harfi",a:"مَدٌّ حَرْفِيٌّ",b:"2 harokat",d:"Mad pada huruf-huruf awal surat.",x:["حم","الر","المر","يس","طه","طس"]},
-{n:"Mad Shilah Shughra",a:"مَدُّ صِلَةٍ صُغْرَى",b:"2 harokat",d:"Mad pada ha' dhamir.",x:["رُسُلِ*هِ*","إِنَّ*هُ*","لَ*هُ*","بِ*هِ*"]}]},
+{n:"Mad 'Iwadh",a:"مَدٌّ عِوَضٍ",b:"2 harokat",d:"Mad pengganti tanwin fathah.",x:["مَآ*ءً* ← مَآ*ءَا*","أَفْوَا*جًا* ← أَفْوَا*جَا*"]},
+{n:"Mad Harfi",a:"مَدٌّ حَرْفِيٌّ",b:"2 harokat",d:"Mad pada huruf-huruf awal surat.",x:["حمٓ","الٓ*ر*","يسٓ","*طه*","طسٓ","الٓمٓ*ر*"]},
+{n:"Mad Shilah Shughra",a:"مَدٌّ صِلَةٍ صُغْرَى",b:"2 harokat",d:"Mad pada ha' dhamir.",x:["خَلَ*قَهُ*","رُسُلِ*هِ*","إِ*نَّهُ*","آيَا*تِهِ*","*لَهُ*","*بِهِ*"]}]},
 {h:"Mad Far'i (Cabang) — Sebab Bertemu Hamzah",ar:"مَدٌّ فَرْعِيٌّ",n:"lebih dari 2 harokat",items:[
-{n:"Mad Wajib Muttashil",a:"مَدٌّ (وَاجِبٌ) مُتَّصِلٌ",b:"4 harokat",d:"Mad bertemu hamzah dalam satu kata.",x:["جَ*اءَ*","جِ*يءَ*","السَّمَ*اءِ*","الْمَلَ*ائِ*كَةُ","وَالْفَحْشَ*اءِ*","ثَلَاثَةَ قُرُ*وءٍ*"]},
-{n:"Mad Jaiz Munfashil",a:"مَدٌّ (جَائِزٌ) مُنْفَصِلٌ",b:"4 harokat",d:"Mad bertemu hamzah dalam dua kata.",x:["قَالُ*وا* *آ*مَنَّا","إِنَّ*ا* *أَ*عْطَيْنَاكَ","وَفِ*ي* *أَ*نْفُسِكُمْ"]},
-{n:"Mad Shilah Kubra",a:"مَدُّ صِلَةٍ كُبْرَى",b:"4 harokat",d:"Mad pada ha' dhamir bertemu hamzah.",x:["بِنِعْمَتِ*هِ* *إِ*خْوَانًا","أَنَّ مَالَ*هُ* *أَ*خْلَدَهُ"]},
-{n:"Mad Badal",a:"مَدٌّ بَدَلٍ",b:"2 harokat",d:"Mad pengganti hamzah. Menurut thariq Syathibiyah, panjang 2 harakat.",x:["*آ*مَنُوا","إِ*ي*مَانًا","أُ*و*تُوا"]}]},
+{n:"Mad Wajib Muttashil",a:"مَدٌّ (وَاجِبٌ) مُتَّصِلٌ",b:"4 harokat",d:"Mad bertemu hamzah dalam satu kata.",x:["جَ*آءَ*","جِ*يٓءَ*","السُّ*وٓأَ*ى","أُولَ*ٰٓئِ*كَ","الْمَلَ*ٰٓئِ*كَةُ","وَالْفَحْشَ*آءِ* ○","ثَلَٰثَةَ قُرُ*وٓءٍ* ○"]},
+{n:"Mad Jaiz Munfashil",a:"مَدٌّ (جَائِزٌ) مُنْفَصِلٌ",b:"4 harokat",d:"Mad bertemu hamzah dalam dua kata.",x:["قَالُ*وٓا۟* *ءَا*مَنَّا","إِنَّ*آ* *أَ*عْطَيْنَٰكَ","وَفِ*ىٓ* *أَ*نفُسِكُمْ"]},
+{n:"Mad Shilah Kubra",a:"مَدٌّ صِلَةٍ كُبْرَى",b:"4 harokat",d:"Mad pada ha' dhamir bertemu hamzah.",x:["بِنِعْمَتِ*هِۦٓ* *إِ*خْوَٰنًا","أَنَّ مَالَ*هُۥٓ* *أَ*خْلَدَهُۥ"]},
+{n:"Mad Badal",a:"مَدٌّ بَدَلٍ",b:"2 harokat",d:"Mad pengganti hamzah. Menurut thariq Syathibiyah, panjang 2 harakat.",x:["*أَأْ*مَنُوا ← *آ*مَنُوا","إِ*ئْ*مَانًا ← إِ*ي*مَانًا","أُ*ؤْ*تُوا ← أُ*و*تُوا"]}]},
 {h:"Mad Far'i (Cabang) — Sebab Bertemu Sukun",ar:"مَدٌّ فَرْعِيٌّ",n:"sebab sukun",items:[
-{n:"Mad Lazim Kilmi Mutsaqqal",a:"مَدٌّ لَازِمٌ كَلِمِيٌّ مُثَقَّلٌ",b:"6 harokat",d:"Mad bertemu sukun asli, pada kata, dengan tasydid.",x:["آللّهُ","الدَّ*ا*بَّةُ","الطَّ*ا*مَّةُ","الضَّ*ا*لِّينَ"]},
-{n:"Mad Lazim Kilmi Mukhaffaf",a:"مَدٌّ لَازِمٌ كَلِمِيٌّ مُخَفَّفٌ",b:"6 harokat",d:"Mad bertemu sukun asli, pada kata, tanpa tasydid.",x:["آلْآنَ"]},
-{n:"Mad Lazim Harfi Mutsaqqal",a:"مَدٌّ لَازِمٌ حَرْفِيٌّ مُثَقَّلٌ",b:"6 harokat",d:"Mad bertemu sukun asli, pada huruf awal surat, dengan tasydid.",x:["الم","طسم"]},
-{n:"Mad Lazim Harfi Mukhaffaf",a:"مَدٌّ لَازِمٌ حَرْفِيٌّ مُخَفَّفٌ",b:"6 harokat",d:"Mad bertemu sukun asli, pada huruf awal surat, tanpa tasydid.",x:["ص","ن","ق","يس","حم","عسق","كهيعص"]},
-{n:"Mad 'Aridh Lissukun",a:"مَدٌّ عَارِضٌ لِلسُّكُونِ",b:"2/4/6 harokat",d:"Mad bertemu sukun tidak asli, yaitu huruf yang disukun karena dibaca waqof.",x:["النَّا*سِ*","يَعْلَمُو*نَ*","عَلِي*مٌ*","رَسُولُ اللَّ*هِ*","إِلَّا بِسُلْطَا*نٍ*"]},
-{n:"Mad Liyn",a:"مَدٌّ لِينٌ",b:"2/4/6 harokat",d:"Bacaan liyn bertemu huruf berharokat hidup namun dibaca sukun karena waqof.",x:["قُرَ*يْشٍ*","خَ*وْفٍ*","مَطَرِ السَّ*وْءِ*"]}]}
+{n:"Mad Lazim Kilmi Mutsaqqal",a:"مَدٌّ لَازِمٌ كَلِمِيٌّ مُثَقَّلٌ",b:"6 harokat",d:"Mad bertemu sukun asli, pada kata, dengan tasydid.",x:["*آللَّ*هُ","الدَّآبَّةُ","الطَّ*آمَّ*ةُ","الصَّآخَّةُ","الضَّ*آلِّ*ينَ","أَتُحَٰٓجُّونِّي"]},
+{n:"Mad Lazim Kilmi Mukhaffaf",a:"مَدٌّ لَازِمٌ كَلِمِيٌّ مُخَفَّفٌ",b:"6 harokat",d:"Mad bertemu sukun asli, pada kata, tanpa tasydid.",x:["آ*لْآ*نَ"]},
+{n:"Mad Lazim Harfi Mutsaqqal",a:"مَدٌّ لَازِمٌ حَرْفِيٌّ مُثَقَّلٌ",b:"6 harokat",d:"Mad bertemu sukun asli, pada huruf awal surat, dengan tasydid.",x:["الٓمّ","طسٓمّ"]},
+{n:"Mad Lazim Harfi Mukhaffaf",a:"مَدٌّ لَازِمٌ حَرْفِيٌّ مُخَفَّفٌ",b:"6 harokat",d:"Mad bertemu sukun asli, pada huruf awal surat, tanpa tasydid.",x:["صٓ","نٓ","قٓ","يسٓ","حمٓ","عٓسٓقٓ","كٓهٰيٰعٓصٓ"]},
+{n:"Mad 'Aridh Lissukun",a:"مَدٌّ عَارِضٌ لِلسُّكُونِ",b:"2/4/6 harokat",d:"Mad bertemu sukun tidak asli, yaitu huruf yang disukun karena dibaca waqof.",x:["وَالنَّا*سِ* ○","يَعْلَمُو*نَ* ○","عَلِي*مٌ* ○","رَسُولُ ٱللَّ*هِ* ○","إِلَّا بِسُلْطَا*نٍ* ○"]},
+{n:"Mad Liyn",a:"مَدٌّ لِينٌ",b:"2/4/6 harokat",d:"Bacaan liyn bertemu huruf berharokat hidup namun dibaca sukun karena waqof.",x:["قُرَيْ*شٍ* ○","خَوْ*فٍ* ○","مَطَرِ السَّوْ*ءِ* ○"]}]}
 ]},
 
 sifat:{t:"Sifat Huruf",i:"fa-sliders",s:"Sifat-sifat huruf hijaiyah: yang mempunyai lawan, yang tak punya lawan, dan qalqalah.",g:[
@@ -163,9 +167,9 @@ sifat:{t:"Sifat Huruf",i:"fa-sliders",s:"Sifat-sifat huruf hijaiyah: yang mempun
 {n:"Tafasysyi",a:"تَفَشِّي",d:"Tersebarnya udara di rongga mulut.",l:"ش"},
 {n:"Istithalah",a:"اِسْتِطَالَةٌ",d:"Memanjang sepanjang sisi kanan/kiri lidah.",l:"ض"}]},
 {h:"Qalqalah (Bacaan Memantul)",ar:"قَلْقَلَةٌ",n:"huruf qolqolah ada 5: ب ج د ط ق",items:[
-{n:"Qalqalah Shughra (kecil)",a:"قَلْقَلَةٌ صُغْرَى",b:"1",d:"Bacaan langsung memantul sedikit pada huruf qolqolah yang bertanda sukun asli, terdapat pada tengah dan akhir kata.",x:["هُوَ يُ*بْ*دِئُ","نَ*جْ*وَى","نَزِ*دْ*","أَ*طْ*عَمَهُمْ","يَ*قْ*تُلُونَ"]},
-{n:"Qalqalah Wustha (sedang)",a:"قَلْقَلَةٌ وُسْطَى",b:"2",d:"Bacaan langsung memantul pada huruf qolqolah pada akhir kata, yang berharokat hidup namun dibaca sukun karena dibaca waqof.",x:["مِنَ الْمَغْرِ*بِ*","الْخُرُو*جِ*","أَحَ*دٌ*","مُحِي*طٌ*","صِدْ*قٍ*"]},
-{n:"Qalqalah Kubra (besar)",a:"قَلْقَلَةٌ كُبْرَى",b:"3",d:"Bacaan ditekan satu harokat, baru memantul pada huruf qolqolah di akhir kata yang bertasydid dan berharokat, namun dibaca sukun karena waqof.",x:["وَتَ*بَّ*","وَالْحَ*جِّ*","حَ*قٌّ*","أَشَ*دُّ*"]}]}
+{n:"Qalqalah Shughra (kecil)",a:"قَلْقَلَةٌ صُغْرَى",b:"1",d:"Bacaan langsung memantul sedikit pada huruf qolqolah yang bertanda sukun asli, terdapat pada tengah dan akhir kata.",x:["هُوَ يُ*بْ*دِئُ وَيُعِيدُ","وَإِذْ هُمْ نَ*جْ*وَىٰ","نَزِ*دْ* لَهُ فِي حَرْثِهِ","أَ*طْ*عَمَهُمْ","وَكَادُوا يَ*قْ*تُلُونَنِي"]},
+{n:"Qalqalah Wustha (sedang)",a:"قَلْقَلَةٌ وُسْطَى",b:"2",d:"Bacaan langsung memantul pada huruf qolqolah pada akhir kata, yang berharokat hidup namun dibaca sukun karena dibaca waqof.",x:["فَأْتِ بِهَا مِنَ الْمَغْرِبِ ○","ذَٰلِكَ يَوْمُ الْخُرُوجِ ○","قُلْ هُوَ ٱللَّهُ أَحَدٌ ○","إِنَّ رَبِّي بِمَا تَعْمَلُونَ مُحِيطٌ ○","أَدْخِلْنِي مُدْخَلَ صِدْقٍ ○"]},
+{n:"Qalqalah Kubra (besar)",a:"قَلْقَلَةٌ كُبْرَى",b:"3",d:"Bacaan ditekan satu harokat, baru memantul pada huruf qolqolah di akhir kata yang bertasydid dan berharokat, namun dibaca sukun karena waqof.",x:["تَبَّتْ يَدَآ أَبِي لَهَبٍ وَتَ*بَّ* ○","قُلْ هِيَ مَوَاقِيتُ لِلنَّاسِ وَالْ*حَجِّ* ○","إِنَّ وَعْدَ ٱللَّهِ حَ*قٌّ* ○","وَلَعَذَابُ الْآخِرَةِ أَ*شَدُّ* ○"]}]}
 ]},
 
 makhraj:{t:"Makhraj Huruf",i:"fa-microphone-lines",s:"Nama dan tempat keluar huruf-huruf (أَلْقَابُ الْحُرُوفِ وَمَخَارِجُهَا).",g:[
@@ -185,23 +189,23 @@ makhraj:{t:"Makhraj Huruf",i:"fa-microphone-lines",s:"Nama dan tempat keluar hur
 
 nun:{t:"Nun Sukun & Tanwin",i:"fa-circle-nodes",s:"Hukum nun sukun dan tanwin (أَحْكَامُ النُّونِ السَّاكِنَةِ وَالتَّنْوِينِ).",note:"Sifat nun sukun, huruf berharokat tanwin, dan mim sukun itu diucapkan dengan unsur dengung 1 harokat. Dan yang bergaris merah memiliki unsur dengung 2 harokat.",g:[
 {h:"Izhhar",ar:"إِظْهَارٌ",n:"membaca jelas bunyi nun sukun/tanwin",items:[
-{n:"Izhhar Halqi",a:"إِظْهَارٌ حَلْقِيٌّ",b:"6 huruf tenggorokan",d:"Membaca jelas bunyi nun sukun/tanwin ketika bertemu salah satu dari 6 huruf tenggorokan.",l:"غ خ ع ح ء ه",x:["مِيثَا*قًا غَ*لِيظًا","الْأَ*نْهَ*ارُ"]},
-{n:"Izhhar Muthlaq",a:"إِظْهَارٌ مُطْلَقًا",b:"ي و",d:"Membaca jelas bunyi nun sukun ketika bertemu Ya atau Wawu dalam satu kata.",l:"و ي",x:["بُ*نْيَ*انٌ","صِ*نْوَ*انٌ","الدُّ*نْيَ*ا","قِ*نْوَ*انٌ"]}]},
+{n:"Izhhar Halqi",a:"إِظْهَارٌ حَلْقِيٌّ",b:"6 huruf tenggorokan",d:"Membaca jelas bunyi nun sukun/tanwin ketika bertemu salah satu dari 6 huruf tenggorokan.",l:"غ خ ع ح ء ه",x:["مِيثَاقًا *غَ*لِيظًا","الْأَ*نْهَ*ارُ"]},
+{n:"Izhhar Muthlaq",a:"إِظْهَارٌ مُطْلَقًا",b:"ي و",d:"Membaca jelas bunyi nun sukun ketika bertemu Ya atau Wawu dalam satu kata.",l:"و ي",x:["بُ*نْيَ*انٌ","صِنْوَانٌ","قِ*نْوَ*انٌ","الدُّ*نْيَ*ا"]}]},
 {h:"Idgham",ar:"إِدْغَامٌ",n:"memasukkan bunyi nun sukun/tanwin ke dalam huruf berikutnya",items:[
-{n:"Idgham Bilaghunnah",a:"إِدْغَامٌ بِلَا غُنَّةٍ",b:"tanpa dengung",d:"Memasukkan bunyi nun sukun atau tanwin ke dalam huruf lam atau ra dengan tanpa dengung.",l:"ل ر",x:["مِ*نْ لَ*دُنْكَ","ثَمَرَ*ةٍ رِ*زْقًا"]},
-{n:"Idgham Bighunnah",a:"إِدْغَامٌ بِغُنَّةٍ",b:"dengung",d:"Memasukkan bunyi nun sukun atau tanwin ke dalam salah satu huruf dari ya, nun, mim, wawu.",l:"ي ن م و",x:["مِ*نْ وَ*رَائِهِمْ","خَيْ*رٌ وَ*أَبْقَى"]}]},
+{n:"Idgham Bilaghunnah",a:"إِدْغَامٌ بِلَا غُنَّةٍ",b:"tanpa dengung",d:"Memasukkan bunyi nun sukun atau tanwin ke dalam huruf lam atau ra dengan tanpa dengung.",l:"ل ر",x:["مِ*نْ لَ*دُنْكَ","ثَمَرَةٍ *رِ*زْقًا"]},
+{n:"Idgham Bighunnah",a:"إِدْغَامٌ بِغُنَّةٍ",b:"dengung",d:"Memasukkan bunyi nun sukun atau tanwin ke dalam salah satu huruf dari ya, nun, mim, wawu.",l:"ي ن م و",x:["مِ*نْ وَ*رَآئِهِمْ","خَيْ*رٌ* *وَّ*أَبْقَىٰ"]}]},
 {h:"Iqlab dan Ikhfa'",ar:"إِقْلَابٌ وَإِخْفَاءٌ",items:[
-{n:"Iqlab",a:"إِقْلَابٌ",b:"dengung",d:"Mengganti bunyi nun sukun/tanwin ketika bertemu huruf ba menjadi bunyi mim sukun.",l:"ب",x:["أَ*نْبِ*يَاءَ","مِ*نْ بَ*عْدِ"]},
-{n:"Ikhfa' Haqiqi",a:"إِخْفَاءٌ حَقِيقِيٌّ",b:"dengung",d:"Membaca samar bunyi nun sukun/tanwin ketika bertemu salah satu huruf 15.",l:"ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك",x:["أَ*نْدَ*ادًا","دَ*كًّا دَ*كًّا"]}]}
+{n:"Iqlab",a:"إِقْلَابٌ",b:"dengung",d:"Mengganti bunyi nun sukun/tanwin ketika bertemu huruf ba menjadi bunyi mim sukun.",l:"ب",x:["أَنْبِيَآءَ","مِ*نْ* *بَ*عْدِ"]},
+{n:"Ikhfa' Haqiqi",a:"إِخْفَاءٌ حَقِيقِيٌّ",b:"dengung",d:"Membaca samar bunyi nun sukun/tanwin ketika bertemu salah satu huruf 15.",l:"ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك",x:["أَنْ*دَ*ادًا","دَ*كًّا* *دَ*كًّا"]}]}
 ]},
 
 mim:{t:"Mim Sukun & Tasydid",i:"fa-comment-dots",s:"Hukum mim sukun serta nun dan mim bertasydid.",g:[
 {h:"Hukum Mim Sukun",ar:"أَحْكَامُ الْمِيمِ السَّاكِنَةِ",items:[
-{n:"Ikhfa' Syafawi",a:"إِخْفَاءٌ شَفَوِيٌّ",b:"dengung",d:"Membaca samar bunyi mim mati ketika bertemu ba.",l:"ب",x:["تَرْمِيهِ*مْ بِ*حِجَارَةٍ"]},
-{n:"Idgham Mimi",a:"إِدْغَامٌ مِيمِيٌّ",b:"dengung",d:"Memasukkan bunyi mim mati ke dalam mim berikutnya.",l:"م",x:["وَآمَنَهُ*مْ مِ*نْ خَوْفٍ"]},
+{n:"Ikhfa' Syafawi",a:"إِخْفَاءٌ شَفَوِيٌّ",b:"dengung",d:"Membaca samar bunyi mim mati ketika bertemu ba.",l:"ب",x:["تَرْمِيهِ*مْ* *بِ*حِجَارَةٍ"]},
+{n:"Idgham Mimi",a:"إِدْغَامٌ مِيمِيٌّ",b:"dengung",d:"Memasukkan bunyi mim mati ke dalam mim berikutnya.",l:"م",x:["وَآمَنَهُ*مْ* *مِ*نْ خَوْفٍ"]},
 {n:"Izhhar Syafawi",a:"إِظْهَارٌ شَفَوِيٌّ",b:"selain mim dan ba",d:"Membaca jelas bunyi mim sukun saat bertemu huruf selain mim dan ba.",x:["الْحَ*مْدُ*"]}]},
 {h:"Hukum Nun dan Mim Bertasydid",ar:"أَحْكَامُ النُّونِ وَالْمِيمِ الْمُشَدَّدَتَيْنِ",items:[
-{n:"Ghunnah",a:"غُنَّةٌ",b:"dengung 2 harokat",d:"Membaca nun dan mim bertasydid dengan dengung 2 harokat.",l:"نّ  مّ",x:["وَأَ*مَّ*ا","مِنَ الْجِ*نَّ*ةِ"]}]}
+{n:"Ghunnah",a:"غُنَّةٌ",b:"dengung 2 harokat",d:"Membaca nun dan mim bertasydid dengan dengung 2 harokat.",l:"نّ  مّ",x:["وَأَمَّا","مِنَ الْجِنَّةِ"]}]}
 ]},
 
 waqaf:{t:"Tanda Waqaf",i:"fa-hand",s:"Tanda-tanda waqaf (عَلَامَاتُ الْوَقْفِ) dan cara menyikapinya.",g:[
@@ -211,10 +215,10 @@ waqaf:{t:"Tanda Waqaf",i:"fa-hand",s:"Tanda-tanda waqaf (عَلَامَاتُ ا
 {n:"Boleh berhenti",a:"وَقْفٌ جَائِزٌ",d:"Meskipun lebih baik terus.",l:"ج"},
 {n:"Lebih baik berhenti",a:"الْوَقْفُ أَوْلَى",d:"Meskipun boleh terus.",l:"قلى"},
 {n:"Lebih baik terus",a:"الْوَصْلُ أَوْلَى",d:"Meskipun boleh berhenti.",l:"صلى"},
-{n:"Waqof merangkul salah satu",a:"وَقْفُ الْمُعَانَقَةِ",d:"Berhenti di salah satu, tidak boleh berhenti di dua-duanya.",l:"ۛ ۛ"},
+{n:"Waqof merangkul salah satu",a:"وَقْفُ مُعَانَقَةٍ",d:"Berhenti di salah satu, tidak boleh berhenti di dua-duanya.",l:"ۛ ۛ"},
 {n:"Berhenti sejenak",a:"سَكْتَةٌ لَطِيفَةٌ",d:"Berhenti selama 2 harokat tanpa bernafas.",l:"س"},
 {n:"Tidak boleh waqof di situ",a:"لَا وَقْفَ فِيهِ",d:"Tanda lam alif di tengah ayat tidak boleh berhenti. Jika terpaksa berhenti, maka mengulang dari kalimat sebelumnya.",l:"لا"},
-{n:"Tidak boleh memutus bacaan di situ",a:"لَا قَطْعَ فِيهِ",d:"Tanda lam alif di akhir ayat, boleh berhenti untuk bernafas, tapi harus melanjutkan bacaan berikutnya.",l:"لا"},
+{n:"Tidak boleh memutus bacaan di situ",a:"لَا قَطْعَ فِيهِ",d:"Tanda lam alif di akhir ayat, boleh berhenti untuk bernafas, tapi harus melanjutkan bacaan berikutnya.",l:"لا ○"},
 {n:"Tanda waqof darurat",d:"Jika terpaksa, boleh berhenti untuk bernafas, tapi harus melanjutkan membaca ayat berikutnya.",l:"لا"}]}
 ]}
 };
@@ -225,11 +229,13 @@ const $=s=>document.querySelector(s);
 const cnt=k=>D[k].g.reduce((a,g)=>a+g.items.length,0);
 
 /* ================= RENDER ================= */
-const R=s=>s.replace(/\*(.+?)\*/g,'<em class="rd">$1</em>').replace(/\(([^)]*)\)/g,'<small class="lat">($1)</small>');
+const R=s=>s.replace(/\*(.+?)\*/g,'<em class="rd">$1</em>').replace(/○/g,'<i class="ring"></i>').replace(/\(([^)]*)\)/g,'<small class="lat">($1)</small>');
 const L=s=>s.replace(/[\u0600-\u06FF][\u0600-\u06FF\s]*[\u0600-\u06FF]/g,'<span class="ar" lang="ar">$&</span>');
 const N=s=>s.replace(/\*/g,"").normalize("NFKD").replace(/[\u064B-\u065F\u0670\u06D6-\u06ED\u0640]/g,"").toLowerCase();
 const A=(c,t)=>`<div class="ar ${c}" lang="ar">${R(t)}</div>`;
-const card=(it,k)=>`<article class="card${k==="mad"?" red":k==="waqaf"?" sg":""}"><div class="top"><div><h3>${it.n}</h3>${it.b?`<span class="bd">${it.b}</span>`:""}</div>${it.a?A("big",it.a):""}</div>${it.d?`<p>${it.d}</p>`:""}${it.l?A("lt",it.l):""}${it.r?`<ul class="rows">${it.r.map(r=>`<li><span class="ar" lang="ar">${R(r[0])}</span><span>${r[1]}</span></li>`).join("")}</ul>`:""}${it.x?`<div class="ex">${it.x.map(e=>`<span class="ar" lang="ar">${R(e)}</span>`).join("")}</div>`:""}</article>`;
+const RB=new Set(["Ikhfa' Haqiqi","Iqlab","Idgham Bighunnah","Ikhfa' Syafawi","Idgham Mimi","Ghunnah"]);
+const BR=new Set(["Mad Wajib Muttashil","Mad Jaiz Munfashil","Mad Shilah Kubra","Mad Lazim Harfi Mutsaqqal","Mad Lazim Harfi Mukhaffaf"]);
+const card=(it,k)=>`<article class="card k-${k}${k==="mad"?" red":k==="waqaf"?" sg":""}${RB.has(it.n)?" rb":""}${BR.has(it.n)?" brn":""}"><div class="top"><div><h3>${it.n}</h3>${it.b?`<span class="bd">${it.b}</span>`:""}</div>${it.a?A("big",it.a):""}</div>${it.d?`<p>${it.d}</p>`:""}${it.l?A("lt",it.l):""}${it.r?`<ul class="rows">${it.r.map(r=>`<li><span class="ar" lang="ar">${R(r[0])}</span><span>${r[1]}</span></li>`).join("")}</ul>`:""}${it.x?`<div class="ex">${it.x.map(e=>`<span class="ar" lang="ar">${R(e)}</span>`).join("")}</div>`:""}</article>`;
 const group=(g,k)=>`<div class="gh"><h2>${g.h}</h2>${g.ar?`<span class="ar" lang="ar">${g.ar}</span>`:""}${g.n?`<span class="tag">${L(g.n)}</span>`:""}</div><div class="grid">${g.items.map(i=>card(i,k)).join("")}</div>`;
 
 function home(){
