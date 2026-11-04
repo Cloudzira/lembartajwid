@@ -62,11 +62,19 @@ h1,h2,p{margin:0}
 .vwrap{position:relative;flex:1;min-height:0;border-radius:24px;background:#fff;border:3px solid #fff;box-shadow:0 0 0 2px #d6c9fa,0 14px 30px rgba(110,90,200,.22);overflow:hidden}
 #vp{position:absolute;inset:0;isolation:isolate;touch-action:none;cursor:grab;overflow:hidden;background:repeating-conic-gradient(#f6f3ff 0 25%,#fff 0 50%) 0 0/24px 24px;user-select:none;-webkit-user-select:none}
 #vp.drag{cursor:grabbing}
-#st{position:absolute;left:0;top:0;width:1950px;height:1242px;transform-origin:0 0;will-change:transform}
-#st img{position:absolute;inset:0;width:100%;height:100%;display:none;pointer-events:none;-webkit-user-drag:none}
-#st img.on{display:block;animation:fi .35s}
+#st{position:absolute;left:0;top:0;width:1950px;height:1242px;transform-origin:0 0}
+#st>img{position:absolute;inset:0;width:100%;height:100%;display:none;pointer-events:none;-webkit-user-drag:none}
+#st>img.on{display:block;animation:fi .35s}
+.tlc{position:absolute;inset:0;pointer-events:none}.tlc.on{display:block}.tlc:not(.on){display:none}
+.tl{position:absolute;opacity:0;transition:opacity .25s;pointer-events:none;user-select:none;-webkit-user-drag:none}.tl.ok{opacity:1}
+.pwa{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px 6px 0}
+.pb{flex:1 1 130px;min-height:42px;border-radius:14px;background:rgba(255,255,255,.18);color:#fff;font-size:12.5px;font-weight:600;padding:8px 10px;transition:.2s;border:1px solid rgba(255,255,255,.28)}
+.pb:hover{background:rgba(255,255,255,.3)}.pb:disabled{opacity:.7;cursor:progress}
+.offs{flex-basis:100%;text-align:center;font-size:11.5px;opacity:.92;min-height:16px}
+#toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:rgba(43,39,80,.95);color:#fff;font-size:13px;padding:11px 18px;border-radius:16px;z-index:120;max-width:min(92vw,420px);text-align:center;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 10px 30px rgba(20,10,70,.4)}
+#toast.show{opacity:1;transform:translate(-50%,0)}
 @keyframes fi{from{opacity:.2}to{opacity:1}}
-#hl{position:absolute;border:5px solid rgba(255,255,255,.92);border-radius:16px;box-shadow:0 0 0 3px rgba(116,97,207,.55),0 0 36px rgba(116,97,207,.45);pointer-events:none;display:none;transition:.4s}
+#hl{z-index:6;position:absolute;border:5px solid rgba(255,255,255,.92);border-radius:16px;box-shadow:0 0 0 3px rgba(116,97,207,.55),0 0 36px rgba(116,97,207,.45);pointer-events:none;display:none;transition:.4s}
 #blr{position:absolute;inset:0;pointer-events:none;backdrop-filter:blur(16px) saturate(1.15) brightness(1.06);-webkit-backdrop-filter:blur(16px) saturate(1.15) brightness(1.06);background:linear-gradient(135deg,rgba(255,255,255,.38),rgba(205,195,255,.26) 55%,rgba(255,255,255,.3));opacity:0;z-index:2;-webkit-mask-image:linear-gradient(#000,#000),linear-gradient(#000,#000);mask-image:linear-gradient(#000,#000),linear-gradient(#000,#000);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-composite:xor;mask-composite:exclude}
 #hl.show{display:block}
 #hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(43,39,80,.86);color:#fff;font-size:var(--fs-small);font-weight:500;padding:8px 14px;border-radius:999px;pointer-events:none;transition:opacity .6s;white-space:nowrap;max-width:92%;overflow:hidden;text-overflow:ellipsis}
@@ -111,6 +119,7 @@ h1,h2,p{margin:0}
   <div class="orn" aria-hidden="true">✦</div>
   <label class="sr"><span aria-hidden="true">🔍</span><input id="q" type="search" placeholder="Cari materi…" autocomplete="off" aria-label="Cari materi"></label>
   <div id="list" role="list"></div>
+  <div class="pwa"><button class="pb" id="inst">⬇ Pasang Aplikasi</button><button class="pb" id="off">☁ Simpan Offline</button><div class="offs" id="offs" role="status"></div></div>
   <div class="soc">
    <a href="https://www.instagram.com/kurniapedia" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
    <a href="https://www.tiktok.com/@kurniapedia" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.7a4.8 4.8 0 0 1-3.8-4.2h-3.4v13.4a2.9 2.9 0 1 1-2-2.8V9.6a6.3 6.3 0 1 0 5.4 6.2V9a8.2 8.2 0 0 0 4.8 1.5V7.1a4.8 4.8 0 0 1-1-.4z"/></svg></a>
@@ -135,7 +144,7 @@ h1,h2,p{margin:0}
   </div>
   <div class="vwrap" id="vw">
    <div id="vp" tabindex="0" aria-label="Gambar lembar tajwid, geser untuk menggeser, cubit atau scroll untuk zoom">
-    <div id="st"><img id="i1" src="img/halaman-1.jpg" alt="Lembar tajwid halaman 1: Mad dan Makhraj"><img id="i2" src="img/halaman-2.jpg" alt="Lembar tajwid halaman 2: Sifat huruf, Qalqalah, Nun dan Mim, Waqaf"><div id="hl"></div></div>
+    <div id="st"><img id="i1" src="img/halaman-1.webp" alt="Lembar tajwid halaman 1: Mad dan Makhraj"><img id="i2" src="img/halaman-2.webp" alt="Lembar tajwid halaman 2: Sifat huruf, Qalqalah, Nun dan Mim, Waqaf"><div class="tlc" id="tl1"></div><div class="tlc" id="tl2"></div><div id="hl"></div></div>
     <div id="blr"></div>
    </div>
    <div id="pg"></div>
@@ -144,6 +153,7 @@ h1,h2,p{margin:0}
  </main>
 </div>
 <div id="bd"></div>
+<div id="toast" role="status" aria-live="polite"></div>
 <div id="splash" role="status" aria-label="Memuat aplikasi"><img class="sp-logo" src="icons/icon.svg" alt=""><div class="sp-ar" lang="ar">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div><div class="sp-t">Lembar Tajwid Tartili</div><div class="sp-s">Panduan Hukum Tajwid Bergambar</div><div class="sp-bar"><i></i></div><div class="sp-f">Crafted with ♥ by Kurniapedia</div></div>
 <nav class="dock" aria-label="Navigasi materi">
  <button class="tb" id="prv2" aria-label="Materi sebelumnya">‹</button>
@@ -233,9 +243,9 @@ function renderList(f=""){
 /* ===== viewer ===== */
 function vs(){return[vp.clientWidth,vp.clientHeight]}
 function minS(){const[w,h]=vs();return Math.min(w/W,h/H)*.5}
-function clamp(){const[w,h]=vs();V.s=Math.min(4.5,Math.max(minS(),V.s));const m=60;
+function clamp(){const[w,h]=vs();V.s=Math.min(6,Math.max(minS(),V.s));const m=60;
  V.x=Math.min(w-m,Math.max(m-W*V.s,V.x));V.y=Math.min(h-m,Math.max(m-H*V.s,V.y))}
-function apply(anim){st.style.transition=anim?"transform .6s cubic-bezier(.2,.8,.2,1)":"none";clamp();st.style.transform=`translate(${V.x}px,${V.y}px) scale(${V.s})`;blurUpdate(anim)}
+function apply(anim){st.style.transition=anim?"transform .6s cubic-bezier(.2,.8,.2,1)":"none";clamp();st.style.transform=`translate(${V.x}px,${V.y}px) scale(${V.s})`;blurUpdate(anim);schedTiles()}
 /* blur di luar materi terpilih: lubang (clip-path) mengikuti kotak materi */
 function blurUpdate(anim){
  const el=document.getElementById("blr"),b=M[cur].b,full=b[2]-b[0]>=1900,p=8,[w,h]=vs();
@@ -244,9 +254,7 @@ function blurUpdate(anim){
  el.style.opacity=showHL&&!full?1:0;
  const sz=`100% 100%,${x2-x1}px ${y2-y1}px`,ps=`0 0,${x1}px ${y1}px`;
  el.style.maskSize=el.style.webkitMaskSize=sz;el.style.maskPosition=el.style.webkitMaskPosition=ps;}
-const HD={1:"img/halaman-1-hd.jpg",2:"img/halaman-2-hd.jpg"},hdDone={};
-function loadHD(p){if(hdDone[p])return;hdDone[p]=1;const im=new Image();im.onload=()=>{document.getElementById("i"+p).src=HD[p]};im.src=HD[p]}
-function setPage(p){if(page===p)return;page=p;loadHD(p);setTimeout(()=>loadHD(p===1?2:1),2500);$("#i1").classList.toggle("on",p===1);$("#i2").classList.toggle("on",p===2);$("#pg").textContent=`Halaman ${p} dari 2`}
+function setPage(p){if(page===p)return;page=p;$('#tl1').classList.toggle('on',p===1);$('#tl2').classList.toggle('on',p===2);$("#i1").classList.toggle("on",p===1);$("#i2").classList.toggle("on",p===2);$("#pg").textContent=`Halaman ${p} dari 2`}
 function fitBox(b,anim=true,pad=.05){
  const[w,h]=vs(),bw=b[2]-b[0],bh=b[3]-b[1];
  V.s=Math.min(w/(bw*(1+2*pad)),h/(bh*(1+2*pad)));
@@ -264,7 +272,7 @@ function go(i,anim=true){
  const on=$("#list .mi.on");on&&on.scrollIntoView({block:"nearest"});
  history.replaceState(null,"","#"+m.id);closeDrawer();
 }
-function zoomAt(f,cx,cy,anim){const ns=Math.min(4.5,Math.max(minS(),V.s*f));f=ns/V.s;V.x=cx-(cx-V.x)*f;V.y=cy-(cy-V.y)*f;V.s=ns;apply(anim)}
+function zoomAt(f,cx,cy,anim){const ns=Math.min(6,Math.max(minS(),V.s*f));f=ns/V.s;V.x=cx-(cx-V.x)*f;V.y=cy-(cy-V.y)*f;V.s=ns;apply(anim)}
 function center(){const[w,h]=vs();return[w/2,h/2]}
 /* pointer: geser & cubit */
 const P=new Map();let pd=0;
@@ -305,6 +313,52 @@ addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer()});
 let ht;function hideHint(){$("#hint").style.opacity=0}
 addEventListener("resize",()=>{clearTimeout(ht);ht=setTimeout(()=>fitBox(M[cur].b,false),150)});
 addEventListener("hashchange",()=>{const i=M.findIndex(m=>m.id===location.hash.slice(1));if(i>=0&&i!==cur)go(i)});
+/* ===== tile bertingkat: hanya potongan yang terlihat yang dimuat ===== */
+const TS=512,LV={1:{f:2,w:3900,h:2484},2:{f:4,w:7800,h:4967},3:{f:8,w:15600,h:9934}};
+const TM=new Map();let tq=0;
+function schedTiles(){if(tq)return;tq=requestAnimationFrame(()=>{tq=0;tileUpdate()})}
+function tileUpdate(){
+ const[w,h]=vs(),need=V.s*Math.min(devicePixelRatio||1,2),L=need>4.6?3:need>2.3?2:need>1.15?1:0;
+ const mx=(w/V.s)*.2,my=(h/V.s)*.2,x1=-V.x/V.s-mx,y1=-V.y/V.s-my,x2=(w-V.x)/V.s+mx,y2=(h-V.y)/V.s+my;
+ for(const[k,t]of TM){if(t.p!==page||t.L>L||t.r[2]<x1||t.r[0]>x2||t.r[3]<y1||t.r[1]>y2){t.el.remove();TM.delete(k)}}
+ if(!L)return;
+ const{f,w:LW,h:LH}=LV[L],ts=TS/f,cont=$("#tl"+page);
+ const ax=Math.max(0,Math.floor(x1/ts)),bx=Math.min(Math.ceil(LW/TS)-1,Math.floor(x2/ts)),ay=Math.max(0,Math.floor(y1/ts)),by=Math.min(Math.ceil(LH/TS)-1,Math.floor(y2/ts));
+ for(let y=ay;y<=by;y++)for(let x=ax;x<=bx;x++){
+  const key=`${page}/${L}/${x}_${y}`;if(TM.has(key))continue;
+  const tw=Math.min(TS,LW-x*TS),th=Math.min(TS,LH-y*TS),ex=x*TS+tw<LW?1:0,ey=y*TS+th<LH?1:0,el=new Image();
+  const r=[x*ts,y*ts,(x*TS+tw)/f,(y*TS+th)/f];
+  el.className="tl";el.decoding="async";el.alt="";el.draggable=false;
+  Object.assign(el.style,{left:r[0]+"px",top:r[1]+"px",width:(tw+ex)/f+"px",height:(th+ey)/f+"px",zIndex:L});
+  el.onload=()=>el.classList.add("ok");el.src=`t/${page}/${L}/${x}_${y}.webp`;
+  cont.appendChild(el);TM.set(key,{el,p:page,L,r});
+ }
+}
+/* ===== pasang aplikasi & simpan offline ===== */
+const TC="tajwid-tiles-v3";let toastT;
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),4200)}
+let dp=null;
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e});
+addEventListener("appinstalled",()=>{$("#inst").style.display="none";toast("Aplikasi berhasil dipasang ✓")});
+if(matchMedia("(display-mode: standalone)").matches||navigator.standalone)$("#inst").style.display="none";
+$("#inst").onclick=async()=>{
+ if(dp){dp.prompt();try{await dp.userChoice}catch(e){}dp=null;return}
+ toast(/iphone|ipad|ipod/i.test(navigator.userAgent)?"Di iPhone/iPad: ketuk ikon Bagikan, lalu pilih “Tambah ke Layar Utama”.":"Buka menu browser, lalu pilih “Instal aplikasi” atau “Tambahkan ke layar utama”.")};
+function allTiles(){const a=[];for(const p of[1,2])for(const L of[1,2,3]){const{w,h}=LV[L];for(let y=0;y<Math.ceil(h/TS);y++)for(let x=0;x<Math.ceil(w/TS);x++)a.push(`t/${p}/${L}/${x}_${y}.webp`)}return a}
+function offState(){let ok=false;try{ok=localStorage.offAll==="1"}catch(e){}$("#offs").textContent=ok?"Siap dipakai offline ✓":"";$("#off").textContent=ok?"☁ Offline siap ✓":"☁ Simpan Offline"}
+$("#off").onclick=async()=>{
+ if(!("caches" in window)||!/^https?:/.test(location.protocol)){toast("Mode offline aktif setelah aplikasi dibuka lewat alamat web (https://).");return}
+ const btn=$("#off"),st=$("#offs"),list=allTiles();let n=0,fail=0;btn.disabled=true;
+ try{const c=await caches.open(TC);
+  const work=async()=>{while(list.length){const u=list.pop();try{if(!(await c.match(u))){const r=await fetch(u);if(r.ok)await c.put(u,r);else fail++}}catch(e){fail++}n++;if(n%12===0)st.textContent=`Menyimpan… ${Math.round(n/tot*100)}%`}};
+  const tot=list.length;await Promise.all(Array.from({length:6},work));
+  if(fail){st.textContent=`Selesai, ${fail} potongan gagal — coba lagi.`;toast("Sebagian gagal disimpan. Periksa koneksi lalu coba lagi.")}
+  else{try{localStorage.offAll="1"}catch(e){}offState();toast("Selesai! Aplikasi bisa dipakai tanpa internet.")}
+ }catch(e){st.textContent="Gagal menyimpan.";toast("Gagal menyimpan offline.")}
+ btn.disabled=false};
+offState();
+addEventListener("offline",()=>toast("Anda sedang offline — aplikasi tetap bisa dipakai."));
+addEventListener("online",()=>toast("Kembali online."));
 /* splash & PWA */
 (function(){const sp=$("#splash");let seen=false;try{seen=sessionStorage.sp==="1"}catch(e){}
  if(seen){sp.remove();return}
