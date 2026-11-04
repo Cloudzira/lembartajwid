@@ -1,101 +1,266 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#7461cf">
+<meta name="theme-color" content="#8b7bdc">
 <title>Lembar Tajwid Tartili</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--p:#7461cf;--pd:#4b3aa8;--bg:#f2effc;--ink:#2a2347;--mut:#6c6788;--card:#fff}
-*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
-body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);min-height:100dvh;padding-bottom:env(safe-area-inset-bottom)}
-header{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;padding:calc(18px + env(safe-area-inset-top)) 18px 14px}
-header h1{font-size:clamp(20px,4vw,28px);font-weight:700}
-header p{font-size:13px;opacity:.9;margin-top:2px}
-nav{position:sticky;top:0;z-index:20;background:#fff;box-shadow:0 4px 14px rgba(70,50,170,.12);display:flex;gap:8px;overflow-x:auto;padding:10px 14px;scrollbar-width:none}
-nav::-webkit-scrollbar{display:none}
-nav a{flex:none;text-decoration:none;color:var(--pd);background:#efeaff;padding:9px 16px;border-radius:999px;font-size:14px;font-weight:600;min-height:40px;display:flex;align-items:center}
-nav a.on{background:var(--p);color:#fff}
-main{max-width:1180px;margin:0 auto;padding:18px 14px 60px}
-.intro{color:var(--mut);font-size:14px;line-height:1.6;margin-bottom:16px}
-.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));align-items:start}
-.card{background:var(--card);border-radius:20px;box-shadow:0 8px 24px rgba(94,74,200,.12);overflow:hidden}
-.card.wide{grid-column:1/-1}
-.card h3{font-size:16px;padding:14px 16px 2px}
-.card p{font-size:13px;color:var(--mut);padding:0 16px 10px;line-height:1.5}
-.card button.im{display:block;width:100%;border:0;background:#fff;padding:0 10px 12px;cursor:zoom-in}
-.card img{display:block;width:100%;height:auto;border-radius:12px;margin:0 auto}
-.card.narrow img{max-width:520px}
-.hint{font-size:12px;color:var(--p);padding:0 16px 14px;font-weight:600}
-.dl{display:inline-block;margin:6px 8px 0 0;background:var(--p);color:#fff;text-decoration:none;padding:12px 18px;border-radius:14px;font-weight:600;font-size:14px}
-#lb{position:fixed;inset:0;background:rgba(20,15,45,.94);z-index:50;display:none;flex-direction:column}
-#lb.show{display:flex}
-#bar{display:flex;gap:8px;align-items:center;padding:calc(10px + env(safe-area-inset-top)) 12px 10px;color:#fff}
-#bar span{flex:1;font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#bar button,#bar a{border:0;background:#ffffff26;color:#fff;min-width:44px;height:44px;border-radius:12px;font-size:20px;cursor:pointer;text-decoration:none;display:grid;place-items:center}
-#sc{flex:1;overflow:auto;padding:0 8px calc(14px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
-#big{display:block;margin:0 auto;max-width:none;background:#fff;border-radius:8px}
-@media(min-width:900px){main{padding-top:26px}.card h3{font-size:18px}}
+:root{--p:#7461cf;--p2:#a595ec;--ink:#2b2750;--mut:#7b779c;--line:#ece6fb;--rd:#d62f4a}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:linear-gradient(160deg,#ddd5f8,#b7a8ee);padding:18px;overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.app{display:grid;grid-template-columns:310px 1fr;gap:18px;max-width:1700px;margin:0 auto;height:calc(100dvh - 36px)}
+.side{background:linear-gradient(180deg,#8d7ede,#6c5bc7);border-radius:30px;padding:20px 12px 14px;color:#fff;display:flex;flex-direction:column;min-height:0;box-shadow:0 18px 40px rgba(94,76,190,.35)}
+.brand{display:flex;align-items:center;gap:12px;padding:0 8px 14px}
+.logo{flex:none;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:16px;background:linear-gradient(135deg,#9c8df0,#6d5cc8);border:3px solid rgba(255,255,255,.55);box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.brand b{display:block;font-size:15px;line-height:1.25}.brand span{font-size:11px;opacity:.85}
+.sr{display:flex;align-items:center;gap:8px;background:#fff;color:var(--ink);border-radius:999px;padding:10px 16px;margin:0 6px 10px;box-shadow:inset 0 2px 6px rgba(120,100,200,.12)}
+.sr input{border:0;outline:0;background:none;font:inherit;font-size:13px;width:100%;color:var(--ink)}
+#list{flex:1;overflow-y:auto;padding:0 4px;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#ffffff66 transparent}
+.gt{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.8;padding:12px 12px 6px}
+.mi{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 12px;margin-bottom:4px;border-radius:14px;font-size:13.5px;font-weight:500;color:#efeaff;transition:.2s;min-height:42px}
+.mi:hover{background:rgba(255,255,255,.14)}
+.mi.on{background:#fff;color:var(--p);box-shadow:0 8px 18px rgba(0,0,0,.15);font-weight:600}
+.mi i{flex:none;width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.55}
+.mi.sub{padding-left:26px;font-size:13px}
+.empty{padding:20px;text-align:center;font-size:13px;opacity:.85}
+.side small{display:block;text-align:center;opacity:.8;font-size:11px;line-height:1.5;padding-top:10px}
+.side small a{text-decoration:underline;color:#fff}
+.main{background:rgba(255,255,255,.58);border-radius:32px;padding:20px;min-width:0;min-height:0;display:flex;flex-direction:column;gap:12px;box-shadow:0 18px 40px rgba(110,90,200,.18)}
+.bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tt{flex:1;min-width:180px}
+.tt h1{margin:0;font-size:22px;font-weight:700;line-height:1.25}
+.tt p{margin:2px 0 0;font-size:12.5px;color:var(--mut)}
+.tools{display:flex;gap:6px;flex-wrap:wrap}
+.tb{min-width:44px;height:44px;padding:0 14px;border-radius:14px;background:#fff;color:var(--p);font-weight:600;font-size:15px;box-shadow:0 4px 10px rgba(110,90,200,.15);transition:.15s}
+.tb:hover{background:#f3efff}.tb:active{transform:scale(.95)}.tb.on{background:var(--p);color:#fff}
+.tb.pr{background:linear-gradient(135deg,#8f7fe6,#6d5bcb);color:#fff}
+.vwrap{position:relative;flex:1;min-height:0;border-radius:24px;background:#fff;box-shadow:inset 0 0 0 1px var(--line),0 10px 24px rgba(110,90,200,.12);overflow:hidden}
+#vp{position:absolute;inset:0;touch-action:none;cursor:grab;overflow:hidden;background:repeating-conic-gradient(#f6f3ff 0 25%,#fff 0 50%) 0 0/24px 24px;user-select:none;-webkit-user-select:none}
+#vp.drag{cursor:grabbing}
+#st{position:absolute;left:0;top:0;width:1950px;height:1242px;transform-origin:0 0;will-change:transform}
+#st img{position:absolute;inset:0;width:100%;height:100%;display:none;pointer-events:none;-webkit-user-drag:none;image-rendering:auto}
+#st img.on{display:block;animation:fi .35s}
+@keyframes fi{from{opacity:.2}to{opacity:1}}
+#hl{position:absolute;border:6px dashed var(--p);border-radius:14px;box-shadow:0 0 0 4000px rgba(40,30,90,.18);pointer-events:none;display:none;transition:.4s}
+#hl.show{display:block}
+#hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(43,39,80,.86);color:#fff;font-size:12px;padding:8px 14px;border-radius:999px;pointer-events:none;transition:opacity .6s;white-space:nowrap;max-width:92%;overflow:hidden;text-overflow:ellipsis}
+#pg{position:absolute;right:12px;top:12px;background:rgba(255,255,255,.92);color:var(--p);font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;box-shadow:0 4px 10px rgba(110,90,200,.2);pointer-events:none}
+.ft{font-size:11.5px;color:var(--mut);text-align:center}.ft a{color:inherit;font-weight:600}
+.dock,#bd{display:none}
+@media(max-width:900px){
+ body{padding:8px 8px 0}
+ .app{display:block;height:calc(100dvh - 8px)}
+ .main{height:calc(100dvh - 8px - 72px - env(safe-area-inset-bottom));padding:12px;border-radius:24px;gap:8px}
+ .tt h1{font-size:17px}.tt p{display:none}
+ .bar{gap:6px}.tools{width:100%;flex-wrap:nowrap;gap:5px}.tools .tb{flex:1;min-width:0;padding:0 2px;font-size:13px;height:42px}#prv,#nxt{display:none}#hint{font-size:11px}
+ .ft{display:none}
+ .side{position:fixed;left:8px;right:8px;bottom:0;height:76dvh;z-index:40;border-radius:28px 28px 0 0;transform:translateY(110%);transition:transform .35s cubic-bezier(.2,.8,.2,1);padding-bottom:calc(14px + env(safe-area-inset-bottom))}
+ .side.open{transform:none}
+ #bd{position:fixed;inset:0;background:rgba(30,20,70,.45);z-index:30}
+ #bd.show{display:block}
+ .dock{display:flex;position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:20;gap:8px;align-items:center;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-radius:22px;padding:8px;box-shadow:0 10px 30px rgba(80,60,180,.3);height:60px}
+ .dock .tb{flex:none;width:48px;height:44px;padding:0;min-width:0}
+ .dock .pick{flex:1;min-width:0;height:44px;border-radius:14px;background:linear-gradient(135deg,#8f7fe6,#6d5bcb);color:#fff;font-weight:600;font-size:13px;padding:0 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .vwrap{border-radius:18px}
+}
+@media(max-width:900px) and (orientation:landscape){.app{display:grid;grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+:focus-visible{outline:3px solid #ffb84d;outline-offset:2px}
 </style>
 </head>
 <body>
-<header><h1>Lembar Tajwid Tartili</h1><p>Disusun ulang oleh Unit Pendidikan Alquran Masjid Fatimatuzzahra Purwokerto</p></header>
-<nav id="nav" aria-label="Materi"></nav>
-<main id="view"></main>
-<div id="lb" role="dialog" aria-modal="true" aria-label="Gambar diperbesar">
- <div id="bar"><span id="lt"></span><button id="zm" aria-label="Perkecil">−</button><button id="zp" aria-label="Perbesar">+</button><a id="dw" download aria-label="Unduh gambar">⤓</a><button id="cl" aria-label="Tutup">✕</button></div>
- <div id="sc"><img id="big" alt=""></div>
+<div class="app">
+ <aside class="side" id="side" aria-label="Pilihan materi">
+  <div class="brand"><div class="logo">TT</div><div><b>Lembar Tajwid Tartili</b><span>Pilih materi, gambar otomatis diperbesar</span></div></div>
+  <label class="sr"><span aria-hidden="true">🔍</span><input id="q" type="search" placeholder="Cari materi…" autocomplete="off" aria-label="Cari materi"></label>
+  <div id="list" role="list"></div>
+  <small>Disusun ulang oleh Unit Pendidikan Alquran<br>Masjid Fatimatuzzahra Purwokerto<br><a href="lembar_tajwid.pdf" download>Unduh PDF asli</a></small>
+ </aside>
+ <main class="main">
+  <div class="bar">
+   <div class="tt"><h1 id="ttl">Lembar Tajwid</h1><p id="dsc"></p></div>
+   <div class="tools" role="group" aria-label="Kontrol gambar">
+    <button class="tb" id="prv" aria-label="Materi sebelumnya">‹</button>
+    <button class="tb" id="nxt" aria-label="Materi berikutnya">›</button>
+    <button class="tb" id="zo" aria-label="Perkecil">−</button>
+    <button class="tb" id="zi" aria-label="Perbesar">+</button>
+    <button class="tb pr" id="fit" aria-label="Pas ke materi">Pas</button>
+    <button class="tb" id="all" aria-label="Lihat seluruh halaman">Semua</button>
+    <button class="tb on" id="hlb" aria-pressed="true" aria-label="Sorot materi">Sorot</button>
+    <button class="tb" id="fs" aria-label="Layar penuh">⤢</button>
+   </div>
+  </div>
+  <div class="vwrap" id="vw">
+   <div id="vp" tabindex="0" aria-label="Gambar lembar tajwid, geser untuk menggeser, cubit atau scroll untuk zoom">
+    <div id="st"><img id="i1" src="img/halaman-1.jpg" alt="Lembar tajwid halaman 1: Mad dan Makhraj"><img id="i2" src="img/halaman-2.jpg" alt="Lembar tajwid halaman 2: Sifat huruf, Qalqalah, Nun dan Mim, Waqaf"><div id="hl"></div></div>
+   </div>
+   <div id="pg"></div>
+   <div id="hint">Geser · cubit untuk zoom · ketuk 2×</div>
+  </div>
+  <div class="ft">Crafted with ♥ by <a href="https://kurniapedia.my.id/" target="_blank" rel="noopener">Kurniapedia</a> 2026</div>
+ </main>
 </div>
+<div id="bd"></div>
+<nav class="dock" aria-label="Navigasi materi">
+ <button class="tb" id="prv2" aria-label="Materi sebelumnya">‹</button>
+ <button class="pick" id="pick" aria-label="Pilih materi">☰ Pilih Materi</button>
+ <button class="tb" id="nxt2" aria-label="Materi berikutnya">›</button>
+</nav>
 <script>
-const S=[
-{k:"mad",t:"Mad",i:"Mad Pokok (2 harokat) dan Mad Cabang (lebih dari 2 harokat) beserta sebab-sebabnya.",c:[
- ["mad-bagan","Bagan Mad Lengkap","Gambaran seluruh hukum mad.",1],
- ["mad-ashli","Mad Ashli (Pokok)","Mad Thabi'i, 'Iwadh, Harfi, dan Shilah Shughra."],
- ["mad-hamzah","Mad Far'i — Sebab Bertemu Hamzah","Wajib Muttashil, Jaiz Munfashil, Shilah Kubra, dan Badal."],
- ["mad-lazim","Mad Lazim","Mad bertemu sukun asli, panjang 6 harokat."],
- ["mad-aridh-liyn","Mad 'Aridh Lissukun dan Mad Liyn","Panjang 2/4/6 harokat.",0,1]]},
-{k:"makhraj",t:"Makhraj",i:"Nama dan tempat keluar huruf-huruf.",c:[["makhraj","Nama dan Tempat Keluar Huruf-Huruf","",0,1]]},
-{k:"sifat",t:"Sifat Huruf",i:"Sifat-sifat huruf yang mempunyai lawan dan yang tidak punya lawan.",c:[
- ["sifat-lawan","Sifat-Sifat yang Mempunyai Lawan","",0,1],
- ["sifat-tanpa-lawan","Sifat-Sifat yang Tak Punya Lawan (lanjutan)","Shafir, Inhiraf, Liyn, Takrir, Tafasysyi, Istithalah.",1],
- ["sifat-halaman","Lembar Sifat Huruf (lengkap)","",0,1]]},
-{k:"qalqalah",t:"Qalqalah",i:"Huruf qalqalah ada 5: ب ج د ط ق.",c:[
- ["qalqalah-kecil","Qalqalah Shughra (kecil)","Memantul sedikit pada sukun asli di tengah dan akhir kata."],
- ["qalqalah-sedang","Qalqalah Wustha (sedang)","Pada akhir kata yang dibaca sukun karena waqof."],
- ["qalqalah-besar","Qalqalah Kubra (besar)","Akhir kata bertasydid, ditekan satu harokat lalu memantul."]]},
-{k:"nun",t:"Nun & Mim",i:"Hukum nun sukun dan tanwin, mim sukun, serta nun dan mim bertasydid.",c:[
- ["nunmim","Hukum Nun Sukun dan Tanwin, Mim Sukun, serta Nun dan Mim Bertasydid","",1],
- ["dengung","Catatan Dengung","Dengung 1 harokat; yang bergaris merah dengung 2 harokat.",0,1],
- ["nun","Hukum Nun Sukun dan Tanwin","Izhhar, Idgham, Iqlab, dan Ikhfa'."],
- ["mim","Hukum Mim Sukun","Ikhfa' Syafawi, Idgham Mimi, dan Izhhar Syafawi.",0,1],
- ["bertasydid","Hukum Nun dan Mim Bertasydid","Ghunnah.",0,1]]},
-{k:"waqaf",t:"Waqaf",i:"Tanda-tanda waqaf dan cara menyikapinya.",c:[["waqaf","Tanda-Tanda Waqaf","",1]]},
-{k:"lembar",t:"Lembar Lengkap",i:"Dua halaman asli lembar tajwid.",c:[
- ["halaman-1","Halaman 1 — Mad dan Makhraj","",1],["halaman-2","Halaman 2 — Sifat, Qalqalah, Nun/Mim, Waqaf","",1]],pdf:1}];
-const $=s=>document.querySelector(s);
-const nav=cur=>$("#nav").innerHTML=S.map(s=>`<a href="#${s.k}"${s.k===cur?' class="on" aria-current="page"':""}>${s.t}</a>`).join("");
-function route(){
- const k=location.hash.slice(1),s=S.find(x=>x.k===k)||S[0];
- nav(s.k);
- $("#view").innerHTML=`<p class="intro">${s.i}</p><div class="grid">`+s.c.map(([f,t,d,w,n])=>`<article class="card${w?" wide":""}${n?" narrow":""}"><h3>${t}</h3>${d?`<p>${d}</p>`:""}<button class="im" data-f="${f}" data-t="${t.replace(/"/g,"&quot;")}" aria-label="Perbesar: ${t.replace(/"/g,"&quot;")}"><img src="img/${f}.jpg" alt="${t.replace(/"/g,"&quot;")}" loading="lazy"></button><div class="hint">Ketuk gambar untuk memperbesar</div></article>`).join("")+`</div>`+(s.pdf?`<p style="margin-top:18px"><a class="dl" href="lembar_tajwid.pdf" download>Unduh PDF asli</a></p>`:"");
- scrollTo(0,0);
- const a=$("#nav a.on");a&&a.scrollIntoView({inline:"center",block:"nearest"});
+/* ===== DATA: [id, judul, halaman, [x1,y1,x2,y2], keterangan, sub?] — koordinat dalam piksel gambar asli 1950×1242 ===== */
+const G=[
+{g:"Hukum Mad",m:[
+ ["mad-bagan","Bagan Mad Lengkap",1,[0,0,1305,1242],"Mad Pokok (2 harokat) dan Mad Cabang (lebih dari 2 harokat)."],
+ ["mad-ashli","Mad Ashli (Pokok)",1,[250,40,1275,315],"Mad Thabi'i, 'Iwadh, Harfi, Shilah Shughra."],
+ ["thabii","Mad Thabi'i",1,[553,80,763,308],"Panjang 2 harokat: alif, wawu sukun, ya sukun.",1],
+ ["iwadh","Mad 'Iwadh",1,[778,80,957,308],"Pengganti tanwin fathah.",1],
+ ["harfi","Mad Harfi",1,[970,80,1108,308],"Pada huruf-huruf awal surat.",1],
+ ["shughra","Mad Shilah Shughra",1,[1122,80,1265,308],"Pada ha' dhamir.",1],
+ ["hamzah","Mad Far'i — Sebab Hamzah",1,[420,440,1275,810],"Wajib Muttashil, Jaiz Munfashil, Shilah Kubra, Badal."],
+ ["wajib","Mad Wajib Muttashil",1,[1098,490,1265,805],"Hamzah dalam satu kata, 4 harokat.",1],
+ ["jaiz","Mad Jaiz Munfashil",1,[918,490,1085,733],"Hamzah dalam dua kata, 4 harokat.",1],
+ ["kubra","Mad Shilah Kubra",1,[736,490,903,733],"Ha' dhamir bertemu hamzah, 4 harokat.",1],
+ ["badal","Mad Badal",1,[584,490,720,733],"Pengganti hamzah, 2 harokat.",1],
+ ["lazim","Mad Lazim",1,[640,770,1275,1215],"Bertemu sukun asli, 6 harokat."],
+ ["lkm","Lazim Kilmi Mutsaqqal",1,[1110,995,1265,1207],"Pada kata, dengan tasydid.",1],
+ ["lkk","Lazim Kilmi Mukhaffaf",1,[977,995,1095,1207],"Pada kata, tanpa tasydid.",1],
+ ["lhm","Lazim Harfi Mutsaqqal",1,[820,995,940,1207],"Huruf awal surat, dengan tasydid.",1],
+ ["lhk","Lazim Harfi Mukhaffaf",1,[650,995,805,1207],"Huruf awal surat, tanpa tasydid.",1],
+ ["aridh","Mad 'Aridh Lissukun",1,[410,915,605,1208],"Sukun karena waqof, 2/4/6 harokat."],
+ ["liyn","Mad Liyn",1,[168,915,363,1208],"Liyn bertemu huruf hidup yang diwaqofkan, 2/4/6 harokat."]]},
+{g:"Makhraj Huruf",m:[
+ ["makhraj","Nama dan Tempat Keluar Huruf",1,[1308,0,1950,1242],"Seluruh tabel makhraj."],
+ ["mk1","Huruf Bibir",1,[1345,140,1912,250],"Syafawiyyah.",1],
+ ["mk2","Huruf Lembutnya Lisan",1,[1345,252,1912,315],"Asaliyyah.",1],
+ ["mk3","Huruf Cenderung ke Langit Mulut",1,[1345,316,1912,396],"Nith'iyyah.",1],
+ ["mk4","Huruf Dekat Gusi",1,[1345,397,1912,460],"Litsawiyyah.",1],
+ ["mk5","Huruf Cenderung ke Ujung Lisan",1,[1345,461,1912,648],"Dzawlaqiyyah.",1],
+ ["mk6","Huruf Dekat Tekak/Uvula",1,[1345,650,1912,772],"Lahawiyyah.",1],
+ ["mk7","Huruf Tengah Lidah",1,[1345,773,1912,836],"Syajariyyah.",1],
+ ["mk8","Huruf Tenggorokan",1,[1345,838,1912,947],"Halqiyyah.",1],
+ ["mk9","Huruf Rongga Mulut",1,[1345,949,1912,1010],"Jawfiyyah.",1],
+ ["mk10","Huruf Dengung",1,[1345,1012,1912,1142],"Huruf ghunnah.",1],
+ ["mk11","Huruf Tersulit",1,[1345,1143,1912,1207],"A'sarul huruf.",1]]},
+{g:"Sifat Huruf",m:[
+ ["sifat","Sifat yang Mempunyai Lawan",2,[25,125,615,1055],"Jahr/hams, syiddah/rakhawah, dst."],
+ ["s1","Jahr dan Hams",2,[38,208,605,340],"",1],
+ ["s2","Syiddah, Tawassuth, Rakhawah",2,[38,344,605,474],"",1],
+ ["s3","Istifal dan Isti'la",2,[38,478,605,607],"",1],
+ ["s4","Infitah dan Ithbaq",2,[38,612,605,742],"",1],
+ ["s5","Ishmat dan Idzlaq",2,[38,746,605,876],"",1],
+ ["s6","Tarqiq dan Tafkhim",2,[38,880,605,1040],"",1],
+ ["sifat2","Sifat yang Tak Punya Lawan",2,[35,1068,918,1218],"Shafir, Inhiraf, Liyn, Takrir, Tafasysyi, Istithalah."]]},
+{g:"Qalqalah",m:[
+ ["qal","Qalqalah (Bacaan Memantul)",2,[630,65,920,1068],"Huruf qalqalah ada 5."],
+ ["q1","Qalqalah Shughra (kecil)",2,[630,225,920,510],"Sukun asli di tengah/akhir kata.",1],
+ ["q2","Qalqalah Wustha (sedang)",2,[630,510,920,800],"Akhir kata, sukun karena waqof.",1],
+ ["q3","Qalqalah Kubra (besar)",2,[630,800,920,1066],"Akhir kata bertasydid, ditekan lalu memantul.",1]]},
+{g:"Nun Sukun, Tanwin & Mim",m:[
+ ["nunmim","Hukum Nun, Tanwin, Mim (lengkap)",2,[950,0,1950,840],"Seluruh bagian hukum nun dan mim."],
+ ["dengung","Catatan Dengung",2,[975,0,1250,145],"1 harokat; garis merah 2 harokat.",1],
+ ["nun","Hukum Nun Sukun dan Tanwin",2,[1330,112,1915,835],"Izhhar, Idgham, Iqlab, Ikhfa'."],
+ ["ikhfa","Ikhfa' Haqiqi",2,[1340,190,1905,300],"Samar, salah satu dari 15 huruf.",1],
+ ["iqlab","Iqlab",2,[1340,308,1905,395],"Nun/tanwin bertemu ba menjadi mim.",1],
+ ["izhhar","Izhhar (Halqi dan Muthlaq)",2,[1340,402,1905,624],"Jelas.",1],
+ ["idgham","Idgham (Bilaghunnah dan Bighunnah)",2,[1340,630,1905,825],"Memasukkan.",1],
+ ["mim","Hukum Mim Sukun",2,[975,165,1315,570],"Ikhfa' Syafawi, Idgham Mimi, Izhhar Syafawi."],
+ ["tasydid","Nun dan Mim Bertasydid",2,[975,580,1315,765],"Ghunnah, dengung 2 harokat.",1]]},
+{g:"Tanda Waqaf",m:[
+ ["waqaf","Tanda-Tanda Waqaf",2,[950,785,1950,1242],"Seluruh tanda waqaf."],
+ ["w1","Waqaf Lazim dan Larangan",2,[975,905,1920,980],"Harus berhenti; tidak boleh waqof.",1],
+ ["w2","Muthlaq, Jaiz, dan Aula",2,[975,985,1595,1112],"Berhenti tanpa syarat, boleh, lebih baik.",1],
+ ["w3","Merangkul dan Sakta",2,[975,1115,1595,1212],"Mu'anaqah dan berhenti sejenak.",1],
+ ["w4","Qath'a dan Waqaf Darurat",2,[1600,985,1920,1212],"Tidak boleh memutus bacaan.",1]]},
+{g:"Lembar Lengkap",m:[
+ ["h1","Halaman 1 (Mad & Makhraj)",1,[0,0,1950,1242],"Gambar penuh."],
+ ["h2","Halaman 2 (Sifat, Nun/Mim, Waqaf)",2,[0,0,1950,1242],"Gambar penuh."]]}];
+const M=[];G.forEach(g=>g.m.forEach(a=>M.push({id:a[0],t:a[1],p:a[2],b:a[3],d:a[4],s:!!a[5]})));
+const W=1950,H=1242,$=s=>document.querySelector(s);
+const vp=$("#vp"),st=$("#st"),hl=$("#hl");
+let cur=0,page=0,V={x:0,y:0,s:1},showHL=true;
+
+/* ===== daftar materi ===== */
+function renderList(f=""){
+ const q=f.trim().toLowerCase();let h="",n=0;
+ G.forEach(g=>{const it=g.m.filter(a=>!q||(a[1]+" "+a[4]+" "+g.g).toLowerCase().includes(q));
+  if(!it.length)return;n+=it.length;h+=`<div class="gt">${g.g}</div>`+it.map(a=>`<button class="mi${a[5]?" sub":""}${M[cur].id===a[0]?" on":""}" data-id="${a[0]}"><i></i>${a[1]}</button>`).join("")});
+ $("#list").innerHTML=n?h:'<div class="empty">Materi tidak ditemukan.</div>';
 }
-let Z=1;
-const zoom=v=>{Z=Math.min(4,Math.max(.5,v));const sc=$("#sc");$("#big").style.width=(sc.clientWidth-16)*Z+"px"};
-function open(f,t){
- const b=$("#big");b.src=`img/${f}.jpg`;b.alt=t;$("#lt").textContent=t;$("#dw").href=b.src;$("#dw").download=f+".jpg";
- $("#lb").classList.add("show");document.body.style.overflow="hidden";
- Z=innerWidth<700?(f.startsWith("halaman")||f==="makhraj"?2.2:1.4):1;requestAnimationFrame(()=>{zoom(Z);$("#sc").scrollTo(0,0)});
+/* ===== viewer ===== */
+function vs(){return[vp.clientWidth,vp.clientHeight]}
+function minS(){const[w,h]=vs();return Math.min(w/W,h/H)*.5}
+function clamp(){const[w,h]=vs();V.s=Math.min(6,Math.max(minS(),V.s));const m=60;
+ V.x=Math.min(w-m,Math.max(m-W*V.s,V.x));V.y=Math.min(h-m,Math.max(m-H*V.s,V.y))}
+function apply(anim){st.style.transition=anim?"transform .6s cubic-bezier(.2,.8,.2,1)":"none";clamp();st.style.transform=`translate(${V.x}px,${V.y}px) scale(${V.s})`}
+function setPage(p){if(page===p)return;page=p;$("#i1").classList.toggle("on",p===1);$("#i2").classList.toggle("on",p===2);$("#pg").textContent=`Halaman ${p} dari 2`}
+function fitBox(b,anim=true,pad=.05){
+ const[w,h]=vs(),bw=b[2]-b[0],bh=b[3]-b[1];
+ V.s=Math.min(w/(bw*(1+2*pad)),h/(bh*(1+2*pad)));
+ V.x=w/2-(b[0]+bw/2)*V.s;V.y=h/2-(b[1]+bh/2)*V.s;apply(anim);
 }
-function close(){$("#lb").classList.remove("show");document.body.style.overflow=""}
-$("#view").addEventListener("click",e=>{const b=e.target.closest("button.im");if(b)open(b.dataset.f,b.dataset.t)});
-$("#zp").onclick=()=>zoom(Z*1.3);$("#zm").onclick=()=>zoom(Z/1.3);$("#cl").onclick=close;
-$("#lb").addEventListener("click",e=>{if(e.target.id==="lb"||e.target.id==="sc")close()});
-addEventListener("keydown",e=>{if(e.key==="Escape")close();if(e.key==="+")zoom(Z*1.3);if(e.key==="-")zoom(Z/1.3)});
-addEventListener("hashchange",()=>{close();route()});
-addEventListener("resize",()=>$("#lb").classList.contains("show")&&zoom(Z));
-route();
+function mark(m){
+ const b=m.b,full=b[2]-b[0]>=1900;hl.classList.toggle("show",showHL&&!full);
+ Object.assign(hl.style,{left:b[0]-8+"px",top:b[1]-8+"px",width:b[2]-b[0]+16+"px",height:b[3]-b[1]+16+"px"});
+}
+function go(i,anim=true){
+ cur=(i+M.length)%M.length;const m=M[cur],ch=page!==m.p;
+ setPage(m.p);mark(m);fitBox(m.b,anim&&!ch);
+ $("#ttl").textContent=m.t;$("#dsc").textContent=m.d||"";
+ $("#pick").textContent="☰ "+m.t;renderList($("#q").value);
+ const on=$("#list .mi.on");on&&on.scrollIntoView({block:"nearest"});
+ history.replaceState(null,"","#"+m.id);closeDrawer();
+}
+function zoomAt(f,cx,cy,anim){const ns=Math.min(6,Math.max(minS(),V.s*f));f=ns/V.s;V.x=cx-(cx-V.x)*f;V.y=cy-(cy-V.y)*f;V.s=ns;apply(anim)}
+function center(){const[w,h]=vs();return[w/2,h/2]}
+/* pointer: geser & cubit */
+const P=new Map();let pd=0;
+vp.addEventListener("pointerdown",e=>{vp.setPointerCapture(e.pointerId);P.set(e.pointerId,[e.clientX,e.clientY]);vp.classList.add("drag");hideHint();
+ if(P.size===2){const[a,b]=[...P.values()];pd=Math.hypot(a[0]-b[0],a[1]-b[1])}});
+vp.addEventListener("pointermove",e=>{
+ if(!P.has(e.pointerId))return;const o=P.get(e.pointerId),r=vp.getBoundingClientRect();
+ if(P.size===1){V.x+=e.clientX-o[0];V.y+=e.clientY-o[1];P.set(e.pointerId,[e.clientX,e.clientY]);apply(false)}
+ else if(P.size===2){P.set(e.pointerId,[e.clientX,e.clientY]);const[a,b]=[...P.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]);
+  if(pd){zoomAt(d/pd,(a[0]+b[0])/2-r.left,(a[1]+b[1])/2-r.top,false)}pd=d}});
+const up=e=>{P.delete(e.pointerId);if(!P.size)vp.classList.remove("drag");pd=0;if(P.size===1){const k=[...P.keys()][0];}};
+vp.addEventListener("pointerup",up);vp.addEventListener("pointercancel",up);
+vp.addEventListener("wheel",e=>{e.preventDefault();hideHint();const r=vp.getBoundingClientRect();zoomAt(Math.exp(-e.deltaY*(e.ctrlKey?.01:.0016)),e.clientX-r.left,e.clientY-r.top,false)},{passive:false});
+vp.addEventListener("dblclick",e=>{const r=vp.getBoundingClientRect();zoomAt(V.s>fitS()*1.9?.5:2,e.clientX-r.left,e.clientY-r.top,true)});
+function fitS(){const b=M[cur].b,[w,h]=vs();return Math.min(w/((b[2]-b[0])*1.1),h/((b[3]-b[1])*1.1))}
+vp.addEventListener("keydown",e=>{const k=e.key,st=60;
+ if(k==="ArrowLeft"){V.x+=st}else if(k==="ArrowRight"){V.x-=st}else if(k==="ArrowUp"){V.y+=st}else if(k==="ArrowDown"){V.y-=st}
+ else if(k==="+"||k==="="){const[c,d]=center();zoomAt(1.25,c,d,true);return}else if(k==="-"){const[c,d]=center();zoomAt(.8,c,d,true);return}
+ else if(k==="0"){fitBox(M[cur].b);return}else if(k==="PageDown"){go(cur+1)}else if(k==="PageUp"){go(cur-1)}else return;
+ e.preventDefault();apply(false)});
+/* tombol */
+const zb=f=>{const[c,d]=center();zoomAt(f,c,d,true)};
+$("#zi").onclick=()=>zb(1.35);$("#zo").onclick=()=>zb(1/1.35);
+$("#fit").onclick=()=>fitBox(M[cur].b);
+$("#all").onclick=()=>fitBox([0,0,W,H]);
+$("#prv").onclick=$("#prv2").onclick=()=>go(cur-1);$("#nxt").onclick=$("#nxt2").onclick=()=>go(cur+1);
+$("#hlb").onclick=e=>{showHL=!showHL;e.currentTarget.classList.toggle("on",showHL);e.currentTarget.setAttribute("aria-pressed",showHL);mark(M[cur])};
+$("#fs").onclick=()=>{const v=$("#vw");try{document.fullscreenElement?document.exitFullscreen():(v.requestFullscreen||v.webkitRequestFullscreen).call(v)}catch(e){}};
+document.addEventListener("fullscreenchange",()=>setTimeout(()=>fitBox(M[cur].b,false),120));
+$("#list").addEventListener("click",e=>{const b=e.target.closest(".mi");if(b)go(M.findIndex(m=>m.id===b.dataset.id))});
+$("#q").addEventListener("input",e=>renderList(e.target.value));
+/* drawer HP */
+const side=$("#side"),bd=$("#bd");
+function openDrawer(){side.classList.add("open");bd.classList.add("show")}
+function closeDrawer(){side.classList.remove("open");bd.classList.remove("show")}
+$("#pick").onclick=openDrawer;bd.onclick=closeDrawer;
+addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer()});
+let ht;function hideHint(){$("#hint").style.opacity=0}
+addEventListener("resize",()=>{clearTimeout(ht);ht=setTimeout(()=>fitBox(M[cur].b,false),150)});
+addEventListener("hashchange",()=>{const i=M.findIndex(m=>m.id===location.hash.slice(1));if(i>=0&&i!==cur)go(i)});
+/* mulai */
+const i0=M.findIndex(m=>m.id===location.hash.slice(1));
+cur=i0>=0?i0:0;
+const imgs=[$("#i1"),$("#i2")];
+requestAnimationFrame(()=>{go(cur,false);setTimeout(hideHint,6000)});
 </script>
 </body>
 </html>
