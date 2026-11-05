@@ -252,11 +252,11 @@ function blurUpdate(anim){
  const x1=V.x+(b[0]-p)*V.s,y1=V.y+(b[1]-p)*V.s,x2=V.x+(b[2]+p)*V.s,y2=V.y+(b[3]+p)*V.s;
  const r=Math.max(0,Math.min(22*V.s,(x2-x1)/2,(y2-y1)/2));
  const f=n=>n.toFixed(2);
- /* seluruh layar dikurangi persegi rounded (evenodd) -> blur hanya di luar materi, sudut bulat */
- const d=`M0 0H${f(w)}V${f(h)}H0Z M${f(x1+r)} ${f(y1)}H${f(x2-r)}A${f(r)} ${f(r)} 0 0 1 ${f(x2)} ${f(y1+r)}V${f(y2-r)}A${f(r)} ${f(r)} 0 0 1 ${f(x2-r)} ${f(y2)}H${f(x1+r)}A${f(r)} ${f(r)} 0 0 1 ${f(x1)} ${f(y2-r)}V${f(y1+r)}A${f(r)} ${f(r)} 0 0 1 ${f(x1+r)} ${f(y1)}Z`;
+ /* seluruh layar dikurangi persegi rounded -> blur hanya di luar materi, sudut bulat */
+ const d=`M0 0H${f(w)}V${f(h)}H0Z M${f(x1+r)} ${f(y1)}A${f(r)} ${f(r)} 0 0 0 ${f(x1)} ${f(y1+r)}V${f(y2-r)}A${f(r)} ${f(r)} 0 0 0 ${f(x1+r)} ${f(y2)}H${f(x2-r)}A${f(r)} ${f(r)} 0 0 0 ${f(x2)} ${f(y2-r)}V${f(y1+r)}A${f(r)} ${f(r)} 0 0 0 ${f(x2-r)} ${f(y1)}Z`;
  el.style.transition=anim?"clip-path .6s cubic-bezier(.2,.8,.2,1),-webkit-clip-path .6s cubic-bezier(.2,.8,.2,1),opacity .3s":"opacity .3s";
  el.style.opacity=showHL&&!full?1:0;
- el.style.clipPath=el.style.webkitClipPath=`path(evenodd,"${d}")`;
+ el.style.clipPath=el.style.webkitClipPath=`path("${d}")`;
 }
 function setPage(p){if(page===p)return;page=p;$('#tl1').classList.toggle('on',p===1);$('#tl2').classList.toggle('on',p===2);$("#i1").classList.toggle("on",p===1);$("#i2").classList.toggle("on",p===2);$("#pg").textContent=`Halaman ${p} dari 2`}
 function fitBox(b,anim=true,pad=.05){
