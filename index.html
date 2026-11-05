@@ -1,386 +1,2073 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#8b7bdc">
-<title>Lembar Tajwid Tartili — Panduan Hukum Tajwid</title>
-<meta name="description" content="Panduan hukum tajwid bergambar: Mad, Makhraj, Sifat Huruf, Qalqalah, Nun & Mim, Waqaf.">
-<link rel="icon" type="image/svg+xml" href="icons/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest">
-<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Tajwid Tartili"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta property="og:title" content="Lembar Tajwid Tartili"><meta property="og:description" content="Panduan hukum tajwid bergambar."><meta property="og:image" content="icons/icon-512.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-<style>
-:root{--p:#7461cf;--p2:#a595ec;--pd:#4b3aa8;--ink:#2b2750;--mut:#7b779c;--line:#ece6fb;--rd:#d62f4a;--gold:#e8b84a;
---fs-h1:clamp(20px,1.7vw + 8px,27px);--fs-sub:13.5px;--fs-eyebrow:11.5px;--fs-item:14px;--fs-sub-item:13px;--fs-group:11px;--fs-btn:13.5px;--fs-small:12px;
---star-w:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='white' stroke-opacity='.11' stroke-width='1.2'%3E%3Crect x='16' y='16' width='40' height='40'/%3E%3Crect x='16' y='16' width='40' height='40' transform='rotate(45 36 36)'/%3E%3C/g%3E%3C/svg%3E");--star-p:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%237461cf' stroke-opacity='.10' stroke-width='1.2'%3E%3Crect x='16' y='16' width='40' height='40'/%3E%3Crect x='16' y='16' width='40' height='40' transform='rotate(45 36 36)'/%3E%3C/g%3E%3C/svg%3E")}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;font-family:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:14px;line-height:1.5;color:var(--ink);background:var(--star-p),linear-gradient(160deg,#ddd5f8,#b7a8ee);background-size:72px 72px,auto;padding:18px;overflow:hidden;-webkit-font-smoothing:antialiased}
-button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
-h1,h2,p{margin:0}
-.app{display:grid;grid-template-columns:316px 1fr;gap:18px;max-width:1700px;margin:0 auto;height:calc(100dvh - 36px)}
-.side{background:var(--star-w),linear-gradient(180deg,#8d7ede,#6c5bc7);background-size:72px 72px,auto;border-radius:30px;padding:20px 12px 14px;color:#fff;display:flex;flex-direction:column;min-height:0;box-shadow:0 18px 40px rgba(94,76,190,.35)}
-.brand{display:flex;align-items:center;gap:12px;padding:0 8px 10px}
-.logo{flex:none;width:54px;height:54px;border-radius:16px;box-shadow:0 0 0 2px rgba(255,255,255,.55),0 8px 18px rgba(30,15,100,.35)}
-.brand b{display:block;font-size:16px;font-weight:700;line-height:1.25;letter-spacing:-.01em}
-.brand span{display:block;font-size:11.5px;font-weight:400;opacity:.88;margin-top:2px;line-height:1.35}
-.orn{display:flex;align-items:center;gap:8px;color:#f6dd96;font-size:11px;margin:0 10px 10px}
-.orn:before,.orn:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent)}
-.sr{display:flex;align-items:center;gap:8px;background:#fff;color:var(--ink);border-radius:999px;padding:10px 16px;margin:0 6px 8px;box-shadow:inset 0 2px 6px rgba(120,100,200,.12)}
-.sr input{border:0;outline:0;background:none;font:inherit;font-size:13px;width:100%;color:var(--ink)}
-#list{flex:1;overflow-y:auto;padding:0 4px;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#ffffff66 transparent}
-.gt{font-size:var(--fs-group);font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#f6dd96;padding:14px 12px 6px;display:flex;align-items:center;gap:8px}
-.gt:before{content:"✦";font-size:9px}
-.mi{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 12px;margin-bottom:3px;border-radius:14px;font-size:var(--fs-item);font-weight:500;line-height:1.35;color:#f1edff;transition:.2s;min-height:42px}
-.mi:hover{background:rgba(255,255,255,.14)}
-.mi.on{background:#fff;color:var(--p);box-shadow:0 8px 18px rgba(0,0,0,.15);font-weight:600}
-.mi i{flex:none;width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.5}
-.mi.on i{background:var(--gold);opacity:1;box-shadow:0 0 0 3px rgba(232,184,74,.28)}
-.mi.sub{padding-left:28px;font-size:var(--fs-sub-item);font-weight:400}
-.mi.sub.on{font-weight:600}
-.empty{padding:20px;text-align:center;font-size:13px;opacity:.85}
-.soc{display:flex;justify-content:center;gap:10px;padding:12px 0 8px}
-.soc a{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);color:#fff;transition:.2s}
-.soc a:hover{background:#fff;color:var(--p);transform:translateY(-2px)}
-.soc svg{width:20px;height:20px}
-.cr{text-align:center;font-size:11.5px;opacity:.92;padding-bottom:2px}
-.cr a{color:#fff;font-weight:600;text-decoration:underline}
-.main{background:rgba(255,255,255,.6);border-radius:32px;padding:20px;min-width:0;min-height:0;display:flex;flex-direction:column;gap:14px;box-shadow:0 18px 40px rgba(110,90,200,.18)}
-.bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.tt{flex:1;min-width:200px}
-.eyb{display:flex;align-items:center;gap:8px;font-size:var(--fs-eyebrow);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--p)}
-.eyb:before{content:"";width:18px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--p2))}
-.tt h1{font-size:var(--fs-h1);font-weight:700;line-height:1.2;letter-spacing:-.015em;margin-top:4px}
-.tt p{font-size:var(--fs-sub);font-weight:400;color:var(--mut);margin-top:3px}
-.tools{display:flex;gap:6px;flex-wrap:wrap}
-.tb{min-width:44px;height:44px;padding:0 14px;border-radius:14px;background:#fff;color:var(--p);font-weight:600;font-size:var(--fs-btn);box-shadow:0 4px 10px rgba(110,90,200,.15);transition:.15s}
-.tb:hover{background:#f3efff}.tb:active{transform:scale(.95)}.tb.on{background:var(--p);color:#fff}
-.tb.pr{background:linear-gradient(135deg,#8f7fe6,#6d5bcb);color:#fff}
-.vwrap{position:relative;flex:1;min-height:0;border-radius:24px;background:#fff;border:3px solid #fff;box-shadow:0 0 0 2px #d6c9fa,0 14px 30px rgba(110,90,200,.22);overflow:hidden}
-#vp{position:absolute;inset:0;isolation:isolate;touch-action:none;cursor:grab;overflow:hidden;background:repeating-conic-gradient(#f6f3ff 0 25%,#fff 0 50%) 0 0/24px 24px;user-select:none;-webkit-user-select:none}
-#vp.drag{cursor:grabbing}
-#st{position:absolute;left:0;top:0;width:1950px;height:1242px;transform-origin:0 0}
-#st>img{position:absolute;inset:0;width:100%;height:100%;display:none;pointer-events:none;-webkit-user-drag:none}
-#st>img.on{display:block;animation:fi .35s}
-.tlc{position:absolute;inset:0;pointer-events:none}.tlc.on{display:block}.tlc:not(.on){display:none}
-.tl{position:absolute;opacity:0;transition:opacity .25s;pointer-events:none;user-select:none;-webkit-user-drag:none}.tl.ok{opacity:1}
-.pwa{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px 6px 0}
-.pb{flex:1 1 130px;min-height:42px;border-radius:14px;background:rgba(255,255,255,.18);color:#fff;font-size:12.5px;font-weight:600;padding:8px 10px;transition:.2s;border:1px solid rgba(255,255,255,.28)}
-.pb:hover{background:rgba(255,255,255,.3)}.pb:disabled{opacity:.7;cursor:progress}
-.offs{flex-basis:100%;text-align:center;font-size:11.5px;opacity:.92;min-height:16px}
-#toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:rgba(43,39,80,.95);color:#fff;font-size:13px;padding:11px 18px;border-radius:16px;z-index:120;max-width:min(92vw,420px);text-align:center;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 10px 30px rgba(20,10,70,.4)}
-#toast.show{opacity:1;transform:translate(-50%,0)}
-@keyframes fi{from{opacity:.2}to{opacity:1}}
-#hl{z-index:6;position:absolute;border:5px solid rgba(255,255,255,.92);border-radius:22px;box-shadow:0 0 0 3px rgba(116,97,207,.55),0 0 36px rgba(116,97,207,.45);pointer-events:none;display:none;transition:.4s}
-#blr{position:absolute;inset:0;pointer-events:none;backdrop-filter:blur(16px) saturate(1.15) brightness(1.06);-webkit-backdrop-filter:blur(16px) saturate(1.15) brightness(1.06);background:linear-gradient(135deg,rgba(255,255,255,.38),rgba(205,195,255,.26) 55%,rgba(255,255,255,.3));opacity:0;z-index:2;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-composite:source-out,source-over,source-over,source-over,source-over,source-over,source-over;mask-composite:subtract,add,add,add,add,add,add}
-#hl.show{display:block}
-#hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(43,39,80,.86);color:#fff;font-size:var(--fs-small);font-weight:500;padding:8px 14px;border-radius:999px;pointer-events:none;transition:opacity .6s;white-space:nowrap;max-width:92%;overflow:hidden;text-overflow:ellipsis}
-#pg{position:absolute;right:12px;top:12px;background:rgba(255,255,255,.94);color:var(--p);font-size:var(--fs-small);font-weight:600;padding:6px 12px;border-radius:999px;box-shadow:0 4px 10px rgba(110,90,200,.2);pointer-events:none}
-.dock,#bd{display:none}
-#splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--star-w),radial-gradient(circle at 50% 35%,#a595ec,#6c5bc7 70%,#4b3aa8);background-size:72px 72px,auto;color:#fff;text-align:center;padding:24px;transition:opacity .6s,visibility .6s,transform .6s}
-#splash.out{opacity:0;visibility:hidden;transform:scale(1.04)}
-.sp-logo{width:124px;height:124px;border-radius:30px;box-shadow:0 22px 50px rgba(30,15,100,.5),0 0 0 3px rgba(255,255,255,.45);animation:pop .9s cubic-bezier(.2,.9,.3,1.25) both}
-.sp-ar{font-family:'Amiri','Noto Naskh Arabic','Scheherazade New',serif;font-size:clamp(22px,4vw,28px);line-height:2;margin-top:20px;color:#fdf1c8;animation:up .8s .35s both}
-.sp-t{font-size:clamp(24px,5vw,32px);font-weight:700;letter-spacing:-.02em;line-height:1.2;animation:up .8s .5s both}
-.sp-s{font-size:14px;font-weight:400;opacity:.9;margin-top:6px;animation:up .8s .65s both}
-.sp-bar{width:170px;height:5px;border-radius:5px;background:rgba(255,255,255,.25);margin-top:28px;overflow:hidden;animation:up .6s .8s both}
-.sp-bar i{display:block;height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,var(--gold),#fff);animation:ld 1.5s .8s ease-out forwards}
-.sp-f{position:absolute;bottom:calc(22px + env(safe-area-inset-bottom));font-size:12px;opacity:.85}
-@keyframes pop{from{opacity:0;transform:scale(.5) rotate(-8deg)}to{opacity:1;transform:none}}
-@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes ld{to{width:100%}}
-@media(max-width:900px){
- body{padding:8px 8px 0}
- .app{display:block;height:calc(100dvh - 8px)}
- .main{height:calc(100dvh - 8px - 72px - env(safe-area-inset-bottom));padding:12px;border-radius:24px;gap:8px}
- .tt h1{font-size:18px}.tt p{display:none}.eyb{font-size:10.5px}.eyb:before{width:12px}
- .bar{gap:6px}.tools{width:100%;flex-wrap:nowrap;gap:5px}.tools .tb{flex:1;min-width:0;padding:0 2px;font-size:13px;height:42px}#prv,#nxt{display:none}#hint{font-size:11px}
- .side{position:fixed;left:8px;right:8px;bottom:0;height:78dvh;z-index:40;border-radius:28px 28px 0 0;transform:translateY(110%);transition:transform .35s cubic-bezier(.2,.8,.2,1);padding-bottom:calc(14px + env(safe-area-inset-bottom))}
- .side.open{transform:none}
- #bd{position:fixed;inset:0;background:rgba(30,20,70,.45);z-index:30}
- #bd.show{display:block}
- .dock{display:flex;position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:20;gap:8px;align-items:center;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-radius:22px;padding:8px;box-shadow:0 10px 30px rgba(80,60,180,.3);height:60px}
- .dock .tb{flex:none;width:48px;height:44px;padding:0;min-width:0;font-size:20px}
- .dock .pick{flex:1;min-width:0;height:44px;border-radius:14px;background:linear-gradient(135deg,#8f7fe6,#6d5bcb);color:#fff;font-weight:600;font-size:13px;padding:0 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
- .vwrap{border-radius:18px}
-}
-@media(max-width:900px) and (orientation:landscape){.app{display:grid;grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
-:focus-visible{outline:3px solid #ffb84d;outline-offset:2px}
-</style>
-</head>
-<body>
-<div class="app">
- <aside class="side" id="side" aria-label="Pilihan materi">
-  <div class="brand"><img class="logo" src="icons/icon.svg" alt="Logo Lembar Tajwid Tartili"><div><b>Lembar Tajwid Tartili</b><span>Pilih materi, gambar otomatis diperbesar</span></div></div>
-  <div class="orn" aria-hidden="true">✦</div>
-  <label class="sr"><span aria-hidden="true">🔍</span><input id="q" type="search" placeholder="Cari materi…" autocomplete="off" aria-label="Cari materi"></label>
-  <div id="list" role="list"></div>
-  <div class="pwa"><button class="pb" id="inst">⬇ Pasang Aplikasi</button><button class="pb" id="off">☁ Simpan Offline</button><div class="offs" id="offs" role="status"></div></div>
-  <div class="soc">
-   <a href="https://www.instagram.com/kurniapedia" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
-   <a href="https://www.tiktok.com/@kurniapedia" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.7a4.8 4.8 0 0 1-3.8-4.2h-3.4v13.4a2.9 2.9 0 1 1-2-2.8V9.6a6.3 6.3 0 1 0 5.4 6.2V9a8.2 8.2 0 0 0 4.8 1.5V7.1a4.8 4.8 0 0 1-1-.4z"/></svg></a>
-   <a href="https://kurniapedia.my.id/" target="_blank" rel="noopener" aria-label="Website Kurniapedia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
-   <a href="https://wa.me/6285870906050" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-2-1-.8.7a3.6 3.6 0 0 1-1.7-1.7l.7-.8-1-2z"/></svg></a>
-  </div>
-  <div class="cr">Crafted with ♥ by <a href="https://kurniapedia.my.id/" target="_blank" rel="noopener">Kurniapedia</a> 2026</div>
- </aside>
- <main class="main">
-  <div class="bar">
-   <div class="tt"><div class="eyb" id="eyb">Hukum Tajwid</div><h1 id="ttl">Lembar Tajwid</h1><p id="dsc"></p></div>
-   <div class="tools" role="group" aria-label="Kontrol gambar">
-    <button class="tb" id="prv" aria-label="Materi sebelumnya">‹</button>
-    <button class="tb" id="nxt" aria-label="Materi berikutnya">›</button>
-    <button class="tb" id="zo" aria-label="Perkecil">−</button>
-    <button class="tb" id="zi" aria-label="Perbesar">+</button>
-    <button class="tb pr" id="fit" aria-label="Pas ke materi">Pas</button>
-    <button class="tb" id="all" aria-label="Lihat seluruh halaman">Semua</button>
-    <button class="tb on" id="hlb" aria-pressed="true" aria-label="Sorot materi">Sorot</button>
-    <button class="tb" id="fs" aria-label="Layar penuh">⤢</button>
-   </div>
-  </div>
-  <div class="vwrap" id="vw">
-   <div id="vp" tabindex="0" aria-label="Gambar lembar tajwid, geser untuk menggeser, cubit atau scroll untuk zoom">
-    <div id="st"><img id="i1" src="img/halaman-1.webp" alt="Lembar tajwid halaman 1: Mad dan Makhraj"><img id="i2" src="img/halaman-2.webp" alt="Lembar tajwid halaman 2: Sifat huruf, Qalqalah, Nun dan Mim, Waqaf"><div class="tlc" id="tl1"></div><div class="tlc" id="tl2"></div><div id="hl"></div></div>
-    <div id="blr"></div>
-   </div>
-   <div id="pg"></div>
-   <div id="hint">Geser · cubit untuk zoom · ketuk 2×</div>
-  </div>
- </main>
-</div>
-<div id="bd"></div>
-<div id="toast" role="status" aria-live="polite"></div>
-<div id="splash" role="status" aria-label="Memuat aplikasi"><img class="sp-logo" src="icons/icon.svg" alt=""><div class="sp-ar" lang="ar">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div><div class="sp-t">Lembar Tajwid Tartili</div><div class="sp-s">Panduan Hukum Tajwid Bergambar</div><div class="sp-bar"><i></i></div><div class="sp-f">Crafted with ♥ by Kurniapedia</div></div>
-<nav class="dock" aria-label="Navigasi materi">
- <button class="tb" id="prv2" aria-label="Materi sebelumnya">‹</button>
- <button class="pick" id="pick" aria-label="Pilih materi">☰ Pilih Materi</button>
- <button class="tb" id="nxt2" aria-label="Materi berikutnya">›</button>
-</nav>
-<script>
-/* ===== DATA: [id, judul, halaman, [x1,y1,x2,y2], keterangan, sub?] — koordinat dalam piksel gambar asli 1950×1242 ===== */
-const G=[
-{g:"Hukum Mad",m:[
- ["mad-bagan","Bagan Mad Lengkap",1,[0,0,1305,1242],"Mad Pokok (2 harokat) dan Mad Cabang (lebih dari 2 harokat)."],
- ["mad-ashli","Mad Ashli (Pokok)",1,[250,40,1275,315],"Mad Thabi'i, 'Iwadh, Harfi, Shilah Shughra."],
- ["thabii","Mad Thabi'i",1,[553,80,763,308],"Panjang 2 harokat: alif, wawu sukun, ya sukun.",1],
- ["iwadh","Mad 'Iwadh",1,[778,80,957,308],"Pengganti tanwin fathah.",1],
- ["harfi","Mad Harfi",1,[970,80,1108,308],"Pada huruf-huruf awal surat.",1],
- ["shughra","Mad Shilah Shughra",1,[1122,80,1265,308],"Pada ha' dhamir.",1],
- ["hamzah","Mad Far'i — Sebab Hamzah",1,[420,440,1275,810],"Wajib Muttashil, Jaiz Munfashil, Shilah Kubra, Badal."],
- ["wajib","Mad Wajib Muttashil",1,[1098,490,1265,805],"Hamzah dalam satu kata, 4 harokat.",1],
- ["jaiz","Mad Jaiz Munfashil",1,[918,490,1085,733],"Hamzah dalam dua kata, 4 harokat.",1],
- ["kubra","Mad Shilah Kubra",1,[736,490,903,733],"Ha' dhamir bertemu hamzah, 4 harokat.",1],
- ["badal","Mad Badal",1,[584,490,720,733],"Pengganti hamzah, 2 harokat.",1],
- ["lazim","Mad Lazim",1,[640,770,1275,1215],"Bertemu sukun asli, 6 harokat."],
- ["lkm","Lazim Kilmi Mutsaqqal",1,[1110,995,1265,1207],"Pada kata, dengan tasydid.",1],
- ["lkk","Lazim Kilmi Mukhaffaf",1,[977,995,1095,1207],"Pada kata, tanpa tasydid.",1],
- ["lhm","Lazim Harfi Mutsaqqal",1,[820,995,940,1207],"Huruf awal surat, dengan tasydid.",1],
- ["lhk","Lazim Harfi Mukhaffaf",1,[650,995,805,1207],"Huruf awal surat, tanpa tasydid.",1],
- ["aridh","Mad 'Aridh Lissukun",1,[410,915,605,1208],"Sukun karena waqof, 2/4/6 harokat."],
- ["liyn","Mad Liyn",1,[168,915,363,1208],"Liyn bertemu huruf hidup yang diwaqofkan, 2/4/6 harokat."]]},
-{g:"Makhraj Huruf",m:[
- ["makhraj","Nama dan Tempat Keluar Huruf",1,[1308,0,1950,1242],"Seluruh tabel makhraj."],
- ["mk1","Huruf Bibir",1,[1345,140,1912,250],"Syafawiyyah.",1],
- ["mk2","Huruf Lembutnya Lisan",1,[1345,252,1912,315],"Asaliyyah.",1],
- ["mk3","Huruf Cenderung ke Langit Mulut",1,[1345,316,1912,396],"Nith'iyyah.",1],
- ["mk4","Huruf Dekat Gusi",1,[1345,397,1912,460],"Litsawiyyah.",1],
- ["mk5","Huruf Cenderung ke Ujung Lisan",1,[1345,461,1912,648],"Dzawlaqiyyah.",1],
- ["mk6","Huruf Dekat Tekak/Uvula",1,[1345,650,1912,772],"Lahawiyyah.",1],
- ["mk7","Huruf Tengah Lidah",1,[1345,773,1912,836],"Syajariyyah.",1],
- ["mk8","Huruf Tenggorokan",1,[1345,838,1912,947],"Halqiyyah.",1],
- ["mk9","Huruf Rongga Mulut",1,[1345,949,1912,1010],"Jawfiyyah.",1],
- ["mk10","Huruf Dengung",1,[1345,1012,1912,1142],"Huruf ghunnah.",1],
- ["mk11","Huruf Tersulit",1,[1345,1143,1912,1207],"A'sarul huruf.",1]]},
-{g:"Sifat Huruf",m:[
- ["sifat","Sifat yang Mempunyai Lawan",2,[25,125,615,1055],"Jahr/hams, syiddah/rakhawah, dst."],
- ["s1","Jahr dan Hams",2,[38,208,605,340],"",1],
- ["s2","Syiddah, Tawassuth, Rakhawah",2,[38,344,605,474],"",1],
- ["s3","Istifal dan Isti'la",2,[38,478,605,607],"",1],
- ["s4","Infitah dan Ithbaq",2,[38,612,605,742],"",1],
- ["s5","Ishmat dan Idzlaq",2,[38,746,605,876],"",1],
- ["s6","Tarqiq dan Tafkhim",2,[38,880,605,1040],"",1],
- ["sifat2","Sifat yang Tak Punya Lawan",2,[35,1068,918,1218],"Shafir, Inhiraf, Liyn, Takrir, Tafasysyi, Istithalah."]]},
-{g:"Qalqalah",m:[
- ["qal","Qalqalah (Bacaan Memantul)",2,[630,65,920,1068],"Huruf qalqalah ada 5."],
- ["q1","Qalqalah Shughra (kecil)",2,[630,225,920,510],"Sukun asli di tengah/akhir kata.",1],
- ["q2","Qalqalah Wustha (sedang)",2,[630,510,920,800],"Akhir kata, sukun karena waqof.",1],
- ["q3","Qalqalah Kubra (besar)",2,[630,800,920,1066],"Akhir kata bertasydid, ditekan lalu memantul.",1]]},
-{g:"Nun Sukun, Tanwin & Mim",m:[
- ["nunmim","Hukum Nun, Tanwin, Mim (lengkap)",2,[950,0,1950,840],"Seluruh bagian hukum nun dan mim."],
- ["dengung","Catatan Dengung",2,[975,0,1250,145],"1 harokat; garis merah 2 harokat.",1],
- ["nun","Hukum Nun Sukun dan Tanwin",2,[1330,112,1915,835],"Izhhar, Idgham, Iqlab, Ikhfa'."],
- ["ikhfa","Ikhfa' Haqiqi",2,[1340,190,1905,300],"Samar, salah satu dari 15 huruf.",1],
- ["iqlab","Iqlab",2,[1340,308,1905,395],"Nun/tanwin bertemu ba menjadi mim.",1],
- ["izhhar","Izhhar (Halqi dan Muthlaq)",2,[1340,402,1905,624],"Jelas.",1],
- ["idgham","Idgham (Bilaghunnah dan Bighunnah)",2,[1340,630,1905,825],"Memasukkan.",1],
- ["mim","Hukum Mim Sukun",2,[975,165,1315,570],"Ikhfa' Syafawi, Idgham Mimi, Izhhar Syafawi."],
- ["tasydid","Nun dan Mim Bertasydid",2,[975,580,1315,765],"Ghunnah, dengung 2 harokat.",1]]},
-{g:"Tanda Waqaf",m:[
- ["waqaf","Tanda-Tanda Waqaf",2,[950,785,1950,1242],"Seluruh tanda waqaf."],
- ["w1","Waqaf Lazim dan Larangan",2,[975,905,1920,980],"Harus berhenti; tidak boleh waqof.",1],
- ["w2","Muthlaq, Jaiz, dan Aula",2,[975,985,1595,1112],"Berhenti tanpa syarat, boleh, lebih baik.",1],
- ["w3","Merangkul dan Sakta",2,[975,1115,1595,1212],"Mu'anaqah dan berhenti sejenak.",1],
- ["w4","Qath'a dan Waqaf Darurat",2,[1600,985,1920,1212],"Tidak boleh memutus bacaan.",1]]},
-{g:"Lembar Lengkap",m:[
- ["h1","Halaman 1 (Mad & Makhraj)",1,[0,0,1950,1242],"Gambar penuh."],
- ["h2","Halaman 2 (Sifat, Nun/Mim, Waqaf)",2,[0,0,1950,1242],"Gambar penuh."]]}];
-const M=[];G.forEach(g=>g.m.forEach(a=>M.push({id:a[0],t:a[1],p:a[2],b:a[3],d:a[4],s:!!a[5],g:g.g})));
-const W=1950,H=1242,$=s=>document.querySelector(s);
-const vp=$("#vp"),st=$("#st"),hl=$("#hl");
-let cur=0,page=0,V={x:0,y:0,s:1},showHL=true;
+  <!-- =====================================================================
+       LEMBAR TAJWID TARTILI
+       Aplikasi web (PWA) untuk mempelajari hukum tajwid dari gambar lembar.
 
-/* ===== daftar materi ===== */
-function renderList(f=""){
- const q=f.trim().toLowerCase();let h="",n=0;
- G.forEach(g=>{const it=g.m.filter(a=>!q||(a[1]+" "+a[4]+" "+g.g).toLowerCase().includes(q));
-  if(!it.length)return;n+=it.length;h+=`<h2 class="gt">${g.g}</h2>`+it.map(a=>`<button class="mi${a[5]?" sub":""}${M[cur].id===a[0]?" on":""}" data-id="${a[0]}"><i></i>${a[1]}</button>`).join("")});
- $("#list").innerHTML=n?h:'<div class="empty">Materi tidak ditemukan.</div>';
-}
-/* ===== viewer ===== */
-function vs(){return[vp.clientWidth,vp.clientHeight]}
-function minS(){const[w,h]=vs();return Math.min(w/W,h/H)*.5}
-function clamp(){const[w,h]=vs();V.s=Math.min(6,Math.max(minS(),V.s));const m=60;
- V.x=Math.min(w-m,Math.max(m-W*V.s,V.x));V.y=Math.min(h-m,Math.max(m-H*V.s,V.y))}
-function apply(anim){st.style.transition=anim?"transform .6s cubic-bezier(.2,.8,.2,1)":"none";clamp();st.style.transform=`translate(${V.x}px,${V.y}px) scale(${V.s})`;blurUpdate(anim);schedTiles()}
-/* blur di luar materi terpilih: lubang (clip-path) mengikuti kotak materi */
-function blurUpdate(anim){
- const el=document.getElementById("blr"),b=M[cur].b,full=b[2]-b[0]>=1900,p=8;
- const x1=V.x+(b[0]-p)*V.s,y1=V.y+(b[1]-p)*V.s,x2=V.x+(b[2]+p)*V.s,y2=V.y+(b[3]+p)*V.s;
- const r=Math.max(1,Math.min(22*V.s,(x2-x1)/2,(y2-y1)/2)),R=n=>+n.toFixed(2);
- /* lubang = 2 persegi panjang + 4 sudut bulat (radial-gradient); blur = layar penuh dikurangi lubang */
- const g="linear-gradient(#000,#000)",c=pos=>`radial-gradient(circle at ${pos},#000 ${R(r-.7)}px,transparent ${R(r)}px)`;
- const rr=`${R(r)}px ${R(r)}px`,P=(x,y)=>`${R(x)}px ${R(y)}px`;
- const img=[g,g,g,c("100% 100%"),c("0 100%"),c("100% 0"),c("0 0")].join(",");
- const sz=["100% 100%",`${R(x2-x1)}px ${R(y2-y1-2*r+2)}px`,`${R(x2-x1-2*r+2)}px ${R(y2-y1)}px`,rr,rr,rr,rr].join(",");
- const ps=["0 0",P(x1,y1+r-1),P(x1+r-1,y1),P(x1,y1),P(x2-r,y1),P(x1,y2-r),P(x2-r,y2-r)].join(",");
- el.style.clipPath=el.style.webkitClipPath="none";
- el.style.transition=anim?"mask-size .6s cubic-bezier(.2,.8,.2,1),mask-position .6s cubic-bezier(.2,.8,.2,1),-webkit-mask-size .6s cubic-bezier(.2,.8,.2,1),-webkit-mask-position .6s cubic-bezier(.2,.8,.2,1),opacity .3s":"opacity .3s";
- el.style.opacity=showHL&&!full?1:0;
- el.style.maskImage=el.style.webkitMaskImage=img;
- el.style.maskSize=el.style.webkitMaskSize=sz;
- el.style.maskPosition=el.style.webkitMaskPosition=ps;
-}
-function setPage(p){if(page===p)return;page=p;$('#tl1').classList.toggle('on',p===1);$('#tl2').classList.toggle('on',p===2);$("#i1").classList.toggle("on",p===1);$("#i2").classList.toggle("on",p===2);$("#pg").textContent=`Halaman ${p} dari 2`}
-function fitBox(b,anim=true,pad=.05){
- const[w,h]=vs(),bw=b[2]-b[0],bh=b[3]-b[1];
- V.s=Math.min(w/(bw*(1+2*pad)),h/(bh*(1+2*pad)));
- V.x=w/2-(b[0]+bw/2)*V.s;V.y=h/2-(b[1]+bh/2)*V.s;apply(anim);
-}
-function mark(m){
- const b=m.b,full=b[2]-b[0]>=1900;hl.classList.toggle("show",showHL&&!full);
- Object.assign(hl.style,{left:b[0]-8+"px",top:b[1]-8+"px",width:b[2]-b[0]+16+"px",height:b[3]-b[1]+16+"px"});
-}
-function go(i,anim=true){
- cur=(i+M.length)%M.length;const m=M[cur],ch=page!==m.p;
- setPage(m.p);mark(m);fitBox(m.b,anim&&!ch);
- $("#ttl").textContent=m.t;$("#eyb").textContent=m.g;document.title=m.t+" — Lembar Tajwid Tartili";$("#dsc").textContent=m.d||"";
- $("#pick").textContent="☰ "+m.t;renderList($("#q").value);
- const on=$("#list .mi.on");on&&on.scrollIntoView({block:"nearest"});
- history.replaceState(null,"","#"+m.id);closeDrawer();
-}
-function zoomAt(f,cx,cy,anim){const ns=Math.min(6,Math.max(minS(),V.s*f));f=ns/V.s;V.x=cx-(cx-V.x)*f;V.y=cy-(cy-V.y)*f;V.s=ns;apply(anim)}
-function center(){const[w,h]=vs();return[w/2,h/2]}
-/* pointer: geser & cubit */
-const P=new Map();let pd=0;
-vp.addEventListener("pointerdown",e=>{vp.setPointerCapture(e.pointerId);P.set(e.pointerId,[e.clientX,e.clientY]);vp.classList.add("drag");hideHint();
- if(P.size===2){const[a,b]=[...P.values()];pd=Math.hypot(a[0]-b[0],a[1]-b[1])}});
-vp.addEventListener("pointermove",e=>{
- if(!P.has(e.pointerId))return;const o=P.get(e.pointerId),r=vp.getBoundingClientRect();
- if(P.size===1){V.x+=e.clientX-o[0];V.y+=e.clientY-o[1];P.set(e.pointerId,[e.clientX,e.clientY]);apply(false)}
- else if(P.size===2){P.set(e.pointerId,[e.clientX,e.clientY]);const[a,b]=[...P.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]);
-  if(pd){zoomAt(d/pd,(a[0]+b[0])/2-r.left,(a[1]+b[1])/2-r.top,false)}pd=d}});
-const up=e=>{P.delete(e.pointerId);if(!P.size)vp.classList.remove("drag");pd=0;if(P.size===1){const k=[...P.keys()][0];}};
-vp.addEventListener("pointerup",up);vp.addEventListener("pointercancel",up);
-vp.addEventListener("wheel",e=>{e.preventDefault();hideHint();const r=vp.getBoundingClientRect();zoomAt(Math.exp(-e.deltaY*(e.ctrlKey?.01:.0016)),e.clientX-r.left,e.clientY-r.top,false)},{passive:false});
-vp.addEventListener("dblclick",e=>{const r=vp.getBoundingClientRect();zoomAt(V.s>fitS()*1.9?.5:2,e.clientX-r.left,e.clientY-r.top,true)});
-function fitS(){const b=M[cur].b,[w,h]=vs();return Math.min(w/((b[2]-b[0])*1.1),h/((b[3]-b[1])*1.1))}
-vp.addEventListener("keydown",e=>{const k=e.key,st=60;
- if(k==="ArrowLeft"){V.x+=st}else if(k==="ArrowRight"){V.x-=st}else if(k==="ArrowUp"){V.y+=st}else if(k==="ArrowDown"){V.y-=st}
- else if(k==="+"||k==="="){const[c,d]=center();zoomAt(1.25,c,d,true);return}else if(k==="-"){const[c,d]=center();zoomAt(.8,c,d,true);return}
- else if(k==="0"){fitBox(M[cur].b);return}else if(k==="PageDown"){go(cur+1)}else if(k==="PageUp"){go(cur-1)}else return;
- e.preventDefault();apply(false)});
-/* tombol */
-const zb=f=>{const[c,d]=center();zoomAt(f,c,d,true)};
-$("#zi").onclick=()=>zb(1.35);$("#zo").onclick=()=>zb(1/1.35);
-$("#fit").onclick=()=>fitBox(M[cur].b);
-$("#all").onclick=()=>fitBox([0,0,W,H]);
-$("#prv").onclick=$("#prv2").onclick=()=>go(cur-1);$("#nxt").onclick=$("#nxt2").onclick=()=>go(cur+1);
-$("#hlb").onclick=e=>{showHL=!showHL;e.currentTarget.classList.toggle("on",showHL);e.currentTarget.setAttribute("aria-pressed",showHL);mark(M[cur]);blurUpdate(false)};
-$("#fs").onclick=()=>{const v=$("#vw");try{document.fullscreenElement?document.exitFullscreen():(v.requestFullscreen||v.webkitRequestFullscreen).call(v)}catch(e){}};
-document.addEventListener("fullscreenchange",()=>setTimeout(()=>fitBox(M[cur].b,false),120));
-$("#list").addEventListener("click",e=>{const b=e.target.closest(".mi");if(b)go(M.findIndex(m=>m.id===b.dataset.id))});
-$("#q").addEventListener("input",e=>renderList(e.target.value));
-/* drawer HP */
-const side=$("#side"),bd=$("#bd");
-function openDrawer(){side.classList.add("open");bd.classList.add("show")}
-function closeDrawer(){side.classList.remove("open");bd.classList.remove("show")}
-$("#pick").onclick=openDrawer;bd.onclick=closeDrawer;
-addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer()});
-let ht;function hideHint(){$("#hint").style.opacity=0}
-addEventListener("resize",()=>{clearTimeout(ht);ht=setTimeout(()=>fitBox(M[cur].b,false),150)});
-addEventListener("hashchange",()=>{const i=M.findIndex(m=>m.id===location.hash.slice(1));if(i>=0&&i!==cur)go(i)});
-/* ===== tile bertingkat: hanya potongan yang terlihat yang dimuat ===== */
-const TS=512,LV={1:{f:2,w:3900,h:2484},2:{f:4,w:7800,h:4967},3:{f:8,w:15600,h:9934}};
-const TM=new Map();let tq=0;
-function schedTiles(){if(tq)return;tq=requestAnimationFrame(()=>{tq=0;tileUpdate()})}
-function tileUpdate(){
- const[w,h]=vs(),need=V.s*Math.min(devicePixelRatio||1,2),L=need>4.6?3:need>2.3?2:need>1.15?1:0;
- const mx=(w/V.s)*.2,my=(h/V.s)*.2,x1=-V.x/V.s-mx,y1=-V.y/V.s-my,x2=(w-V.x)/V.s+mx,y2=(h-V.y)/V.s+my;
- for(const[k,t]of TM){if(t.p!==page||t.L>L||t.r[2]<x1||t.r[0]>x2||t.r[3]<y1||t.r[1]>y2){t.el.remove();TM.delete(k)}}
- if(!L)return;
- const{f,w:LW,h:LH}=LV[L],ts=TS/f,cont=$("#tl"+page);
- const ax=Math.max(0,Math.floor(x1/ts)),bx=Math.min(Math.ceil(LW/TS)-1,Math.floor(x2/ts)),ay=Math.max(0,Math.floor(y1/ts)),by=Math.min(Math.ceil(LH/TS)-1,Math.floor(y2/ts));
- for(let y=ay;y<=by;y++)for(let x=ax;x<=bx;x++){
-  const key=`${page}/${L}/${x}_${y}`;if(TM.has(key))continue;
-  const tw=Math.min(TS,LW-x*TS),th=Math.min(TS,LH-y*TS),ex=x*TS+tw<LW?1:0,ey=y*TS+th<LH?1:0,el=new Image();
-  const r=[x*ts,y*ts,(x*TS+tw)/f,(y*TS+th)/f];
-  el.className="tl";el.decoding="async";el.alt="";el.draggable=false;
-  Object.assign(el.style,{left:r[0]+"px",top:r[1]+"px",width:(tw+ex)/f+"px",height:(th+ey)/f+"px",zIndex:L});
-  el.onload=()=>el.classList.add("ok");el.src=`t/${page}/${L}/${x}_${y}.webp`;
-  cont.appendChild(el);TM.set(key,{el,p:page,L,r});
- }
-}
-/* ===== pasang aplikasi & simpan offline ===== */
-const TC="tajwid-tiles-v3";let toastT;
-function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),4200)}
-let dp=null;
-addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e});
-addEventListener("appinstalled",()=>{$("#inst").style.display="none";toast("Aplikasi berhasil dipasang ✓")});
-if(matchMedia("(display-mode: standalone)").matches||navigator.standalone)$("#inst").style.display="none";
-$("#inst").onclick=async()=>{
- if(dp){dp.prompt();try{await dp.userChoice}catch(e){}dp=null;return}
- toast(/iphone|ipad|ipod/i.test(navigator.userAgent)?"Di iPhone/iPad: ketuk ikon Bagikan, lalu pilih “Tambah ke Layar Utama”.":"Buka menu browser, lalu pilih “Instal aplikasi” atau “Tambahkan ke layar utama”.")};
-function allTiles(){const a=[];for(const p of[1,2])for(const L of[1,2,3]){const{w,h}=LV[L];for(let y=0;y<Math.ceil(h/TS);y++)for(let x=0;x<Math.ceil(w/TS);x++)a.push(`t/${p}/${L}/${x}_${y}.webp`)}return a}
-function offState(){let ok=false;try{ok=localStorage.offAll==="1"}catch(e){}$("#offs").textContent=ok?"Siap dipakai offline ✓":"";$("#off").textContent=ok?"☁ Offline siap ✓":"☁ Simpan Offline"}
-$("#off").onclick=async()=>{
- if(!("caches" in window)||!/^https?:/.test(location.protocol)){toast("Mode offline aktif setelah aplikasi dibuka lewat alamat web (https://).");return}
- const btn=$("#off"),st=$("#offs"),list=allTiles();let n=0,fail=0;btn.disabled=true;
- try{const c=await caches.open(TC);
-  const work=async()=>{while(list.length){const u=list.pop();try{if(!(await c.match(u))){const r=await fetch(u);if(r.ok)await c.put(u,r);else fail++}}catch(e){fail++}n++;if(n%12===0)st.textContent=`Menyimpan… ${Math.round(n/tot*100)}%`}};
-  const tot=list.length;await Promise.all(Array.from({length:6},work));
-  if(fail){st.textContent=`Selesai, ${fail} potongan gagal — coba lagi.`;toast("Sebagian gagal disimpan. Periksa koneksi lalu coba lagi.")}
-  else{try{localStorage.offAll="1"}catch(e){}offState();toast("Selesai! Aplikasi bisa dipakai tanpa internet.")}
- }catch(e){st.textContent="Gagal menyimpan.";toast("Gagal menyimpan offline.")}
- btn.disabled=false};
-offState();
-addEventListener("offline",()=>toast("Anda sedang offline — aplikasi tetap bisa dipakai."));
-addEventListener("online",()=>toast("Kembali online."));
-/* splash & PWA */
-(function(){const sp=$("#splash");let seen=false;try{seen=sessionStorage.sp==="1"}catch(e){}
- if(seen){sp.remove();return}
- const t0=performance.now();let fin=false;
- const done=()=>{if(fin)return;fin=true;setTimeout(()=>{sp.classList.add("out");setTimeout(()=>sp.remove(),700);try{sessionStorage.sp="1"}catch(e){}},Math.max(0,2100-(performance.now()-t0)))};
- document.readyState==="complete"?done():addEventListener("load",done);setTimeout(done,5000)})();
-if("serviceWorker" in navigator&&/^https?:/.test(location.protocol))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
-/* mulai */
-const i0=M.findIndex(m=>m.id===location.hash.slice(1));
-cur=i0>=0?i0:0;
-const imgs=[$("#i1"),$("#i2")];
-requestAnimationFrame(()=>{go(cur,false);setTimeout(hideHint,6000)});
-</script>
+       STRUKTUR FILE INI
+       1. Bagian head   : pengaturan halaman (judul, ikon, font)
+       2. Bagian style  : seluruh tampilan (CSS), dibagi per bagian
+       3. Bagian body   : kerangka halaman (HTML)
+       4. Script pertama: DATA materi
+       5. Script kedua  : LOGIKA aplikasi (JavaScript), dibagi per bagian
+       ===================================================================== -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#8b7bdc">
+
+  <title>Lembar Tajwid Tartili — Panduan Hukum Tajwid</title>
+  <meta name="description" content="Panduan hukum tajwid bergambar: Mad, Makhraj, Sifat Huruf, Qalqalah, Nun &amp; Mim, Waqaf.">
+
+  <!-- Ikon & manifest (agar bisa dipasang sebagai aplikasi) -->
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <!-- Pengaturan khusus saat dipasang di HP -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Tajwid Tartili">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Tampilan saat tautan dibagikan (WhatsApp, Facebook, dll.) -->
+  <meta property="og:title" content="Lembar Tajwid Tartili">
+  <meta property="og:description" content="Panduan hukum tajwid bergambar.">
+  <meta property="og:image" content="icons/icon-512.png">
+
+  <!-- Font: Poppins (teks umum) dan Amiri (teks Arab) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ======================================================================
+       1. VARIABEL DESAIN
+       Warna dan ukuran dipusatkan di sini. Ubah satu nilai, seluruh
+       aplikasi ikut berubah.
+       ====================================================================== */
+    :root {
+      /* Warna */
+      --color-primary: #7461cf;
+      --color-primary-light: #a595ec;
+      --color-text: #2b2750;
+      --color-muted: #7b779c;
+      --color-gold: #e8b84a;
+
+      /* Ukuran huruf */
+      --font-size-title: clamp(20px, 1.7vw + 8px, 27px);
+      --font-size-subtitle: 13.5px;
+      --font-size-eyebrow: 11.5px;
+      --font-size-item: 14px;
+      --font-size-sub-item: 13px;
+      --font-size-group: 11px;
+      --font-size-button: 13.5px;
+      --font-size-small: 12px;
+
+      /* Pola bintang dekoratif: putih (untuk latar gelap) & ungu (latar terang) */
+      --pattern-on-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='white' stroke-opacity='.11' stroke-width='1.2'%3E%3Crect x='16' y='16' width='40' height='40'/%3E%3Crect x='16' y='16' width='40' height='40' transform='rotate(45 36 36)'/%3E%3C/g%3E%3C/svg%3E");
+      --pattern-on-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%237461cf' stroke-opacity='.10' stroke-width='1.2'%3E%3Crect x='16' y='16' width='40' height='40'/%3E%3Crect x='16' y='16' width='40' height='40' transform='rotate(45 36 36)'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* ======================================================================
+       2. RESET & DASAR
+       ====================================================================== */
+    * {
+      box-sizing: border-box; /* lebar elemen sudah termasuk padding & border */
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 18px;
+      overflow: hidden;
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--color-text);
+      background:
+        var(--pattern-on-light),
+        linear-gradient(160deg, #ddd5f8, #b7a8ee);
+      background-size: 72px 72px, auto;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      border: 0;
+      background: none;
+    }
+
+    h1,
+    h2,
+    p {
+      margin: 0;
+    }
+
+    /* Cincin fokus yang jelas untuk pengguna keyboard */
+    :focus-visible {
+      outline: 3px solid #ffb84d;
+      outline-offset: 2px;
+    }
+
+    /* ======================================================================
+       3. KERANGKA UTAMA
+       Dua kolom di desktop: sidebar (kiri) dan konten (kanan).
+       ====================================================================== */
+    .app {
+      display: grid;
+      grid-template-columns: 316px 1fr;
+      gap: 18px;
+      max-width: 1700px;
+      height: calc(100dvh - 36px);
+      margin: 0 auto;
+    }
+
+    /* ======================================================================
+       4. SIDEBAR
+       ====================================================================== */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      padding: 20px 12px 14px;
+      border-radius: 30px;
+      color: #fff;
+      background:
+        var(--pattern-on-dark),
+        linear-gradient(180deg, #8d7ede, #6c5bc7);
+      background-size: 72px 72px, auto;
+      box-shadow: 0 18px 40px rgba(94, 76, 190, .35);
+    }
+
+    /* --- Logo & nama aplikasi --- */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 8px 10px;
+    }
+
+    .brand-logo {
+      flex: none;
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, .55), 0 8px 18px rgba(30, 15, 100, .35);
+    }
+
+    .brand-name {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -.01em;
+    }
+
+    .brand-tagline {
+      display: block;
+      margin-top: 2px;
+      font-size: 11.5px;
+      font-weight: 400;
+      line-height: 1.35;
+      opacity: .88;
+    }
+
+    /* --- Garis hias bertanda bintang --- */
+    .divider-ornament {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 10px 10px;
+      font-size: 11px;
+      color: #f6dd96;
+    }
+
+    .divider-ornament::before,
+    .divider-ornament::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .45), transparent);
+    }
+
+    /* --- Kotak pencarian --- */
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 6px 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      color: var(--color-text);
+      background: #fff;
+      box-shadow: inset 0 2px 6px rgba(120, 100, 200, .12);
+    }
+
+    .search-box input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: none;
+      font: inherit;
+      font-size: 13px;
+      color: var(--color-text);
+    }
+
+    /* --- Daftar materi --- */
+    .material-list {
+      flex: 1;
+      padding: 0 4px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: #ffffff66 transparent;
+    }
+
+    .group-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 12px 6px;
+      font-size: var(--font-size-group);
+      font-weight: 600;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: #f6dd96;
+    }
+
+    .group-title::before {
+      content: "✦";
+      font-size: 9px;
+    }
+
+    .material-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 42px;
+      margin-bottom: 3px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      text-align: left;
+      font-size: var(--font-size-item);
+      font-weight: 500;
+      line-height: 1.35;
+      color: #f1edff;
+      transition: .2s;
+    }
+
+    .material-item:hover {
+      background: rgba(255, 255, 255, .14);
+    }
+
+    /* Titik kecil di kiri setiap item */
+    .material-item i {
+      flex: none;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: .5;
+    }
+
+    /* Item yang sedang dipilih */
+    .material-item.is-active {
+      font-weight: 600;
+      color: var(--color-primary);
+      background: #fff;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, .15);
+    }
+
+    .material-item.is-active i {
+      background: var(--color-gold);
+      opacity: 1;
+      box-shadow: 0 0 0 3px rgba(232, 184, 74, .28);
+    }
+
+    /* Item turunan (anak dari materi induk): menjorok ke dalam */
+    .material-item.is-sub {
+      padding-left: 28px;
+      font-size: var(--font-size-sub-item);
+      font-weight: 400;
+    }
+
+    .material-item.is-sub.is-active {
+      font-weight: 600;
+    }
+
+    .empty-message {
+      padding: 20px;
+      text-align: center;
+      font-size: 13px;
+      opacity: .85;
+    }
+
+    /* --- Tombol "Pasang Aplikasi" & "Simpan Offline" --- */
+    .pwa-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      padding: 10px 6px 0;
+    }
+
+    .pwa-button {
+      flex: 1 1 130px;
+      min-height: 42px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #fff;
+      background: rgba(255, 255, 255, .18);
+      transition: .2s;
+    }
+
+    .pwa-button:hover {
+      background: rgba(255, 255, 255, .3);
+    }
+
+    .pwa-button:disabled {
+      opacity: .7;
+      cursor: progress;
+    }
+
+    .offline-status {
+      flex-basis: 100%;
+      min-height: 16px;
+      text-align: center;
+      font-size: 11.5px;
+      opacity: .92;
+    }
+
+    /* --- Ikon media sosial & kredit --- */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 0 8px;
+    }
+
+    .social-links a {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(255, 255, 255, .18);
+      transition: .2s;
+    }
+
+    .social-links a:hover {
+      color: var(--color-primary);
+      background: #fff;
+      transform: translateY(-2px);
+    }
+
+    .social-links svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .credit {
+      padding-bottom: 2px;
+      text-align: center;
+      font-size: 11.5px;
+      opacity: .92;
+    }
+
+    .credit a {
+      font-weight: 600;
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* ======================================================================
+       5. KONTEN UTAMA (judul, tombol kontrol, viewer)
+       ====================================================================== */
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-width: 0;
+      min-height: 0;
+      padding: 20px;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, .6);
+      box-shadow: 0 18px 40px rgba(110, 90, 200, .18);
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .title-block {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--font-size-eyebrow);
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 18px;
+      height: 3px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--color-gold), var(--color-primary-light));
+    }
+
+    .title-block h1 {
+      margin-top: 4px;
+      font-size: var(--font-size-title);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -.015em;
+    }
+
+    .title-block p {
+      margin-top: 3px;
+      font-size: var(--font-size-subtitle);
+      font-weight: 400;
+      color: var(--color-muted);
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* --- Tombol kontrol (‹ › − + Pas Semua Sorot ⤢) --- */
+    .btn {
+      min-width: 44px;
+      height: 44px;
+      padding: 0 14px;
+      border-radius: 14px;
+      font-size: var(--font-size-button);
+      font-weight: 600;
+      color: var(--color-primary);
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(110, 90, 200, .15);
+      transition: .15s;
+    }
+
+    .btn:hover {
+      background: #f3efff;
+    }
+
+    .btn:active {
+      transform: scale(.95);
+    }
+
+    .btn.is-active {
+      color: #fff;
+      background: var(--color-primary);
+    }
+
+    /* Tombol "Pas". Ditulis .btn.btn-primary agar tetap menang atas .btn:hover. */
+    .btn.btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, #8f7fe6, #6d5bcb);
+    }
+
+    /* ======================================================================
+       6. VIEWER GAMBAR
+       Susunan lapisan (dari bawah ke atas):
+         gambar halaman  →  tile resolusi tinggi  →  blur  →  bingkai sorotan
+       ====================================================================== */
+    .viewer-frame {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      border: 3px solid #fff;
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 0 0 2px #d6c9fa, 0 14px 30px rgba(110, 90, 200, .22);
+    }
+
+    /* Area geser & zoom. Latar kotak-kotak tampil di luar gambar. */
+    .viewport {
+      position: absolute;
+      inset: 0;
+      isolation: isolate;
+      overflow: hidden;
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      background: repeating-conic-gradient(#f6f3ff 0 25%, #fff 0 50%) 0 0 / 24px 24px;
+    }
+
+    .viewport.is-dragging {
+      cursor: grabbing;
+    }
+
+    /* "Panggung": wadah gambar. Digeser dan diperbesar lewat transform. */
+    .stage {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1950px;   /* harus sama dengan IMAGE_WIDTH di JavaScript */
+      height: 1242px;  /* harus sama dengan IMAGE_HEIGHT di JavaScript */
+      transform-origin: 0 0;
+    }
+
+    .stage > img {
+      position: absolute;
+      inset: 0;
+      display: none;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    .stage > img.is-active {
+      display: block;
+      animation: fade-in .35s;
+    }
+
+    /* --- Tile: potongan gambar beresolusi tinggi --- */
+    .tile-layer {
+      position: absolute;
+      inset: 0;
+      display: none;
+      pointer-events: none;
+    }
+
+    .tile-layer.is-active {
+      display: block;
+    }
+
+    .tile {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      transition: opacity .25s;
+    }
+
+    .tile.is-loaded {
+      opacity: 1;
+    }
+
+    /* --- Bingkai sorotan di sekeliling materi terpilih ---
+       Radius sudut diatur dari JavaScript (HIGHLIGHT_RADIUS). */
+    .highlight {
+      position: absolute;
+      z-index: 6;
+      display: none;
+      border: 5px solid rgba(255, 255, 255, .92);
+      box-shadow: 0 0 0 3px rgba(116, 97, 207, .55), 0 0 36px rgba(116, 97, 207, .45);
+      pointer-events: none;
+      transition: .4s;
+    }
+
+    .highlight.is-visible {
+      display: block;
+    }
+
+    /* --- Lapisan blur di luar materi terpilih ---
+       Blur menutupi seluruh layar, lalu "dilubangi" mengikuti kotak materi.
+       Lubangnya dibuat dengan mask yang disusun JavaScript (updateBlurOverlay):
+       layer pertama = layar penuh (dikurangi / subtract),
+       layer berikutnya = potongan lubang (ditambahkan / add). */
+    .blur-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      opacity: 0;
+      pointer-events: none;
+      backdrop-filter: blur(16px) saturate(1.15) brightness(1.06);
+      -webkit-backdrop-filter: blur(16px) saturate(1.15) brightness(1.06);
+      background: linear-gradient(135deg, rgba(255, 255, 255, .38), rgba(205, 195, 255, .26) 55%, rgba(255, 255, 255, .3));
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-composite: source-out, source-over, source-over, source-over, source-over, source-over, source-over;
+      mask-composite: subtract, add, add, add, add, add, add;
+    }
+
+    /* --- Petunjuk & penanda halaman --- */
+    .hint {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      max-width: 92%;
+      padding: 8px 14px;
+      overflow: hidden;
+      border-radius: 999px;
+      font-size: var(--font-size-small);
+      font-weight: 500;
+      color: #fff;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      background: rgba(43, 39, 80, .86);
+      transform: translateX(-50%);
+      pointer-events: none;
+      transition: opacity .6s;
+    }
+
+    .page-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: var(--font-size-small);
+      font-weight: 600;
+      color: var(--color-primary);
+      background: rgba(255, 255, 255, .94);
+      box-shadow: 0 4px 10px rgba(110, 90, 200, .2);
+      pointer-events: none;
+    }
+
+    /* ======================================================================
+       7. TOAST (pesan singkat di bawah layar)
+       ====================================================================== */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: calc(90px + env(safe-area-inset-bottom));
+      z-index: 120;
+      max-width: min(92vw, 420px);
+      padding: 11px 18px;
+      border-radius: 16px;
+      font-size: 13px;
+      text-align: center;
+      color: #fff;
+      background: rgba(43, 39, 80, .95);
+      box-shadow: 0 10px 30px rgba(20, 10, 70, .4);
+      opacity: 0;
+      transform: translate(-50%, 20px);
+      pointer-events: none;
+      transition: .3s;
+    }
+
+    .toast.is-visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* ======================================================================
+       8. SPLASH SCREEN (layar pembuka)
+       ====================================================================== */
+    .splash {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      color: #fff;
+      background:
+        var(--pattern-on-dark),
+        radial-gradient(circle at 50% 35%, #a595ec, #6c5bc7 70%, #4b3aa8);
+      background-size: 72px 72px, auto;
+      transition: opacity .6s, visibility .6s, transform .6s;
+    }
+
+    .splash.is-hidden {
+      visibility: hidden;
+      opacity: 0;
+      transform: scale(1.04);
+    }
+
+    .splash-logo {
+      width: 124px;
+      height: 124px;
+      border-radius: 30px;
+      box-shadow: 0 22px 50px rgba(30, 15, 100, .5), 0 0 0 3px rgba(255, 255, 255, .45);
+      animation: logo-pop .9s cubic-bezier(.2, .9, .3, 1.25) both;
+    }
+
+    .splash-arabic {
+      margin-top: 20px;
+      font-family: "Amiri", "Noto Naskh Arabic", "Scheherazade New", serif;
+      font-size: clamp(22px, 4vw, 28px);
+      line-height: 2;
+      color: #fdf1c8;
+      animation: slide-up .8s .35s both;
+    }
+
+    .splash-title {
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -.02em;
+      animation: slide-up .8s .5s both;
+    }
+
+    .splash-subtitle {
+      margin-top: 6px;
+      font-size: 14px;
+      font-weight: 400;
+      opacity: .9;
+      animation: slide-up .8s .65s both;
+    }
+
+    .splash-progress {
+      width: 170px;
+      height: 5px;
+      margin-top: 28px;
+      overflow: hidden;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, .25);
+      animation: slide-up .6s .8s both;
+    }
+
+    .splash-progress i {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: 5px;
+      background: linear-gradient(90deg, var(--color-gold), #fff);
+      animation: fill-bar 1.5s .8s ease-out forwards;
+    }
+
+    .splash-footer {
+      position: absolute;
+      bottom: calc(22px + env(safe-area-inset-bottom));
+      font-size: 12px;
+      opacity: .85;
+    }
+
+    /* ======================================================================
+       9. ANIMASI
+       ====================================================================== */
+    @keyframes fade-in {
+      from { opacity: .2; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes logo-pop {
+      from { opacity: 0; transform: scale(.5) rotate(-8deg); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @keyframes slide-up {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @keyframes fill-bar {
+      to { width: 100%; }
+    }
+
+    /* Hormati pengguna yang mematikan animasi di perangkatnya */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+
+    /* ======================================================================
+       10. NAVIGASI HP (disembunyikan di desktop)
+       ====================================================================== */
+    .mobile-dock,
+    .backdrop {
+      display: none;
+    }
+
+    /* ======================================================================
+       11. RESPONSIF — layar ≤ 900px (HP & tablet kecil)
+       Sidebar berubah menjadi panel yang naik dari bawah.
+       ====================================================================== */
+    @media (max-width: 900px) {
+      body {
+        padding: 8px 8px 0;
+      }
+
+      .app {
+        display: block;
+        height: calc(100dvh - 8px);
+      }
+
+      .content {
+        gap: 8px;
+        height: calc(100dvh - 8px - 72px - env(safe-area-inset-bottom));
+        padding: 12px;
+        border-radius: 24px;
+      }
+
+      /* Judul & tombol dipadatkan */
+      .title-block h1 { font-size: 18px; }
+      .title-block p  { display: none; }
+      .eyebrow        { font-size: 10.5px; }
+      .eyebrow::before { width: 12px; }
+      .toolbar        { gap: 6px; }
+
+      .controls {
+        flex-wrap: nowrap;
+        gap: 5px;
+        width: 100%;
+      }
+
+      .controls .btn {
+        flex: 1;
+        min-width: 0;
+        height: 42px;
+        padding: 0 2px;
+        font-size: 13px;
+      }
+
+      /* Tombol ‹ › pindah ke dock bawah */
+      #btn-prev,
+      #btn-next {
+        display: none;
+      }
+
+      .hint {
+        font-size: 11px;
+      }
+
+      .viewer-frame {
+        border-radius: 18px;
+      }
+
+      /* Sidebar menjadi panel geser dari bawah */
+      .sidebar {
+        position: fixed;
+        right: 8px;
+        bottom: 0;
+        left: 8px;
+        z-index: 40;
+        height: 78dvh;
+        padding-bottom: calc(14px + env(safe-area-inset-bottom));
+        border-radius: 28px 28px 0 0;
+        transform: translateY(110%);
+        transition: transform .35s cubic-bezier(.2, .8, .2, 1);
+      }
+
+      .sidebar.is-open {
+        transform: none;
+      }
+
+      /* Latar gelap di belakang panel */
+      .backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 30;
+        background: rgba(30, 20, 70, .45);
+      }
+
+      .backdrop.is-visible {
+        display: block;
+      }
+
+      /* Dock navigasi di bawah layar */
+      .mobile-dock {
+        position: fixed;
+        right: 8px;
+        bottom: calc(8px + env(safe-area-inset-bottom));
+        left: 8px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 60px;
+        padding: 8px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, .92);
+        box-shadow: 0 10px 30px rgba(80, 60, 180, .3);
+        backdrop-filter: blur(10px);
+      }
+
+      .mobile-dock .btn {
+        flex: none;
+        width: 48px;
+        min-width: 0;
+        height: 44px;
+        padding: 0;
+        font-size: 20px;
+      }
+
+      .dock-pick {
+        flex: 1;
+        min-width: 0;
+        height: 44px;
+        padding: 0 12px;
+        overflow: hidden;
+        border-radius: 14px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #fff;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        background: linear-gradient(135deg, #8f7fe6, #6d5bcb);
+      }
+    }
+
+    /* HP dalam posisi mendatar: kembali satu kolom */
+    @media (max-width: 900px) and (orientation: landscape) {
+      .app {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ======================================================================
+       KERANGKA HALAMAN
+       ====================================================================== -->
+  <div class="app">
+
+    <!-- ===== SIDEBAR: pencarian & daftar materi ===== -->
+    <aside class="sidebar" id="sidebar" aria-label="Pilihan materi">
+
+      <div class="brand">
+        <img class="brand-logo" src="icons/icon.svg" alt="Logo Lembar Tajwid Tartili">
+        <div>
+          <b class="brand-name">Lembar Tajwid Tartili</b>
+          <span class="brand-tagline">Pilih materi, gambar otomatis diperbesar</span>
+        </div>
+      </div>
+
+      <div class="divider-ornament" aria-hidden="true">✦</div>
+
+      <label class="search-box">
+        <span aria-hidden="true">🔍</span>
+        <input id="search-input" type="search" placeholder="Cari materi…" autocomplete="off" aria-label="Cari materi">
+      </label>
+
+      <!-- Isinya dibuat oleh JavaScript (renderMaterialList) -->
+      <div class="material-list" id="material-list" role="list"></div>
+
+      <div class="pwa-actions">
+        <button class="pwa-button" id="btn-install">⬇ Pasang Aplikasi</button>
+        <button class="pwa-button" id="btn-offline">☁ Simpan Offline</button>
+        <div class="offline-status" id="offline-status" role="status"></div>
+      </div>
+
+      <div class="social-links">
+        <a href="https://www.instagram.com/kurniapedia" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@kurniapedia" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.7a4.8 4.8 0 0 1-3.8-4.2h-3.4v13.4a2.9 2.9 0 1 1-2-2.8V9.6a6.3 6.3 0 1 0 5.4 6.2V9a8.2 8.2 0 0 0 4.8 1.5V7.1a4.8 4.8 0 0 1-1-.4z"/></svg>
+        </a>
+        <a href="https://kurniapedia.my.id/" target="_blank" rel="noopener" aria-label="Website Kurniapedia">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </a>
+        <a href="https://wa.me/6285870906050" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.2-1.4-2-1-.8.7a3.6 3.6 0 0 1-1.7-1.7l.7-.8-1-2z"/></svg>
+        </a>
+      </div>
+
+      <div class="credit">
+        Crafted with ♥ by <a href="https://kurniapedia.my.id/" target="_blank" rel="noopener">Kurniapedia</a> 2026
+      </div>
+    </aside>
+
+    <!-- ===== KONTEN UTAMA: judul, tombol kontrol, dan viewer gambar ===== -->
+    <main class="content">
+
+      <div class="toolbar">
+        <div class="title-block">
+          <div class="eyebrow" id="group-label">Hukum Tajwid</div>
+          <h1 id="material-title">Lembar Tajwid</h1>
+          <p id="material-description"></p>
+        </div>
+
+        <div class="controls" role="group" aria-label="Kontrol gambar">
+          <button class="btn" id="btn-prev" aria-label="Materi sebelumnya">‹</button>
+          <button class="btn" id="btn-next" aria-label="Materi berikutnya">›</button>
+          <button class="btn" id="btn-zoom-out" aria-label="Perkecil">−</button>
+          <button class="btn" id="btn-zoom-in" aria-label="Perbesar">+</button>
+          <button class="btn btn-primary" id="btn-fit" aria-label="Pas ke materi">Pas</button>
+          <button class="btn" id="btn-show-all" aria-label="Lihat seluruh halaman">Semua</button>
+          <button class="btn is-active" id="btn-highlight" aria-pressed="true" aria-label="Sorot materi">Sorot</button>
+          <button class="btn" id="btn-fullscreen" aria-label="Layar penuh">⤢</button>
+        </div>
+      </div>
+
+      <div class="viewer-frame" id="viewer-frame">
+        <div class="viewport" id="viewport" tabindex="0" aria-label="Gambar lembar tajwid, geser untuk menggeser, cubit atau scroll untuk zoom">
+
+          <!-- Panggung: semua yang ada di dalamnya ikut bergeser & diperbesar -->
+          <div class="stage" id="stage">
+            <img id="page-image-1" src="img/halaman-1.webp" alt="Lembar tajwid halaman 1: Mad dan Makhraj">
+            <img id="page-image-2" src="img/halaman-2.webp" alt="Lembar tajwid halaman 2: Sifat huruf, Qalqalah, Nun dan Mim, Waqaf">
+            <div class="tile-layer" id="tiles-page-1"></div>
+            <div class="tile-layer" id="tiles-page-2"></div>
+            <div class="highlight" id="highlight"></div>
+          </div>
+
+          <!-- Blur di luar materi terpilih (di atas panggung, tidak ikut bergeser) -->
+          <div class="blur-overlay" id="blur-overlay"></div>
+        </div>
+
+        <div class="page-badge" id="page-badge"></div>
+        <div class="hint" id="hint">Geser · cubit untuk zoom · ketuk 2×</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ===== Elemen tambahan ===== -->
+  <div class="backdrop" id="backdrop"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="splash" id="splash" role="status" aria-label="Memuat aplikasi">
+    <img class="splash-logo" src="icons/icon.svg" alt="">
+    <div class="splash-arabic" lang="ar">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+    <div class="splash-title">Lembar Tajwid Tartili</div>
+    <div class="splash-subtitle">Panduan Hukum Tajwid Bergambar</div>
+    <div class="splash-progress"><i></i></div>
+    <div class="splash-footer">Crafted with ♥ by Kurniapedia</div>
+  </div>
+
+  <!-- Navigasi bawah (hanya tampil di HP) -->
+  <nav class="mobile-dock" aria-label="Navigasi materi">
+    <button class="btn" id="btn-prev-mobile" aria-label="Materi sebelumnya">‹</button>
+    <button class="dock-pick" id="btn-pick" aria-label="Pilih materi">☰ Pilih Materi</button>
+    <button class="btn" id="btn-next-mobile" aria-label="Materi berikutnya">›</button>
+  </nav>
+
+
+  <!-- ======================================================================
+       DATA MATERI
+       Untuk menambah / mengubah materi, cukup edit bagian ini.
+
+       Arti setiap kolom:
+         id          : kode unik (juga dipakai di alamat, mis. #thabii)
+         title       : judul yang tampil
+         page        : halaman gambar (1 atau 2)
+         box         : kotak materi di gambar asli [kiri, atas, kanan, bawah]
+                       dalam piksel, gambar berukuran 1950 × 1242
+         description : keterangan singkat di bawah judul
+         isSub       : true bila materi ini turunan dari materi di atasnya
+       ====================================================================== -->
+  <script>
+    const MATERIAL_GROUPS = [
+      {
+        name: "Hukum Mad",
+        materials: [
+          { id: "mad-bagan", title: "Bagan Mad Lengkap", page: 1, box: [0, 0, 1305, 1242], description: "Mad Pokok (2 harokat) dan Mad Cabang (lebih dari 2 harokat)." },
+          { id: "mad-ashli", title: "Mad Ashli (Pokok)", page: 1, box: [250, 40, 1275, 315], description: "Mad Thabi'i, 'Iwadh, Harfi, Shilah Shughra." },
+          { id: "thabii", title: "Mad Thabi'i", page: 1, box: [553, 80, 763, 308], description: "Panjang 2 harokat: alif, wawu sukun, ya sukun.", isSub: true },
+          { id: "iwadh", title: "Mad 'Iwadh", page: 1, box: [778, 80, 957, 308], description: "Pengganti tanwin fathah.", isSub: true },
+          { id: "harfi", title: "Mad Harfi", page: 1, box: [970, 80, 1108, 308], description: "Pada huruf-huruf awal surat.", isSub: true },
+          { id: "shughra", title: "Mad Shilah Shughra", page: 1, box: [1122, 80, 1265, 308], description: "Pada ha' dhamir.", isSub: true },
+          { id: "hamzah", title: "Mad Far'i — Sebab Hamzah", page: 1, box: [420, 440, 1275, 810], description: "Wajib Muttashil, Jaiz Munfashil, Shilah Kubra, Badal." },
+          { id: "wajib", title: "Mad Wajib Muttashil", page: 1, box: [1098, 490, 1265, 805], description: "Hamzah dalam satu kata, 4 harokat.", isSub: true },
+          { id: "jaiz", title: "Mad Jaiz Munfashil", page: 1, box: [918, 490, 1085, 733], description: "Hamzah dalam dua kata, 4 harokat.", isSub: true },
+          { id: "kubra", title: "Mad Shilah Kubra", page: 1, box: [736, 490, 903, 733], description: "Ha' dhamir bertemu hamzah, 4 harokat.", isSub: true },
+          { id: "badal", title: "Mad Badal", page: 1, box: [584, 490, 720, 733], description: "Pengganti hamzah, 2 harokat.", isSub: true },
+          { id: "lazim", title: "Mad Lazim", page: 1, box: [640, 770, 1275, 1215], description: "Bertemu sukun asli, 6 harokat." },
+          { id: "lkm", title: "Lazim Kilmi Mutsaqqal", page: 1, box: [1110, 995, 1265, 1207], description: "Pada kata, dengan tasydid.", isSub: true },
+          { id: "lkk", title: "Lazim Kilmi Mukhaffaf", page: 1, box: [977, 995, 1095, 1207], description: "Pada kata, tanpa tasydid.", isSub: true },
+          { id: "lhm", title: "Lazim Harfi Mutsaqqal", page: 1, box: [820, 995, 940, 1207], description: "Huruf awal surat, dengan tasydid.", isSub: true },
+          { id: "lhk", title: "Lazim Harfi Mukhaffaf", page: 1, box: [650, 995, 805, 1207], description: "Huruf awal surat, tanpa tasydid.", isSub: true },
+          { id: "aridh", title: "Mad 'Aridh Lissukun", page: 1, box: [410, 915, 605, 1208], description: "Sukun karena waqof, 2/4/6 harokat." },
+          { id: "liyn", title: "Mad Liyn", page: 1, box: [168, 915, 363, 1208], description: "Liyn bertemu huruf hidup yang diwaqofkan, 2/4/6 harokat." },
+        ],
+      },
+      {
+        name: "Makhraj Huruf",
+        materials: [
+          { id: "makhraj", title: "Nama dan Tempat Keluar Huruf", page: 1, box: [1308, 0, 1950, 1242], description: "Seluruh tabel makhraj." },
+          { id: "mk1", title: "Huruf Bibir", page: 1, box: [1345, 140, 1912, 250], description: "Syafawiyyah.", isSub: true },
+          { id: "mk2", title: "Huruf Lembutnya Lisan", page: 1, box: [1345, 252, 1912, 315], description: "Asaliyyah.", isSub: true },
+          { id: "mk3", title: "Huruf Cenderung ke Langit Mulut", page: 1, box: [1345, 316, 1912, 396], description: "Nith'iyyah.", isSub: true },
+          { id: "mk4", title: "Huruf Dekat Gusi", page: 1, box: [1345, 397, 1912, 460], description: "Litsawiyyah.", isSub: true },
+          { id: "mk5", title: "Huruf Cenderung ke Ujung Lisan", page: 1, box: [1345, 461, 1912, 648], description: "Dzawlaqiyyah.", isSub: true },
+          { id: "mk6", title: "Huruf Dekat Tekak/Uvula", page: 1, box: [1345, 650, 1912, 772], description: "Lahawiyyah.", isSub: true },
+          { id: "mk7", title: "Huruf Tengah Lidah", page: 1, box: [1345, 773, 1912, 836], description: "Syajariyyah.", isSub: true },
+          { id: "mk8", title: "Huruf Tenggorokan", page: 1, box: [1345, 838, 1912, 947], description: "Halqiyyah.", isSub: true },
+          { id: "mk9", title: "Huruf Rongga Mulut", page: 1, box: [1345, 949, 1912, 1010], description: "Jawfiyyah.", isSub: true },
+          { id: "mk10", title: "Huruf Dengung", page: 1, box: [1345, 1012, 1912, 1142], description: "Huruf ghunnah.", isSub: true },
+          { id: "mk11", title: "Huruf Tersulit", page: 1, box: [1345, 1143, 1912, 1207], description: "A'sarul huruf.", isSub: true },
+        ],
+      },
+      {
+        name: "Sifat Huruf",
+        materials: [
+          { id: "sifat", title: "Sifat yang Mempunyai Lawan", page: 2, box: [25, 125, 615, 1055], description: "Jahr/hams, syiddah/rakhawah, dst." },
+          { id: "s1", title: "Jahr dan Hams", page: 2, box: [38, 208, 605, 340], description: "", isSub: true },
+          { id: "s2", title: "Syiddah, Tawassuth, Rakhawah", page: 2, box: [38, 344, 605, 474], description: "", isSub: true },
+          { id: "s3", title: "Istifal dan Isti'la", page: 2, box: [38, 478, 605, 607], description: "", isSub: true },
+          { id: "s4", title: "Infitah dan Ithbaq", page: 2, box: [38, 612, 605, 742], description: "", isSub: true },
+          { id: "s5", title: "Ishmat dan Idzlaq", page: 2, box: [38, 746, 605, 876], description: "", isSub: true },
+          { id: "s6", title: "Tarqiq dan Tafkhim", page: 2, box: [38, 880, 605, 1040], description: "", isSub: true },
+          { id: "sifat2", title: "Sifat yang Tak Punya Lawan", page: 2, box: [35, 1068, 918, 1218], description: "Shafir, Inhiraf, Liyn, Takrir, Tafasysyi, Istithalah." },
+        ],
+      },
+      {
+        name: "Qalqalah",
+        materials: [
+          { id: "qal", title: "Qalqalah (Bacaan Memantul)", page: 2, box: [630, 65, 920, 1068], description: "Huruf qalqalah ada 5." },
+          { id: "q1", title: "Qalqalah Shughra (kecil)", page: 2, box: [630, 225, 920, 510], description: "Sukun asli di tengah/akhir kata.", isSub: true },
+          { id: "q2", title: "Qalqalah Wustha (sedang)", page: 2, box: [630, 510, 920, 800], description: "Akhir kata, sukun karena waqof.", isSub: true },
+          { id: "q3", title: "Qalqalah Kubra (besar)", page: 2, box: [630, 800, 920, 1066], description: "Akhir kata bertasydid, ditekan lalu memantul.", isSub: true },
+        ],
+      },
+      {
+        name: "Nun Sukun, Tanwin & Mim",
+        materials: [
+          { id: "nunmim", title: "Hukum Nun, Tanwin, Mim (lengkap)", page: 2, box: [950, 0, 1950, 840], description: "Seluruh bagian hukum nun dan mim." },
+          { id: "dengung", title: "Catatan Dengung", page: 2, box: [975, 0, 1250, 145], description: "1 harokat; garis merah 2 harokat.", isSub: true },
+          { id: "nun", title: "Hukum Nun Sukun dan Tanwin", page: 2, box: [1330, 112, 1915, 835], description: "Izhhar, Idgham, Iqlab, Ikhfa'." },
+          { id: "ikhfa", title: "Ikhfa' Haqiqi", page: 2, box: [1340, 190, 1905, 300], description: "Samar, salah satu dari 15 huruf.", isSub: true },
+          { id: "iqlab", title: "Iqlab", page: 2, box: [1340, 308, 1905, 395], description: "Nun/tanwin bertemu ba menjadi mim.", isSub: true },
+          { id: "izhhar", title: "Izhhar (Halqi dan Muthlaq)", page: 2, box: [1340, 402, 1905, 624], description: "Jelas.", isSub: true },
+          { id: "idgham", title: "Idgham (Bilaghunnah dan Bighunnah)", page: 2, box: [1340, 630, 1905, 825], description: "Memasukkan.", isSub: true },
+          { id: "mim", title: "Hukum Mim Sukun", page: 2, box: [975, 165, 1315, 570], description: "Ikhfa' Syafawi, Idgham Mimi, Izhhar Syafawi." },
+          { id: "tasydid", title: "Nun dan Mim Bertasydid", page: 2, box: [975, 580, 1315, 765], description: "Ghunnah, dengung 2 harokat.", isSub: true },
+        ],
+      },
+      {
+        name: "Tanda Waqaf",
+        materials: [
+          { id: "waqaf", title: "Tanda-Tanda Waqaf", page: 2, box: [950, 785, 1950, 1242], description: "Seluruh tanda waqaf." },
+          { id: "w1", title: "Waqaf Lazim dan Larangan", page: 2, box: [975, 905, 1920, 980], description: "Harus berhenti; tidak boleh waqof.", isSub: true },
+          { id: "w2", title: "Muthlaq, Jaiz, dan Aula", page: 2, box: [975, 985, 1595, 1112], description: "Berhenti tanpa syarat, boleh, lebih baik.", isSub: true },
+          { id: "w3", title: "Merangkul dan Sakta", page: 2, box: [975, 1115, 1595, 1212], description: "Mu'anaqah dan berhenti sejenak.", isSub: true },
+          { id: "w4", title: "Qath'a dan Waqaf Darurat", page: 2, box: [1600, 985, 1920, 1212], description: "Tidak boleh memutus bacaan.", isSub: true },
+        ],
+      },
+      {
+        name: "Lembar Lengkap",
+        materials: [
+          { id: "h1", title: "Halaman 1 (Mad & Makhraj)", page: 1, box: [0, 0, 1950, 1242], description: "Gambar penuh." },
+          { id: "h2", title: "Halaman 2 (Sifat, Nun/Mim, Waqaf)", page: 2, box: [0, 0, 1950, 1242], description: "Gambar penuh." },
+        ],
+      },
+    ];
+  </script>
+
+
+  <!-- ======================================================================
+       LOGIKA APLIKASI
+       ====================================================================== -->
+  <script>
+    "use strict";
+
+    /* ====================================================================
+       1. KONSTANTA
+       Angka-angka tetap diberi nama agar maksudnya jelas.
+       ==================================================================== */
+
+    // Ukuran gambar asli (piksel). Harus sama dengan ukuran .stage di CSS.
+    const IMAGE_WIDTH = 1950;
+    const IMAGE_HEIGHT = 1242;
+
+    // Batas zoom
+    const MAX_ZOOM = 6;
+    const MIN_ZOOM_RATIO = 0.5;      // zoom terkecil = 50% dari ukuran "muat di layar"
+    const BUTTON_ZOOM_STEP = 1.35;   // tombol + dan −
+    const KEYBOARD_ZOOM_IN = 1.25;
+    const KEYBOARD_ZOOM_OUT = 0.8;
+
+    // Seberapa jauh gambar boleh digeser keluar layar
+    const PAN_MARGIN = 60;
+    const KEYBOARD_PAN_STEP = 60;
+
+    // Ruang kosong di sekeliling materi saat "Pas" (5%)
+    const FIT_PADDING = 0.05;
+
+    // Bingkai sorotan
+    const HIGHLIGHT_PADDING = 8;     // jarak bingkai dari materi (piksel gambar)
+    const HIGHLIGHT_RADIUS = 22;     // kebulatan sudut bingkai & lubang blur
+    const FULL_WIDTH_THRESHOLD = 1900; // materi selebar ini dianggap "satu halaman penuh"
+
+    // Animasi halus
+    const EASING = "cubic-bezier(.2,.8,.2,1)";
+
+    // Tile: gambar dipotong-potong per 512 px supaya zoom tetap tajam
+    // tanpa memuat seluruh gambar beresolusi tinggi sekaligus.
+    const TILE_SIZE = 512;
+    const ZOOM_LEVELS = {
+      1: { factor: 2, width: 3900,  height: 2484 },
+      2: { factor: 4, width: 7800,  height: 4967 },
+      3: { factor: 8, width: 15600, height: 9934 },
+    };
+
+    // Nama cache untuk mode offline (naikkan versinya bila tile berubah)
+    const OFFLINE_CACHE_NAME = "tajwid-tiles-v3";
+
+
+    /* ====================================================================
+       2. STATE (data yang berubah saat aplikasi dipakai)
+       ==================================================================== */
+    const state = {
+      currentIndex: 0,          // posisi materi yang dipilih di daftar `materials`
+      currentPage: 0,           // halaman gambar yang tampil (0 = belum ada)
+      highlightEnabled: true,   // tombol "Sorot" aktif atau tidak
+    };
+
+    // Posisi & perbesaran gambar: x/y = geseran (px layar), scale = zoom
+    const view = { x: 0, y: 0, scale: 1 };
+
+
+    /* ====================================================================
+       3. REFERENSI ELEMEN HTML
+       Dicari sekali di sini, lalu dipakai ulang.
+       ==================================================================== */
+    const $ = (selector) => document.querySelector(selector);
+
+    const dom = {
+      sidebar:        $("#sidebar"),
+      backdrop:       $("#backdrop"),
+      searchInput:    $("#search-input"),
+      materialList:   $("#material-list"),
+
+      groupLabel:     $("#group-label"),
+      materialTitle:  $("#material-title"),
+      materialDesc:   $("#material-description"),
+
+      viewerFrame:    $("#viewer-frame"),
+      viewport:       $("#viewport"),
+      stage:          $("#stage"),
+      highlight:      $("#highlight"),
+      blurOverlay:    $("#blur-overlay"),
+      pageBadge:      $("#page-badge"),
+      hint:           $("#hint"),
+
+      // Indeks 1 dan 2 = halaman 1 dan 2 (indeks 0 sengaja kosong)
+      pageImages:     [null, $("#page-image-1"), $("#page-image-2")],
+      tileLayers:     [null, $("#tiles-page-1"), $("#tiles-page-2")],
+
+      btnInstall:     $("#btn-install"),
+      btnOffline:     $("#btn-offline"),
+      offlineStatus:  $("#offline-status"),
+      btnPick:        $("#btn-pick"),
+      toast:          $("#toast"),
+      splash:         $("#splash"),
+    };
+
+
+    /* ====================================================================
+       4. DATA TURUNAN
+       `materials` = daftar datar semua materi (dari MATERIAL_GROUPS),
+       lebih mudah dipakai untuk navigasi ‹ ›.
+       ==================================================================== */
+    const materials = [];
+    MATERIAL_GROUPS.forEach((group) => {
+      group.materials.forEach((item) => {
+        materials.push({ ...item, group: group.name, isSub: Boolean(item.isSub) });
+      });
+    });
+
+    /** Materi yang sedang dipilih. */
+    function currentMaterial() {
+      return materials[state.currentIndex];
+    }
+
+    /** Apakah kotak materi selebar halaman penuh? (tanpa sorotan/blur) */
+    function isFullWidth(box) {
+      return box[2] - box[0] >= FULL_WIDTH_THRESHOLD;
+    }
+
+
+    /* ====================================================================
+       5. DAFTAR MATERI (sidebar)
+       ==================================================================== */
+
+    /**
+     * Menggambar ulang daftar materi di sidebar.
+     * @param {string} filter - kata pencarian (kosong = tampilkan semua)
+     */
+    function renderMaterialList(filter = "") {
+      const keyword = filter.trim().toLowerCase();
+      let html = "";
+      let matchCount = 0;
+
+      MATERIAL_GROUPS.forEach((group) => {
+        // Cari di judul, keterangan, dan nama kelompok
+        const matches = group.materials.filter((item) => {
+          const searchableText = `${item.title} ${item.description} ${group.name}`.toLowerCase();
+          return !keyword || searchableText.includes(keyword);
+        });
+        if (matches.length === 0) return;
+
+        matchCount += matches.length;
+        html += `<h2 class="group-title">${group.name}</h2>`;
+
+        html += matches.map((item) => {
+          const classes = ["material-item"];
+          if (item.isSub) classes.push("is-sub");
+          if (currentMaterial().id === item.id) classes.push("is-active");
+          return `<button class="${classes.join(" ")}" data-id="${item.id}"><i></i>${item.title}</button>`;
+        }).join("");
+      });
+
+      dom.materialList.innerHTML = matchCount
+        ? html
+        : '<div class="empty-message">Materi tidak ditemukan.</div>';
+    }
+
+
+    /* ====================================================================
+       6. VIEWER: GESER, ZOOM, DAN PAS
+       ==================================================================== */
+
+    /** Ukuran area viewer: [lebar, tinggi]. */
+    function getViewportSize() {
+      return [dom.viewport.clientWidth, dom.viewport.clientHeight];
+    }
+
+    /** Titik tengah area viewer: [x, y]. */
+    function getViewportCenter() {
+      const [width, height] = getViewportSize();
+      return [width / 2, height / 2];
+    }
+
+    /** Zoom paling kecil yang diizinkan. */
+    function getMinScale() {
+      const [width, height] = getViewportSize();
+      return Math.min(width / IMAGE_WIDTH, height / IMAGE_HEIGHT) * MIN_ZOOM_RATIO;
+    }
+
+    /** Zoom yang membuat materi terpilih pas di layar (dipakai untuk ketuk 2×). */
+    function getFitScale() {
+      const box = currentMaterial().box;
+      const [width, height] = getViewportSize();
+      return Math.min(
+        width / ((box[2] - box[0]) * 1.1),
+        height / ((box[3] - box[1]) * 1.1)
+      );
+    }
+
+    /** Menjaga zoom dan posisi tetap dalam batas wajar. */
+    function clampView() {
+      const [width, height] = getViewportSize();
+
+      view.scale = Math.min(MAX_ZOOM, Math.max(getMinScale(), view.scale));
+
+      // Gambar tidak boleh hilang sepenuhnya dari layar
+      view.x = Math.min(width - PAN_MARGIN, Math.max(PAN_MARGIN - IMAGE_WIDTH * view.scale, view.x));
+      view.y = Math.min(height - PAN_MARGIN, Math.max(PAN_MARGIN - IMAGE_HEIGHT * view.scale, view.y));
+    }
+
+    /**
+     * Menerapkan posisi & zoom (`view`) ke tampilan.
+     * @param {boolean} animate - true = bergerak halus, false = langsung
+     */
+    function applyView(animate) {
+      dom.stage.style.transition = animate ? `transform .6s ${EASING}` : "none";
+      clampView();
+      dom.stage.style.transform = `translate(${view.x}px, ${view.y}px) scale(${view.scale})`;
+
+      updateBlurOverlay(animate);
+      scheduleTileUpdate();
+    }
+
+    /**
+     * Memperbesar/memperkecil dengan titik (cx, cy) sebagai pusat.
+     * Titik itu tidak bergeser di layar (seperti cubit di HP).
+     * @param {number} factor - pengali zoom (>1 memperbesar, <1 memperkecil)
+     */
+    function zoomAt(factor, cx, cy, animate) {
+      const newScale = Math.min(MAX_ZOOM, Math.max(getMinScale(), view.scale * factor));
+      const actualFactor = newScale / view.scale;
+
+      view.x = cx - (cx - view.x) * actualFactor;
+      view.y = cy - (cy - view.y) * actualFactor;
+      view.scale = newScale;
+
+      applyView(animate);
+    }
+
+    /** Zoom dengan pusat di tengah layar. */
+    function zoomFromCenter(factor) {
+      const [cx, cy] = getViewportCenter();
+      zoomAt(factor, cx, cy, true);
+    }
+
+    /**
+     * Menggeser & memperbesar agar kotak `box` pas memenuhi layar.
+     * @param {number[]} box - [kiri, atas, kanan, bawah]
+     */
+    function fitToBox(box, animate = true, padding = FIT_PADDING) {
+      const [width, height] = getViewportSize();
+      const boxWidth = box[2] - box[0];
+      const boxHeight = box[3] - box[1];
+
+      view.scale = Math.min(
+        width / (boxWidth * (1 + 2 * padding)),
+        height / (boxHeight * (1 + 2 * padding))
+      );
+      view.x = width / 2 - (box[0] + boxWidth / 2) * view.scale;
+      view.y = height / 2 - (box[1] + boxHeight / 2) * view.scale;
+
+      applyView(animate);
+    }
+
+    /** Menampilkan halaman gambar 1 atau 2. */
+    function showPage(page) {
+      if (state.currentPage === page) return;
+      state.currentPage = page;
+
+      [1, 2].forEach((number) => {
+        const isCurrent = number === page;
+        dom.tileLayers[number].classList.toggle("is-active", isCurrent);
+        dom.pageImages[number].classList.toggle("is-active", isCurrent);
+      });
+
+      dom.pageBadge.textContent = `Halaman ${page} dari 2`;
+    }
+
+
+    /* ====================================================================
+       7. SOROTAN & BLUR
+       Materi terpilih diberi bingkai putih, dan area di luarnya di-blur.
+       ==================================================================== */
+
+    /** Menempatkan bingkai sorotan di sekeliling materi. */
+    function updateHighlight(material) {
+      const box = material.box;
+      const visible = state.highlightEnabled && !isFullWidth(box);
+
+      dom.highlight.classList.toggle("is-visible", visible);
+      Object.assign(dom.highlight.style, {
+        left:   `${box[0] - HIGHLIGHT_PADDING}px`,
+        top:    `${box[1] - HIGHLIGHT_PADDING}px`,
+        width:  `${box[2] - box[0] + HIGHLIGHT_PADDING * 2}px`,
+        height: `${box[3] - box[1] + HIGHLIGHT_PADDING * 2}px`,
+        borderRadius: `${HIGHLIGHT_RADIUS}px`,
+      });
+    }
+
+    /**
+     * Mengatur blur: seluruh layar di-blur, kecuali "lubang" berbentuk
+     * persegi rounded di atas materi terpilih.
+     *
+     * Cara kerjanya (pakai CSS mask):
+     *   Lubang = 2 persegi panjang yang bersilangan  +  4 lingkaran di sudut.
+     *   Mask = layar penuh DIKURANGI lubang.
+     * Jadi blur hanya muncul di luar lubang, dan sudut lubangnya bulat.
+     */
+    function updateBlurOverlay(animate) {
+      const box = currentMaterial().box;
+
+      // Posisi lubang di layar (koordinat piksel layar, bukan piksel gambar)
+      const left   = view.x + (box[0] - HIGHLIGHT_PADDING) * view.scale;
+      const top    = view.y + (box[1] - HIGHLIGHT_PADDING) * view.scale;
+      const right  = view.x + (box[2] + HIGHLIGHT_PADDING) * view.scale;
+      const bottom = view.y + (box[3] + HIGHLIGHT_PADDING) * view.scale;
+
+      // Radius sudut mengikuti zoom, tapi tidak boleh melebihi setengah sisi
+      const radius = Math.max(1, Math.min(HIGHLIGHT_RADIUS * view.scale, (right - left) / 2, (bottom - top) / 2));
+
+      const round = (n) => Number(n.toFixed(2));
+      const px = (x, y) => `${round(x)}px ${round(y)}px`;
+
+      const solid = "linear-gradient(#000, #000)";
+      const corner = (center) =>
+        `radial-gradient(circle at ${center}, #000 ${round(radius - 0.7)}px, transparent ${round(radius)}px)`;
+
+      const holeWidth  = right - left;
+      const holeHeight = bottom - top;
+      const cornerSize = px(radius, radius);
+
+      // Urutan layer: [layar penuh, persegi datar, persegi tegak, 4 sudut]
+      // (+2 / −1 pada ukuran membuat potongan sedikit tumpang tindih,
+      //  supaya tidak ada garis tipis di sambungan)
+      const images = [
+        solid, solid, solid,
+        corner("100% 100%"), corner("0 100%"), corner("100% 0"), corner("0 0"),
+      ].join(",");
+
+      const sizes = [
+        "100% 100%",
+        px(holeWidth, holeHeight - 2 * radius + 2),
+        px(holeWidth - 2 * radius + 2, holeHeight),
+        cornerSize, cornerSize, cornerSize, cornerSize,
+      ].join(",");
+
+      const positions = [
+        "0 0",
+        px(left, top + radius - 1),
+        px(left + radius - 1, top),
+        px(left, top),                    // sudut kiri-atas
+        px(right - radius, top),          // sudut kanan-atas
+        px(left, bottom - radius),        // sudut kiri-bawah
+        px(right - radius, bottom - radius), // sudut kanan-bawah
+      ].join(",");
+
+      const overlay = dom.blurOverlay.style;
+
+      overlay.transition = animate
+        ? `mask-size .6s ${EASING}, mask-position .6s ${EASING}, -webkit-mask-size .6s ${EASING}, -webkit-mask-position .6s ${EASING}, opacity .3s`
+        : "opacity .3s";
+
+      overlay.opacity = state.highlightEnabled && !isFullWidth(box) ? 1 : 0;
+
+      // Properti "-webkit-" diperlukan oleh Safari dan browser lama
+      overlay.maskImage    = overlay.webkitMaskImage    = images;
+      overlay.maskSize     = overlay.webkitMaskSize     = sizes;
+      overlay.maskPosition = overlay.webkitMaskPosition = positions;
+    }
+
+
+    /* ====================================================================
+       8. NAVIGASI ANTAR MATERI
+       ==================================================================== */
+
+    /**
+     * Pindah ke materi tertentu: perbarui judul, sorotan, zoom, dan daftar.
+     * @param {number} index - posisi materi (otomatis berputar di ujung daftar)
+     */
+    function goToMaterial(index, animate = true) {
+      state.currentIndex = (index + materials.length) % materials.length;
+      const material = currentMaterial();
+      const pageChanged = state.currentPage !== material.page;
+
+      showPage(material.page);
+      updateHighlight(material);
+      // Bila halaman berganti, lompat langsung (tanpa animasi geser)
+      fitToBox(material.box, animate && !pageChanged);
+
+      // Perbarui teks
+      dom.materialTitle.textContent = material.title;
+      dom.groupLabel.textContent = material.group;
+      dom.materialDesc.textContent = material.description || "";
+      dom.btnPick.textContent = `☰ ${material.title}`;
+      document.title = `${material.title} — Lembar Tajwid Tartili`;
+
+      // Perbarui daftar & gulir ke item aktif
+      renderMaterialList(dom.searchInput.value);
+      const activeItem = $(".material-item.is-active");
+      if (activeItem) activeItem.scrollIntoView({ block: "nearest" });
+
+      // Simpan di alamat (#id) agar bisa dibagikan
+      history.replaceState(null, "", `#${material.id}`);
+      closeDrawer();
+    }
+
+
+    /* ====================================================================
+       9. INTERAKSI: SENTUH, MOUSE, KEYBOARD
+       ==================================================================== */
+
+    // --- Geser (1 jari/mouse) dan cubit (2 jari) ---
+    const activePointers = new Map();  // id jari -> [x, y]
+    let lastPinchDistance = 0;
+
+    function distanceBetween(a, b) {
+      return Math.hypot(a[0] - b[0], a[1] - b[1]);
+    }
+
+    dom.viewport.addEventListener("pointerdown", (event) => {
+      dom.viewport.setPointerCapture(event.pointerId);
+      activePointers.set(event.pointerId, [event.clientX, event.clientY]);
+      dom.viewport.classList.add("is-dragging");
+      hideHint();
+
+      if (activePointers.size === 2) {
+        const [a, b] = [...activePointers.values()];
+        lastPinchDistance = distanceBetween(a, b);
+      }
+    });
+
+    dom.viewport.addEventListener("pointermove", (event) => {
+      if (!activePointers.has(event.pointerId)) return;
+
+      const previous = activePointers.get(event.pointerId);
+      const rect = dom.viewport.getBoundingClientRect();
+
+      if (activePointers.size === 1) {
+        // Satu jari: geser gambar
+        view.x += event.clientX - previous[0];
+        view.y += event.clientY - previous[1];
+        activePointers.set(event.pointerId, [event.clientX, event.clientY]);
+        applyView(false);
+
+      } else if (activePointers.size === 2) {
+        // Dua jari: zoom sesuai perubahan jarak antar jari
+        activePointers.set(event.pointerId, [event.clientX, event.clientY]);
+        const [a, b] = [...activePointers.values()];
+        const distance = distanceBetween(a, b);
+
+        if (lastPinchDistance) {
+          const centerX = (a[0] + b[0]) / 2 - rect.left;
+          const centerY = (a[1] + b[1]) / 2 - rect.top;
+          zoomAt(distance / lastPinchDistance, centerX, centerY, false);
+        }
+        lastPinchDistance = distance;
+      }
+    });
+
+    function onPointerEnd(event) {
+      activePointers.delete(event.pointerId);
+      if (activePointers.size === 0) dom.viewport.classList.remove("is-dragging");
+      lastPinchDistance = 0;
+    }
+    dom.viewport.addEventListener("pointerup", onPointerEnd);
+    dom.viewport.addEventListener("pointercancel", onPointerEnd);
+
+    // --- Scroll mouse / trackpad: zoom ---
+    dom.viewport.addEventListener("wheel", (event) => {
+      event.preventDefault();
+      hideHint();
+
+      const rect = dom.viewport.getBoundingClientRect();
+      const sensitivity = event.ctrlKey ? 0.01 : 0.0016; // cubit di trackpad lebih sensitif
+      const factor = Math.exp(-event.deltaY * sensitivity);
+
+      zoomAt(factor, event.clientX - rect.left, event.clientY - rect.top, false);
+    }, { passive: false });
+
+    // --- Klik dua kali / ketuk 2×: zoom masuk, atau kembali bila sudah dekat ---
+    dom.viewport.addEventListener("dblclick", (event) => {
+      const rect = dom.viewport.getBoundingClientRect();
+      const alreadyZoomedIn = view.scale > getFitScale() * 1.9;
+      const factor = alreadyZoomedIn ? 0.5 : 2;
+
+      zoomAt(factor, event.clientX - rect.left, event.clientY - rect.top, true);
+    });
+
+    // --- Keyboard (saat viewer sedang fokus) ---
+    dom.viewport.addEventListener("keydown", (event) => {
+      switch (event.key) {
+        case "ArrowLeft":  view.x += KEYBOARD_PAN_STEP; break;
+        case "ArrowRight": view.x -= KEYBOARD_PAN_STEP; break;
+        case "ArrowUp":    view.y += KEYBOARD_PAN_STEP; break;
+        case "ArrowDown":  view.y -= KEYBOARD_PAN_STEP; break;
+
+        case "+":
+        case "=":
+          zoomFromCenter(KEYBOARD_ZOOM_IN);
+          return;
+        case "-":
+          zoomFromCenter(KEYBOARD_ZOOM_OUT);
+          return;
+        case "0":
+          fitToBox(currentMaterial().box);
+          return;
+
+        case "PageDown": goToMaterial(state.currentIndex + 1); break;
+        case "PageUp":   goToMaterial(state.currentIndex - 1); break;
+
+        default:
+          return; // tombol lain: biarkan perilaku normal browser
+      }
+
+      event.preventDefault();
+      applyView(false);
+    });
+
+
+    /* ====================================================================
+       10. TOMBOL & KONTROL
+       ==================================================================== */
+    $("#btn-zoom-in").onclick  = () => zoomFromCenter(BUTTON_ZOOM_STEP);
+    $("#btn-zoom-out").onclick = () => zoomFromCenter(1 / BUTTON_ZOOM_STEP);
+    $("#btn-fit").onclick      = () => fitToBox(currentMaterial().box);
+    $("#btn-show-all").onclick = () => fitToBox([0, 0, IMAGE_WIDTH, IMAGE_HEIGHT]);
+
+    // Tombol sebelumnya/berikutnya (desktop & dock HP)
+    $("#btn-prev").onclick = $("#btn-prev-mobile").onclick = () => goToMaterial(state.currentIndex - 1);
+    $("#btn-next").onclick = $("#btn-next-mobile").onclick = () => goToMaterial(state.currentIndex + 1);
+
+    // Tombol "Sorot": nyalakan / matikan sorotan & blur
+    $("#btn-highlight").onclick = (event) => {
+      const button = event.currentTarget;
+      state.highlightEnabled = !state.highlightEnabled;
+
+      button.classList.toggle("is-active", state.highlightEnabled);
+      button.setAttribute("aria-pressed", state.highlightEnabled);
+
+      updateHighlight(currentMaterial());
+      updateBlurOverlay(false);
+    };
+
+    // Tombol layar penuh
+    $("#btn-fullscreen").onclick = () => {
+      const frame = dom.viewerFrame;
+      try {
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          (frame.requestFullscreen || frame.webkitRequestFullscreen).call(frame);
+        }
+      } catch (error) {
+        /* Browser tidak mendukung layar penuh: abaikan */
+      }
+    };
+
+    // Setelah masuk/keluar layar penuh, sesuaikan ulang ukuran gambar
+    document.addEventListener("fullscreenchange", () => {
+      setTimeout(() => fitToBox(currentMaterial().box, false), 120);
+    });
+
+    // Klik item di daftar materi
+    dom.materialList.addEventListener("click", (event) => {
+      const button = event.target.closest(".material-item");
+      if (!button) return;
+      goToMaterial(materials.findIndex((item) => item.id === button.dataset.id));
+    });
+
+    // Ketik di kotak pencarian
+    dom.searchInput.addEventListener("input", (event) => renderMaterialList(event.target.value));
+
+    // Panel materi di HP (naik dari bawah)
+    function openDrawer() {
+      dom.sidebar.classList.add("is-open");
+      dom.backdrop.classList.add("is-visible");
+    }
+    function closeDrawer() {
+      dom.sidebar.classList.remove("is-open");
+      dom.backdrop.classList.remove("is-visible");
+    }
+    dom.btnPick.onclick = openDrawer;
+    dom.backdrop.onclick = closeDrawer;
+    addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeDrawer();
+    });
+
+    function hideHint() {
+      dom.hint.style.opacity = 0;
+    }
+
+    // Saat ukuran jendela berubah: sesuaikan ulang (ditunda agar tidak berulang-ulang)
+    let resizeTimer;
+    addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => fitToBox(currentMaterial().box, false), 150);
+    });
+
+    // Alamat berubah (#id): pindah ke materi tersebut
+    addEventListener("hashchange", () => {
+      const index = materials.findIndex((item) => item.id === location.hash.slice(1));
+      if (index >= 0 && index !== state.currentIndex) goToMaterial(index);
+    });
+
+
+    /* ====================================================================
+       11. TILE: MEMUAT POTONGAN GAMBAR RESOLUSI TINGGI
+       Semakin besar zoom, semakin tinggi level tile yang dimuat.
+       Hanya potongan yang terlihat di layar yang diunduh.
+       ==================================================================== */
+    const loadedTiles = new Map();   // kunci "halaman/level/x_y" -> data tile
+    let tileUpdateScheduled = false;
+
+    /** Menjadwalkan pembaruan tile (maksimal sekali per frame). */
+    function scheduleTileUpdate() {
+      if (tileUpdateScheduled) return;
+      tileUpdateScheduled = true;
+      requestAnimationFrame(() => {
+        tileUpdateScheduled = false;
+        updateTiles();
+      });
+    }
+
+    /** Menentukan level tile (0–3) dari tingkat zoom saat ini. */
+    function getTileLevel() {
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      const sharpnessNeeded = view.scale * pixelRatio;
+
+      if (sharpnessNeeded > 4.6) return 3;
+      if (sharpnessNeeded > 2.3) return 2;
+      if (sharpnessNeeded > 1.15) return 1;
+      return 0; // gambar halaman biasa sudah cukup tajam
+    }
+
+    function updateTiles() {
+      const [width, height] = getViewportSize();
+      const level = getTileLevel();
+      const page = state.currentPage;
+
+      // Area yang terlihat di layar (dalam koordinat gambar) + cadangan 20%
+      const marginX = (width / view.scale) * 0.2;
+      const marginY = (height / view.scale) * 0.2;
+      const visibleLeft   = -view.x / view.scale - marginX;
+      const visibleTop    = -view.y / view.scale - marginY;
+      const visibleRight  = (width - view.x) / view.scale + marginX;
+      const visibleBottom = (height - view.y) / view.scale + marginY;
+
+      // 1) Buang tile yang sudah tidak perlu
+      for (const [key, tile] of loadedTiles) {
+        const [tileLeft, tileTop, tileRight, tileBottom] = tile.rect;
+        const isOtherPage   = tile.page !== page;
+        const isTooDetailed = tile.level > level;
+        const isOffScreen   = tileRight < visibleLeft || tileLeft > visibleRight ||
+                              tileBottom < visibleTop || tileTop > visibleBottom;
+
+        if (isOtherPage || isTooDetailed || isOffScreen) {
+          tile.element.remove();
+          loadedTiles.delete(key);
+        }
+      }
+
+      if (level === 0) return;
+
+      // 2) Hitung tile mana saja yang terlihat
+      const { factor, width: levelWidth, height: levelHeight } = ZOOM_LEVELS[level];
+      const tileSizeOnStage = TILE_SIZE / factor;
+      const layer = dom.tileLayers[page];
+
+      const firstColumn = Math.max(0, Math.floor(visibleLeft / tileSizeOnStage));
+      const lastColumn  = Math.min(Math.ceil(levelWidth / TILE_SIZE) - 1, Math.floor(visibleRight / tileSizeOnStage));
+      const firstRow    = Math.max(0, Math.floor(visibleTop / tileSizeOnStage));
+      const lastRow     = Math.min(Math.ceil(levelHeight / TILE_SIZE) - 1, Math.floor(visibleBottom / tileSizeOnStage));
+
+      // 3) Muat tile yang belum ada
+      for (let row = firstRow; row <= lastRow; row++) {
+        for (let column = firstColumn; column <= lastColumn; column++) {
+          const key = `${page}/${level}/${column}_${row}`;
+          if (loadedTiles.has(key)) continue;
+
+          // Ukuran tile (tile di tepi bisa lebih kecil dari 512)
+          const tileWidth  = Math.min(TILE_SIZE, levelWidth - column * TILE_SIZE);
+          const tileHeight = Math.min(TILE_SIZE, levelHeight - row * TILE_SIZE);
+          // Tile yang bukan di tepi dilebihkan 1px agar tidak ada garis tipis di sambungan
+          const extraX = column * TILE_SIZE + tileWidth < levelWidth ? 1 : 0;
+          const extraY = row * TILE_SIZE + tileHeight < levelHeight ? 1 : 0;
+
+          const rect = [
+            column * tileSizeOnStage,
+            row * tileSizeOnStage,
+            (column * TILE_SIZE + tileWidth) / factor,
+            (row * TILE_SIZE + tileHeight) / factor,
+          ];
+
+          const image = new Image();
+          image.className = "tile";
+          image.decoding = "async";
+          image.alt = "";
+          image.draggable = false;
+          Object.assign(image.style, {
+            left:   `${rect[0]}px`,
+            top:    `${rect[1]}px`,
+            width:  `${(tileWidth + extraX) / factor}px`,
+            height: `${(tileHeight + extraY) / factor}px`,
+            zIndex: level,
+          });
+          // Muncul perlahan setelah selesai diunduh
+          image.onload = () => image.classList.add("is-loaded");
+          image.src = `t/${page}/${level}/${column}_${row}.webp`;
+
+          layer.appendChild(image);
+          loadedTiles.set(key, { element: image, page, level, rect });
+        }
+      }
+    }
+
+
+    /* ====================================================================
+       12. PWA: PASANG APLIKASI & SIMPAN OFFLINE
+       ==================================================================== */
+    let toastTimer;
+
+    /** Menampilkan pesan singkat selama ±4 detik. */
+    function showToast(message) {
+      dom.toast.textContent = message;
+      dom.toast.classList.add("is-visible");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => dom.toast.classList.remove("is-visible"), 4200);
+    }
+
+    // --- Tombol "Pasang Aplikasi" ---
+    let installPrompt = null; // dikirim browser saat aplikasi bisa dipasang
+
+    addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      installPrompt = event;
+    });
+
+    addEventListener("appinstalled", () => {
+      dom.btnInstall.style.display = "none";
+      showToast("Aplikasi berhasil dipasang ✓");
+    });
+
+    // Sembunyikan tombol bila sudah berjalan sebagai aplikasi terpasang
+    if (matchMedia("(display-mode: standalone)").matches || navigator.standalone) {
+      dom.btnInstall.style.display = "none";
+    }
+
+    dom.btnInstall.onclick = async () => {
+      if (installPrompt) {
+        installPrompt.prompt();
+        try { await installPrompt.userChoice; } catch (error) { /* abaikan */ }
+        installPrompt = null;
+        return;
+      }
+      // Browser tidak menyediakan prompt: beri petunjuk manual
+      const isApple = /iphone|ipad|ipod/i.test(navigator.userAgent);
+      showToast(isApple
+        ? "Di iPhone/iPad: ketuk ikon Bagikan, lalu pilih “Tambah ke Layar Utama”."
+        : "Buka menu browser, lalu pilih “Instal aplikasi” atau “Tambahkan ke layar utama”.");
+    };
+
+    // --- Tombol "Simpan Offline" ---
+
+    /** Daftar alamat semua tile (halaman 1–2, level 1–3). */
+    function listAllTileUrls() {
+      const urls = [];
+      for (const page of [1, 2]) {
+        for (const level of [1, 2, 3]) {
+          const { width, height } = ZOOM_LEVELS[level];
+          for (let row = 0; row < Math.ceil(height / TILE_SIZE); row++) {
+            for (let column = 0; column < Math.ceil(width / TILE_SIZE); column++) {
+              urls.push(`t/${page}/${level}/${column}_${row}.webp`);
+            }
+          }
+        }
+      }
+      return urls;
+    }
+
+    /** Memperbarui teks tombol & status sesuai apakah sudah tersimpan. */
+    function updateOfflineStatus() {
+      let isSaved = false;
+      try { isSaved = localStorage.offAll === "1"; } catch (error) { /* abaikan */ }
+
+      dom.offlineStatus.textContent = isSaved ? "Siap dipakai offline ✓" : "";
+      dom.btnOffline.textContent = isSaved ? "☁ Offline siap ✓" : "☁ Simpan Offline";
+    }
+
+    dom.btnOffline.onclick = async () => {
+      const canCache = "caches" in window && /^https?:/.test(location.protocol);
+      if (!canCache) {
+        showToast("Mode offline aktif setelah aplikasi dibuka lewat alamat web (https://).");
+        return;
+      }
+
+      const queue = listAllTileUrls();
+      const total = queue.length;
+      let processed = 0;
+      let failed = 0;
+      dom.btnOffline.disabled = true;
+
+      try {
+        const cache = await caches.open(OFFLINE_CACHE_NAME);
+
+        // "Pekerja": mengambil alamat dari antrean satu per satu
+        const worker = async () => {
+          while (queue.length) {
+            const url = queue.pop();
+            try {
+              const alreadySaved = await cache.match(url);
+              if (!alreadySaved) {
+                const response = await fetch(url);
+                if (response.ok) await cache.put(url, response);
+                else failed++;
+              }
+            } catch (error) {
+              failed++;
+            }
+            processed++;
+            if (processed % 12 === 0) {
+              dom.offlineStatus.textContent = `Menyimpan… ${Math.round(processed / total * 100)}%`;
+            }
+          }
+        };
+
+        // Jalankan 6 pekerja bersamaan agar lebih cepat
+        await Promise.all(Array.from({ length: 6 }, worker));
+
+        if (failed) {
+          dom.offlineStatus.textContent = `Selesai, ${failed} potongan gagal — coba lagi.`;
+          showToast("Sebagian gagal disimpan. Periksa koneksi lalu coba lagi.");
+        } else {
+          try { localStorage.offAll = "1"; } catch (error) { /* abaikan */ }
+          updateOfflineStatus();
+          showToast("Selesai! Aplikasi bisa dipakai tanpa internet.");
+        }
+      } catch (error) {
+        dom.offlineStatus.textContent = "Gagal menyimpan.";
+        showToast("Gagal menyimpan offline.");
+      }
+
+      dom.btnOffline.disabled = false;
+    };
+
+    updateOfflineStatus();
+    addEventListener("offline", () => showToast("Anda sedang offline — aplikasi tetap bisa dipakai."));
+    addEventListener("online",  () => showToast("Kembali online."));
+
+    // Service worker: membuat aplikasi bisa dibuka tanpa internet
+    if ("serviceWorker" in navigator && /^https?:/.test(location.protocol)) {
+      addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch(() => { /* abaikan */ });
+      });
+    }
+
+
+    /* ====================================================================
+       13. SPLASH SCREEN
+       Tampil minimal ±2 detik, hanya sekali per sesi.
+       ==================================================================== */
+    function initSplash() {
+      const MIN_DISPLAY_MS = 2100;   // tampil paling sedikit selama ini
+      const MAX_WAIT_MS = 5000;      // paling lama menunggu halaman selesai dimuat
+
+      let alreadySeen = false;
+      try { alreadySeen = sessionStorage.sp === "1"; } catch (error) { /* abaikan */ }
+
+      if (alreadySeen) {
+        dom.splash.remove();
+        return;
+      }
+
+      const startTime = performance.now();
+      let finished = false;
+
+      const hideSplash = () => {
+        if (finished) return;
+        finished = true;
+
+        const remaining = Math.max(0, MIN_DISPLAY_MS - (performance.now() - startTime));
+        setTimeout(() => {
+          dom.splash.classList.add("is-hidden");
+          setTimeout(() => dom.splash.remove(), 700);
+          try { sessionStorage.sp = "1"; } catch (error) { /* abaikan */ }
+        }, remaining);
+      };
+
+      if (document.readyState === "complete") hideSplash();
+      else addEventListener("load", hideSplash);
+      setTimeout(hideSplash, MAX_WAIT_MS);
+    }
+    initSplash();
+
+
+    /* ====================================================================
+       14. MULAI APLIKASI
+       ==================================================================== */
+    (function start() {
+      // Bila alamat berisi #id materi, mulai dari materi itu
+      const indexFromUrl = materials.findIndex((item) => item.id === location.hash.slice(1));
+      state.currentIndex = indexFromUrl >= 0 ? indexFromUrl : 0;
+
+      requestAnimationFrame(() => {
+        goToMaterial(state.currentIndex, false);
+        setTimeout(hideHint, 6000);   // petunjuk hilang sendiri setelah 6 detik
+      });
+    })();
+  </script>
 </body>
 </html>
