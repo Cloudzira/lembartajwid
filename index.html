@@ -75,7 +75,7 @@ h1,h2,p{margin:0}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 @keyframes fi{from{opacity:.2}to{opacity:1}}
 #hl{z-index:6;position:absolute;border:5px solid rgba(255,255,255,.92);border-radius:22px;box-shadow:0 0 0 3px rgba(116,97,207,.55),0 0 36px rgba(116,97,207,.45);pointer-events:none;display:none;transition:.4s}
-#blr{position:absolute;inset:0;pointer-events:none;backdrop-filter:blur(16px) saturate(1.15) brightness(1.06);-webkit-backdrop-filter:blur(16px) saturate(1.15) brightness(1.06);background:linear-gradient(135deg,rgba(255,255,255,.38),rgba(205,195,255,.26) 55%,rgba(255,255,255,.3));opacity:0;z-index:2;}
+#blr{position:absolute;inset:0;pointer-events:none;backdrop-filter:blur(16px) saturate(1.15) brightness(1.06);-webkit-backdrop-filter:blur(16px) saturate(1.15) brightness(1.06);background:linear-gradient(135deg,rgba(255,255,255,.38),rgba(205,195,255,.26) 55%,rgba(255,255,255,.3));opacity:0;z-index:2;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-composite:source-out,source-over,source-over,source-over,source-over,source-over,source-over;mask-composite:subtract,add,add,add,add,add,add}
 #hl.show{display:block}
 #hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(43,39,80,.86);color:#fff;font-size:var(--fs-small);font-weight:500;padding:8px 14px;border-radius:999px;pointer-events:none;transition:opacity .6s;white-space:nowrap;max-width:92%;overflow:hidden;text-overflow:ellipsis}
 #pg{position:absolute;right:12px;top:12px;background:rgba(255,255,255,.94);color:var(--p);font-size:var(--fs-small);font-weight:600;padding:6px 12px;border-radius:999px;box-shadow:0 4px 10px rgba(110,90,200,.2);pointer-events:none}
@@ -248,15 +248,21 @@ function clamp(){const[w,h]=vs();V.s=Math.min(6,Math.max(minS(),V.s));const m=60
 function apply(anim){st.style.transition=anim?"transform .6s cubic-bezier(.2,.8,.2,1)":"none";clamp();st.style.transform=`translate(${V.x}px,${V.y}px) scale(${V.s})`;blurUpdate(anim);schedTiles()}
 /* blur di luar materi terpilih: lubang (clip-path) mengikuti kotak materi */
 function blurUpdate(anim){
- const el=document.getElementById("blr"),b=M[cur].b,full=b[2]-b[0]>=1900,p=8,[w,h]=vs();
+ const el=document.getElementById("blr"),b=M[cur].b,full=b[2]-b[0]>=1900,p=8;
  const x1=V.x+(b[0]-p)*V.s,y1=V.y+(b[1]-p)*V.s,x2=V.x+(b[2]+p)*V.s,y2=V.y+(b[3]+p)*V.s;
- const r=Math.max(0,Math.min(22*V.s,(x2-x1)/2,(y2-y1)/2));
- const f=n=>n.toFixed(2);
- /* seluruh layar dikurangi persegi rounded -> blur hanya di luar materi, sudut bulat */
- const d=`M0 0H${f(w)}V${f(h)}H0Z M${f(x1+r)} ${f(y1)}A${f(r)} ${f(r)} 0 0 0 ${f(x1)} ${f(y1+r)}V${f(y2-r)}A${f(r)} ${f(r)} 0 0 0 ${f(x1+r)} ${f(y2)}H${f(x2-r)}A${f(r)} ${f(r)} 0 0 0 ${f(x2)} ${f(y2-r)}V${f(y1+r)}A${f(r)} ${f(r)} 0 0 0 ${f(x2-r)} ${f(y1)}Z`;
- el.style.transition=anim?"clip-path .6s cubic-bezier(.2,.8,.2,1),-webkit-clip-path .6s cubic-bezier(.2,.8,.2,1),opacity .3s":"opacity .3s";
+ const r=Math.max(1,Math.min(22*V.s,(x2-x1)/2,(y2-y1)/2)),R=n=>+n.toFixed(2);
+ /* lubang = 2 persegi panjang + 4 sudut bulat (radial-gradient); blur = layar penuh dikurangi lubang */
+ const g="linear-gradient(#000,#000)",c=pos=>`radial-gradient(circle at ${pos},#000 ${R(r-.7)}px,transparent ${R(r)}px)`;
+ const rr=`${R(r)}px ${R(r)}px`,P=(x,y)=>`${R(x)}px ${R(y)}px`;
+ const img=[g,g,g,c("100% 100%"),c("0 100%"),c("100% 0"),c("0 0")].join(",");
+ const sz=["100% 100%",`${R(x2-x1)}px ${R(y2-y1-2*r+2)}px`,`${R(x2-x1-2*r+2)}px ${R(y2-y1)}px`,rr,rr,rr,rr].join(",");
+ const ps=["0 0",P(x1,y1+r-1),P(x1+r-1,y1),P(x1,y1),P(x2-r,y1),P(x1,y2-r),P(x2-r,y2-r)].join(",");
+ el.style.clipPath=el.style.webkitClipPath="none";
+ el.style.transition=anim?"mask-size .6s cubic-bezier(.2,.8,.2,1),mask-position .6s cubic-bezier(.2,.8,.2,1),-webkit-mask-size .6s cubic-bezier(.2,.8,.2,1),-webkit-mask-position .6s cubic-bezier(.2,.8,.2,1),opacity .3s":"opacity .3s";
  el.style.opacity=showHL&&!full?1:0;
- el.style.clipPath=el.style.webkitClipPath=`path("${d}")`;
+ el.style.maskImage=el.style.webkitMaskImage=img;
+ el.style.maskSize=el.style.webkitMaskSize=sz;
+ el.style.maskPosition=el.style.webkitMaskPosition=ps;
 }
 function setPage(p){if(page===p)return;page=p;$('#tl1').classList.toggle('on',p===1);$('#tl2').classList.toggle('on',p===2);$("#i1").classList.toggle("on",p===1);$("#i2").classList.toggle("on",p===2);$("#pg").textContent=`Halaman ${p} dari 2`}
 function fitBox(b,anim=true,pad=.05){
