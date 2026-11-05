@@ -74,8 +74,8 @@ h1,h2,p{margin:0}
 #toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:rgba(43,39,80,.95);color:#fff;font-size:13px;padding:11px 18px;border-radius:16px;z-index:120;max-width:min(92vw,420px);text-align:center;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 10px 30px rgba(20,10,70,.4)}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 @keyframes fi{from{opacity:.2}to{opacity:1}}
-#hl{z-index:6;position:absolute;border:5px solid rgba(255,255,255,.92);border-radius:16px;box-shadow:0 0 0 3px rgba(116,97,207,.55),0 0 36px rgba(116,97,207,.45);pointer-events:none;display:none;transition:.4s}
-#blr{position:absolute;inset:0;pointer-events:none;backdrop-filter:blur(16px) saturate(1.15) brightness(1.06);-webkit-backdrop-filter:blur(16px) saturate(1.15) brightness(1.06);background:linear-gradient(135deg,rgba(255,255,255,.38),rgba(205,195,255,.26) 55%,rgba(255,255,255,.3));opacity:0;z-index:2;-webkit-mask-image:linear-gradient(#000,#000),linear-gradient(#000,#000);mask-image:linear-gradient(#000,#000),linear-gradient(#000,#000);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-composite:xor;mask-composite:exclude}
+#hl{z-index:6;position:absolute;border:5px solid rgba(255,255,255,.92);border-radius:22px;box-shadow:0 0 0 3px rgba(116,97,207,.55),0 0 36px rgba(116,97,207,.45);pointer-events:none;display:none;transition:.4s}
+#blr{position:absolute;inset:0;pointer-events:none;backdrop-filter:blur(16px) saturate(1.15) brightness(1.06);-webkit-backdrop-filter:blur(16px) saturate(1.15) brightness(1.06);background:linear-gradient(135deg,rgba(255,255,255,.38),rgba(205,195,255,.26) 55%,rgba(255,255,255,.3));opacity:0;z-index:2;}
 #hl.show{display:block}
 #hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(43,39,80,.86);color:#fff;font-size:var(--fs-small);font-weight:500;padding:8px 14px;border-radius:999px;pointer-events:none;transition:opacity .6s;white-space:nowrap;max-width:92%;overflow:hidden;text-overflow:ellipsis}
 #pg{position:absolute;right:12px;top:12px;background:rgba(255,255,255,.94);color:var(--p);font-size:var(--fs-small);font-weight:600;padding:6px 12px;border-radius:999px;box-shadow:0 4px 10px rgba(110,90,200,.2);pointer-events:none}
@@ -250,10 +250,14 @@ function apply(anim){st.style.transition=anim?"transform .6s cubic-bezier(.2,.8,
 function blurUpdate(anim){
  const el=document.getElementById("blr"),b=M[cur].b,full=b[2]-b[0]>=1900,p=8,[w,h]=vs();
  const x1=V.x+(b[0]-p)*V.s,y1=V.y+(b[1]-p)*V.s,x2=V.x+(b[2]+p)*V.s,y2=V.y+(b[3]+p)*V.s;
- el.style.transition=anim?"mask-size .6s cubic-bezier(.2,.8,.2,1),mask-position .6s cubic-bezier(.2,.8,.2,1),-webkit-mask-size .6s cubic-bezier(.2,.8,.2,1),-webkit-mask-position .6s cubic-bezier(.2,.8,.2,1),opacity .3s":"opacity .3s";
+ const r=Math.max(0,Math.min(22*V.s,(x2-x1)/2,(y2-y1)/2));
+ const f=n=>n.toFixed(2);
+ /* seluruh layar dikurangi persegi rounded (evenodd) -> blur hanya di luar materi, sudut bulat */
+ const d=`M0 0H${f(w)}V${f(h)}H0Z M${f(x1+r)} ${f(y1)}H${f(x2-r)}A${f(r)} ${f(r)} 0 0 1 ${f(x2)} ${f(y1+r)}V${f(y2-r)}A${f(r)} ${f(r)} 0 0 1 ${f(x2-r)} ${f(y2)}H${f(x1+r)}A${f(r)} ${f(r)} 0 0 1 ${f(x1)} ${f(y2-r)}V${f(y1+r)}A${f(r)} ${f(r)} 0 0 1 ${f(x1+r)} ${f(y1)}Z`;
+ el.style.transition=anim?"clip-path .6s cubic-bezier(.2,.8,.2,1),-webkit-clip-path .6s cubic-bezier(.2,.8,.2,1),opacity .3s":"opacity .3s";
  el.style.opacity=showHL&&!full?1:0;
- const sz=`100% 100%,${x2-x1}px ${y2-y1}px`,ps=`0 0,${x1}px ${y1}px`;
- el.style.maskSize=el.style.webkitMaskSize=sz;el.style.maskPosition=el.style.webkitMaskPosition=ps;}
+ el.style.clipPath=el.style.webkitClipPath=`path(evenodd,"${d}")`;
+}
 function setPage(p){if(page===p)return;page=p;$('#tl1').classList.toggle('on',p===1);$('#tl2').classList.toggle('on',p===2);$("#i1").classList.toggle("on",p===1);$("#i2").classList.toggle("on",p===2);$("#pg").textContent=`Halaman ${p} dari 2`}
 function fitBox(b,anim=true,pad=.05){
  const[w,h]=vs(),bw=b[2]-b[0],bh=b[3]-b[1];
