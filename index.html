@@ -15,7 +15,7 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#8b7bdc">
+  <meta name="theme-color" content="#7461cf">
 
   <title>Lembar Tajwid Tartili — Panduan Hukum Tajwid</title>
   <meta name="description" content="Panduan hukum tajwid bergambar: Mad, Makhraj, Sifat Huruf, Qalqalah, Nun &amp; Mim, Waqaf.">
@@ -81,10 +81,6 @@
     html,
     body {
       height: 100%;
-      /* Halaman tidak boleh ikut ter-zoom oleh cubit / dobel-ketuk.
-         Zoom hanya terjadi di dalam area gambar (.viewport). */
-      touch-action: pan-x pan-y;
-      overscroll-behavior: none;
     }
 
     body {
@@ -582,17 +578,15 @@
     }
 
     /* --- Bingkai sorotan di sekeliling materi terpilih ---
-       Posisi, ukuran, tebal garis, dan radius sudut dihitung dari JavaScript
-       (updateHighlightFrame). Bingkai ini TIDAK ikut diperbesar bersama panggung,
-       supaya bayangannya tidak ikut membesar (itu berat bagi GPU dan bisa
-       membuat layar berkedip / hitam saat zoom). */
+       Radius sudut diatur dari JavaScript (HIGHLIGHT_RADIUS). */
     .highlight {
       position: absolute;
-      z-index: 1;
+      z-index: 6;
       display: none;
       border: 5px solid rgba(255, 255, 255, .92);
-      box-shadow: 0 0 0 3px rgba(116, 97, 207, .55), 0 0 22px rgba(116, 97, 207, .45);
+      box-shadow: 0 0 0 3px rgba(116, 97, 207, .55), 0 0 36px rgba(116, 97, 207, .45);
       pointer-events: none;
+      transition: .4s;
     }
 
     .highlight.is-visible {
@@ -617,55 +611,6 @@
       mask-repeat: no-repeat;
       -webkit-mask-composite: source-out, source-over, source-over, source-over, source-over, source-over, source-over;
       mask-composite: subtract, add, add, add, add, add, add;
-    }
-
-    /* --- Saat gambar sedang digeser / di-zoom ---
-       Blur latar (backdrop-filter) sangat berat bagi GPU bila dihitung ulang
-       di setiap frame, dan itu penyebab layar berkedip / hitam di HP.
-       Jadi selama bergerak, blur dimatikan dan diganti warna tipis yang mirip.
-       Begitu gerakan berhenti, blur dinyalakan lagi. */
-    .viewer-frame.is-moving .blur-overlay {
-      -webkit-backdrop-filter: none;
-      backdrop-filter: none;
-      background: linear-gradient(135deg, rgba(255, 255, 255, .62), rgba(205, 195, 255, .5) 55%, rgba(255, 255, 255, .58));
-    }
-
-    /* --- Tombol Keluar Zoom (muncul hanya saat gambar diperbesar) --- */
-    .exit-zoom {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      height: 40px;
-      padding: 0 16px 0 12px;
-      border-radius: 999px;
-      font-size: var(--font-size-small);
-      font-weight: 600;
-      color: #fff;
-      background: linear-gradient(135deg, #8f7fe6, #6d5bcb);
-      box-shadow: 0 6px 16px rgba(80, 60, 180, .38);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-6px);
-      transition: opacity .2s, transform .2s, visibility .2s;
-    }
-
-    .exit-zoom.is-visible {
-      opacity: 1;
-      visibility: visible;
-      transform: none;
-    }
-
-    .exit-zoom:active {
-      transform: scale(.95);
-    }
-
-    .exit-zoom svg {
-      width: 16px;
-      height: 16px;
     }
 
     /* --- Petunjuk & penanda halaman --- */
@@ -989,6 +934,68 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ======================================================================
+       12. PENYEMPURNAAN TAMPILAN & ANTI ZOOM GANDA
+       ====================================================================== */
+    html, body { overscroll-behavior: none; touch-action: manipulation; -webkit-text-size-adjust: 100%; }
+    body {
+      height: 100dvh;
+      padding: max(18px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+    }
+    .app { height: 100%; }
+    .viewer-frame, .viewport { touch-action: none; -webkit-tap-highlight-color: transparent; }
+    .stage { will-change: transform; }
+
+    .btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .btn.icon { display: grid; place-items: center; width: 44px; padding: 0; }
+    .toolbar .controls { align-items: center; gap: 8px; flex-wrap: nowrap; }
+    .seg { display: flex; padding: 3px; border-radius: 17px; background: rgba(255,255,255,.65); box-shadow: 0 4px 10px rgba(110,90,200,.12); }
+    .seg .btn { box-shadow: none; background: transparent; }
+    .seg .btn:hover { background: #fff; }
+    .btn:focus-visible { outline-offset: 1px; }
+
+    /* Panel zoom melayang di dalam viewer: satu tempat saja untuk semua kontrol zoom */
+    .zoom-dock {
+      position: absolute; right: 12px; bottom: 14px; z-index: 8;
+      display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px;
+      border-radius: 22px; background: rgba(255,255,255,.9);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      box-shadow: 0 10px 28px rgba(80,60,180,.28), 0 0 0 1px rgba(116,97,207,.12);
+    }
+    .zoom-dock .btn { width: 42px; min-width: 0; height: 42px; box-shadow: none; background: transparent; border-radius: 14px; }
+    .zoom-dock .btn:hover { background: #f1edff; }
+    .zoom-level { min-width: 46px; padding: 2px 0; text-align: center; font-size: 11.5px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--color-primary); }
+    .hint { left: 14px; max-width: calc(100% - 96px); transform: none; }
+    .page-badge { top: 12px; right: 12px; font-size: 11.5px; }
+
+    @media (min-width: 901px) {
+      .app { grid-template-columns: clamp(264px, 24vw, 316px) 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      body { padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) 0 max(8px, env(safe-area-inset-left)); }
+      .app { height: 100%; }
+      .content { height: calc(100% - 72px - env(safe-area-inset-bottom)); }
+      .toolbar { flex-wrap: nowrap; align-items: center; }
+      .title-block { min-width: 0; }
+      .title-block h1 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .toolbar .controls { width: auto; margin-left: auto; flex-shrink: 0; }
+      .toolbar .controls .btn { flex: none; height: 42px; padding: 0; font-size: 13px; }
+      .toolbar .controls .btn.icon { width: 42px; }
+      .toolbar .controls .btn.text { width: auto; padding: 0 14px; }
+      .seg { display: none; }
+      .zoom-dock { right: 8px; bottom: 10px; }
+    }
+
+    /* HP posisi mendatar / layar pendek */
+    @media (max-height: 520px) {
+      .eyebrow, .title-block p { display: none; }
+      .title-block h1 { font-size: 16px; }
+      .content { gap: 6px; padding: 8px; }
+      .zoom-dock { flex-direction: row; right: 10px; bottom: 10px; }
+      .zoom-level { min-width: 42px; }
+    }
   </style>
 </head>
 
@@ -1013,7 +1020,7 @@
       <div class="divider-ornament" aria-hidden="true">✦</div>
 
       <label class="search-box">
-        <span aria-hidden="true">🔍</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7461cf" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
         <input id="search-input" type="search" placeholder="Cari materi…" autocomplete="off" aria-label="Cari materi">
       </label>
 
@@ -1056,15 +1063,13 @@
           <p id="material-description"></p>
         </div>
 
-        <div class="controls" role="group" aria-label="Kontrol gambar">
-          <button class="btn" id="btn-prev" aria-label="Materi sebelumnya">‹</button>
-          <button class="btn" id="btn-next" aria-label="Materi berikutnya">›</button>
-          <button class="btn" id="btn-zoom-out" aria-label="Perkecil">−</button>
-          <button class="btn" id="btn-zoom-in" aria-label="Perbesar">+</button>
-          <button class="btn btn-primary" id="btn-fit" aria-label="Pas ke materi">Pas</button>
-          <button class="btn" id="btn-show-all" aria-label="Lihat seluruh halaman">Semua</button>
-          <button class="btn is-active" id="btn-highlight" aria-pressed="true" aria-label="Sorot materi">Sorot</button>
-          <button class="btn" id="btn-fullscreen" aria-label="Layar penuh">⤢</button>
+        <div class="controls" role="group" aria-label="Kontrol materi">
+          <div class="seg">
+            <button class="btn icon" id="btn-prev" aria-label="Materi sebelumnya" title="Sebelumnya (PageUp)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button class="btn icon" id="btn-next" aria-label="Materi berikutnya" title="Berikutnya (PageDown)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+          </div>
+          <button class="btn text is-active" id="btn-highlight" aria-pressed="true" aria-label="Sorot materi" title="Sorot materi">Sorot</button>
+          <button class="btn icon" id="btn-fullscreen" aria-label="Layar penuh" title="Layar penuh"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 00-2 2v3M21 8V5a2 2 0 00-2-2h-3M3 16v3a2 2 0 002 2h3M16 21h3a2 2 0 002-2v-3"/></svg></button>
         </div>
       </div>
 
@@ -1077,23 +1082,22 @@
             <img id="page-image-2" src="img/halaman-2.webp" alt="Lembar tajwid halaman 2: Sifat huruf, Qalqalah, Nun dan Mim, Waqaf">
             <div class="tile-layer" id="tiles-page-1"></div>
             <div class="tile-layer" id="tiles-page-2"></div>
+            <div class="highlight" id="highlight"></div>
           </div>
-
-          <!-- Bingkai sorotan (di atas panggung, posisinya dihitung ulang tiap zoom) -->
-          <div class="highlight" id="highlight"></div>
 
           <!-- Blur di luar materi terpilih (di atas panggung, tidak ikut bergeser) -->
           <div class="blur-overlay" id="blur-overlay"></div>
         </div>
 
         <div class="page-badge" id="page-badge"></div>
-
-        <!-- Muncul saat gambar diperbesar; ketuk untuk kembali ke ukuran pas -->
-        <button class="exit-zoom" id="btn-exit-zoom" aria-label="Keluar zoom" tabindex="-1">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6"/><path d="M20 10h-6V4"/><path d="M14 10l7-7"/><path d="M3 21l7-7"/></svg>
-          <span>Keluar Zoom</span>
-        </button>
         <div class="hint" id="hint">Geser · cubit untuk zoom · ketuk 2×</div>
+        <div class="zoom-dock" role="group" aria-label="Zoom">
+          <button class="btn icon" id="btn-zoom-in" aria-label="Perbesar" title="Perbesar (+)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          <output class="zoom-level" id="zoom-level" aria-live="off">100%</output>
+          <button class="btn icon" id="btn-zoom-out" aria-label="Perkecil" title="Perkecil (−)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+          <button class="btn icon" id="btn-fit" aria-label="Pas ke materi" title="Pas ke materi (0)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V5a1 1 0 011-1h4M20 9V5a1 1 0 00-1-1h-4M4 15v4a1 1 0 001 1h4M20 15v4a1 1 0 01-1 1h-4"/></svg></button>
+          <button class="btn icon" id="btn-show-all" aria-label="Lihat seluruh halaman" title="Seluruh halaman"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
+        </div>
       </div>
     </main>
   </div>
@@ -1268,11 +1272,6 @@
     // Animasi halus
     const EASING = "cubic-bezier(.2,.8,.2,1)";
 
-    // Di atas zoom ini, efek blur dimatikan selama gambar bergerak (hemat GPU)
-    const HEAVY_SCALE = 2.5;
-    // Tombol "Keluar Zoom" muncul bila zoom lebih besar dari ukuran pas x angka ini
-    const EXIT_ZOOM_THRESHOLD = 1.15;
-
     // Tile: gambar dipotong-potong per 512 px supaya zoom tetap tajam
     // tanpa memuat seluruh gambar beresolusi tinggi sekaligus.
     const TILE_SIZE = 512;
@@ -1297,6 +1296,7 @@
 
     // Posisi & perbesaran gambar: x/y = geseran (px layar), scale = zoom
     const view = { x: 0, y: 0, scale: 1 };
+    let animatingUntil = 0;   // sampai kapan animasi zoom/geser masih berjalan
 
 
     /* ====================================================================
@@ -1322,7 +1322,6 @@
       blurOverlay:    $("#blur-overlay"),
       pageBadge:      $("#page-badge"),
       hint:           $("#hint"),
-      btnExitZoom:    $("#btn-exit-zoom"),
 
       // Indeks 1 dan 2 = halaman 1 dan 2 (indeks 0 sengaja kosong)
       pageImages:     [null, $("#page-image-1"), $("#page-image-2")],
@@ -1333,6 +1332,7 @@
       offlineStatus:  $("#offline-status"),
       btnPick:        $("#btn-pick"),
       toast:          $("#toast"),
+      zoomLevel:      $("#zoom-level"),
       splash:         $("#splash"),
     };
 
@@ -1444,53 +1444,15 @@
      * Menerapkan posisi & zoom (`view`) ke tampilan.
      * @param {boolean} animate - true = bergerak halus, false = langsung
      */
-    function applyView(animate, calm = false) {
-      clampView(); // batas langsung dijaga supaya perhitungan berikutnya akurat
-
-      // Banyak peristiwa (mis. pointermove) bisa datang dalam 1 frame.
-      // Tampilan cukup digambar SEKALI per frame.
-      queuedAnimate = queuedAnimate || animate;
-      queuedCalm = queuedCalm || calm;
-      if (renderQueued) return;
-
-      renderQueued = true;
-      requestAnimationFrame(() => {
-        renderQueued = false;
-        const useAnimation = queuedAnimate;
-        const useCalm = queuedCalm;
-        queuedAnimate = false;
-        queuedCalm = false;
-        renderView(useAnimation, useCalm);
-      });
-    }
-
-    let renderQueued = false;
-    let queuedAnimate = false;
-    let queuedCalm = false;
-    let lastRenderedScale = 1;
-    let settleTimer;
-
-    /** Benar-benar menggambar posisi & zoom ke layar. */
-    function renderView(animate, calm) {
+    function applyView(animate) {
       dom.stage.style.transition = animate ? `transform .6s ${EASING}` : "none";
+      clampView();
       dom.stage.style.transform = `translate(${view.x}px, ${view.y}px) scale(${view.scale})`;
 
-      // Matikan blur sementara bila: digeser/dicubit, zoom lewat tombol, atau zoom sudah besar
-      const heavy = !animate || calm || Math.max(view.scale, lastRenderedScale) > HEAVY_SCALE;
-      if (heavy) markMoving(animate ? 750 : 200);
-      lastRenderedScale = view.scale;
-
-      updateHighlightFrame(animate);
+      animatingUntil = animate ? performance.now() + 650 : 0;
+      updateZoomLabel();
       updateBlurOverlay(animate);
-      updateExitZoomButton();
       scheduleTileUpdate();
-    }
-
-    /** Menandai "sedang bergerak"; tanda dilepas sesudah gerakan berhenti. */
-    function markMoving(durationMs) {
-      dom.viewerFrame.classList.add("is-moving");
-      clearTimeout(settleTimer);
-      settleTimer = setTimeout(() => dom.viewerFrame.classList.remove("is-moving"), durationMs);
     }
 
     /**
@@ -1506,39 +1468,13 @@
       view.y = cy - (cy - view.y) * actualFactor;
       view.scale = newScale;
 
-      applyView(animate, true);
+      applyView(animate);
     }
 
     /** Zoom dengan pusat di tengah layar. */
     function zoomFromCenter(factor) {
       const [cx, cy] = getViewportCenter();
       zoomAt(factor, cx, cy, true);
-    }
-
-    /** Zoom yang membuat kotak `box` pas di layar (dengan ruang kosong `padding`). */
-    function getBoxFitScale(box, padding = FIT_PADDING) {
-      const [width, height] = getViewportSize();
-      return Math.min(
-        width / ((box[2] - box[0]) * (1 + 2 * padding)),
-        height / ((box[3] - box[1]) * (1 + 2 * padding))
-      );
-    }
-
-    /** Apakah gambar sedang diperbesar melebihi ukuran "Pas"? */
-    function isZoomedIn() {
-      return view.scale > getBoxFitScale(currentMaterial().box) * EXIT_ZOOM_THRESHOLD;
-    }
-
-    /** Menampilkan / menyembunyikan tombol Keluar Zoom. */
-    function updateExitZoomButton() {
-      const visible = isZoomedIn();
-      dom.btnExitZoom.classList.toggle("is-visible", visible);
-      dom.btnExitZoom.tabIndex = visible ? 0 : -1;
-    }
-
-    /** Keluar dari zoom: kembali ke ukuran pas materi yang sedang dipilih. */
-    function exitZoom() {
-      fitToBox(currentMaterial().box, true);
     }
 
     /**
@@ -1550,7 +1486,10 @@
       const boxWidth = box[2] - box[0];
       const boxHeight = box[3] - box[1];
 
-      view.scale = getBoxFitScale(box, padding);
+      view.scale = Math.min(
+        width / (boxWidth * (1 + 2 * padding)),
+        height / (boxHeight * (1 + 2 * padding))
+      );
       view.x = width / 2 - (box[0] + boxWidth / 2) * view.scale;
       view.y = height / 2 - (box[1] + boxHeight / 2) * view.scale;
 
@@ -1577,36 +1516,19 @@
        Materi terpilih diberi bingkai putih, dan area di luarnya di-blur.
        ==================================================================== */
 
-    /** Menyalakan / mematikan bingkai sorotan (posisinya diatur updateHighlightFrame). */
+    /** Menempatkan bingkai sorotan di sekeliling materi. */
     function updateHighlight(material) {
-      const visible = state.highlightEnabled && !isFullWidth(material.box);
+      const box = material.box;
+      const visible = state.highlightEnabled && !isFullWidth(box);
+
       dom.highlight.classList.toggle("is-visible", visible);
-    }
-
-    /**
-     * Menempatkan bingkai sorotan di layar, mengikuti posisi & zoom saat ini.
-     * Garis bingkai dibuat tipis-tetap (2,5–6 px) agar tetap rapi di zoom besar.
-     */
-    function updateHighlightFrame(animate) {
-      const box = currentMaterial().box;
-
-      const left   = view.x + (box[0] - HIGHLIGHT_PADDING) * view.scale;
-      const top    = view.y + (box[1] - HIGHLIGHT_PADDING) * view.scale;
-      const right  = view.x + (box[2] + HIGHLIGHT_PADDING) * view.scale;
-      const bottom = view.y + (box[3] + HIGHLIGHT_PADDING) * view.scale;
-      const radius = Math.max(1, Math.min(HIGHLIGHT_RADIUS * view.scale, (right - left) / 2, (bottom - top) / 2));
-      const borderWidth = Math.min(6, Math.max(2.5, 5 * view.scale));
-
-      const style = dom.highlight.style;
-      style.transition = animate
-        ? ["left", "top", "width", "height", "border-radius"].map((p) => `${p} .6s ${EASING}`).join(", ")
-        : "none";
-      style.left = `${left.toFixed(2)}px`;
-      style.top = `${top.toFixed(2)}px`;
-      style.width = `${(right - left).toFixed(2)}px`;
-      style.height = `${(bottom - top).toFixed(2)}px`;
-      style.borderRadius = `${radius.toFixed(2)}px`;
-      style.borderWidth = `${borderWidth.toFixed(2)}px`;
+      Object.assign(dom.highlight.style, {
+        left:   `${box[0] - HIGHLIGHT_PADDING}px`,
+        top:    `${box[1] - HIGHLIGHT_PADDING}px`,
+        width:  `${box[2] - box[0] + HIGHLIGHT_PADDING * 2}px`,
+        height: `${box[3] - box[1] + HIGHLIGHT_PADDING * 2}px`,
+        borderRadius: `${HIGHLIGHT_RADIUS}px`,
+      });
     }
 
     /**
@@ -1669,8 +1591,8 @@
       const overlay = dom.blurOverlay.style;
 
       overlay.transition = animate
-        ? `mask-size .6s ${EASING}, mask-position .6s ${EASING}, -webkit-mask-size .6s ${EASING}, -webkit-mask-position .6s ${EASING}, opacity .3s, background .25s`
-        : "opacity .3s, background .25s";
+        ? `mask-size .6s ${EASING}, mask-position .6s ${EASING}, -webkit-mask-size .6s ${EASING}, -webkit-mask-position .6s ${EASING}, opacity .3s`
+        : "opacity .3s";
 
       overlay.opacity = state.highlightEnabled && !isFullWidth(box) ? 1 : 0;
 
@@ -1721,82 +1643,139 @@
        9. INTERAKSI: SENTUH, MOUSE, KEYBOARD
        ==================================================================== */
 
-    // --- Geser (1 jari/mouse) dan cubit (2 jari) ---
-    const activePointers = new Map();  // id jari -> [x, y]
-    let lastPinchDistance = 0;
+    /* Satu pengendali gestur untuk mouse, sentuhan, dan pena.
+       Zoom cubit dihitung dari keadaan AWAL gestur (bukan tambahan kecil-kecil),
+       dan zoom bawaan browser dimatikan, jadi tidak ada zoom ganda. */
+    const pointers = new Map();   // id jari -> [x, y]
+    let gesture = null;
+    let tap = null;
+    let lastTap = { t: 0, x: 0, y: 0 };
+    let lastPointerType = "mouse";
 
-    function distanceBetween(a, b) {
-      return Math.hypot(a[0] - b[0], a[1] - b[1]);
+    const distanceBetween = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+    const viewportRect = () => dom.viewport.getBoundingClientRect();
+    const clampScale = (value) => Math.min(MAX_ZOOM, Math.max(getMinScale(), value));
+
+    /** Persentase zoom: 100% = seluruh halaman muat di layar. */
+    function updateZoomLabel() {
+      const [width, height] = getViewportSize();
+      const base = Math.min(width / IMAGE_WIDTH, height / IMAGE_HEIGHT) || 1;
+      dom.zoomLevel.textContent = `${Math.round(view.scale / base * 100)}%`;
+    }
+
+    /** Bila animasi masih jalan, ambil posisi yang sedang terlihat agar tidak melompat. */
+    function settleView() {
+      if (performance.now() >= animatingUntil) return;
+      const m = new DOMMatrixReadOnly(getComputedStyle(dom.stage).transform);
+      if (m.a > 0) { view.scale = m.a; view.x = m.e; view.y = m.f; }
+      applyView(false);
+    }
+
+    function startGesture() {
+      const points = [...pointers.values()];
+      if (points.length === 1) {
+        gesture = { mode: "pan", px: points[0][0], py: points[0][1] };
+      } else if (points.length >= 2) {
+        const [a, b] = points;
+        const rect = viewportRect();
+        gesture = {
+          mode: "pinch",
+          dist: distanceBetween(a, b) || 1,
+          scale: view.scale,
+          // titik gambar yang berada di antara dua jari
+          ix: ((a[0] + b[0]) / 2 - rect.left - view.x) / view.scale,
+          iy: ((a[1] + b[1]) / 2 - rect.top - view.y) / view.scale,
+        };
+      } else {
+        gesture = null;
+      }
+    }
+
+    function doubleZoom(clientX, clientY) {
+      const rect = viewportRect();
+      const alreadyZoomedIn = view.scale > getFitScale() * 1.9;
+      zoomAt(alreadyZoomedIn ? 0.5 : 2, clientX - rect.left, clientY - rect.top, true);
     }
 
     dom.viewport.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
       dom.viewport.setPointerCapture(event.pointerId);
-      activePointers.set(event.pointerId, [event.clientX, event.clientY]);
+      lastPointerType = event.pointerType;
+      settleView();
+      pointers.set(event.pointerId, [event.clientX, event.clientY]);
       dom.viewport.classList.add("is-dragging");
       hideHint();
-
-      if (activePointers.size === 2) {
-        const [a, b] = [...activePointers.values()];
-        lastPinchDistance = distanceBetween(a, b);
-      }
+      tap = pointers.size === 1 ? { t: performance.now(), x: event.clientX, y: event.clientY, moved: false } : null;
+      startGesture();
     });
 
     dom.viewport.addEventListener("pointermove", (event) => {
-      if (!activePointers.has(event.pointerId)) return;
+      if (!pointers.has(event.pointerId) || !gesture) return;
+      pointers.set(event.pointerId, [event.clientX, event.clientY]);
+      if (tap && Math.hypot(event.clientX - tap.x, event.clientY - tap.y) > 10) tap.moved = true;
 
-      const previous = activePointers.get(event.pointerId);
-      const rect = dom.viewport.getBoundingClientRect();
-
-      if (activePointers.size === 1) {
-        // Satu jari: geser gambar
-        view.x += event.clientX - previous[0];
-        view.y += event.clientY - previous[1];
-        activePointers.set(event.pointerId, [event.clientX, event.clientY]);
-        applyView(false);
-
-      } else if (activePointers.size === 2) {
-        // Dua jari: zoom sesuai perubahan jarak antar jari
-        activePointers.set(event.pointerId, [event.clientX, event.clientY]);
-        const [a, b] = [...activePointers.values()];
-        const distance = distanceBetween(a, b);
-
-        if (lastPinchDistance) {
-          const centerX = (a[0] + b[0]) / 2 - rect.left;
-          const centerY = (a[1] + b[1]) / 2 - rect.top;
-          zoomAt(distance / lastPinchDistance, centerX, centerY, false);
-        }
-        lastPinchDistance = distance;
+      if (gesture.mode === "pan") {
+        view.x += event.clientX - gesture.px;
+        view.y += event.clientY - gesture.py;
+        gesture.px = event.clientX;
+        gesture.py = event.clientY;
+      } else {
+        const [a, b] = [...pointers.values()];
+        const rect = viewportRect();
+        view.scale = clampScale(gesture.scale * distanceBetween(a, b) / gesture.dist);
+        view.x = (a[0] + b[0]) / 2 - rect.left - gesture.ix * view.scale;
+        view.y = (a[1] + b[1]) / 2 - rect.top - gesture.iy * view.scale;
       }
+      applyView(false);
     });
 
     function onPointerEnd(event) {
-      activePointers.delete(event.pointerId);
-      if (activePointers.size === 0) dom.viewport.classList.remove("is-dragging");
-      lastPinchDistance = 0;
+      if (!pointers.delete(event.pointerId)) return;
+      if (pointers.size === 0) dom.viewport.classList.remove("is-dragging");
+      startGesture();   // jari tersisa melanjutkan tanpa lompatan
+
+      // Ketuk 2× di layar sentuh (dblclick bawaan hanya dipakai untuk mouse)
+      if (event.type === "pointerup" && tap && !tap.moved && event.pointerType !== "mouse") {
+        const now = performance.now();
+        if (now - tap.t < 300) {
+          if (now - lastTap.t < 320 && Math.hypot(event.clientX - lastTap.x, event.clientY - lastTap.y) < 40) {
+            lastTap.t = 0;
+            doubleZoom(event.clientX, event.clientY);
+          } else {
+            lastTap = { t: now, x: event.clientX, y: event.clientY };
+          }
+        }
+      }
+      tap = null;
     }
     dom.viewport.addEventListener("pointerup", onPointerEnd);
     dom.viewport.addEventListener("pointercancel", onPointerEnd);
+    dom.viewport.addEventListener("dblclick", (event) => {
+      if (lastPointerType === "mouse") doubleZoom(event.clientX, event.clientY);
+    });
 
-    // --- Scroll mouse / trackpad: zoom ---
+    // --- Scroll mouse / cubit trackpad: digabung per frame agar halus ---
+    let wheelDelta = 0, wheelAt = [0, 0], wheelFrame = 0;
     dom.viewport.addEventListener("wheel", (event) => {
       event.preventDefault();
       hideHint();
-
-      const rect = dom.viewport.getBoundingClientRect();
-      const sensitivity = event.ctrlKey ? 0.01 : 0.0016; // cubit di trackpad lebih sensitif
-      const factor = Math.exp(-event.deltaY * sensitivity);
-
-      zoomAt(factor, event.clientX - rect.left, event.clientY - rect.top, false);
+      settleView();
+      const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? 400 : 1;
+      wheelDelta += -event.deltaY * unit * (event.ctrlKey ? 0.01 : 0.0016);
+      const rect = viewportRect();
+      wheelAt = [event.clientX - rect.left, event.clientY - rect.top];
+      if (wheelFrame) return;
+      wheelFrame = requestAnimationFrame(() => {
+        wheelFrame = 0;
+        zoomAt(Math.exp(Math.max(-0.7, Math.min(0.7, wheelDelta))), wheelAt[0], wheelAt[1], false);
+        wheelDelta = 0;
+      });
     }, { passive: false });
 
-    // --- Klik dua kali / ketuk 2×: zoom masuk, atau kembali bila sudah dekat ---
-    dom.viewport.addEventListener("dblclick", (event) => {
-      const rect = dom.viewport.getBoundingClientRect();
-      const alreadyZoomedIn = view.scale > getFitScale() * 1.9;
-      const factor = alreadyZoomedIn ? 0.5 : 2;
-
-      zoomAt(factor, event.clientX - rect.left, event.clientY - rect.top, true);
-    });
+    // Matikan zoom halaman bawaan browser (Ctrl+scroll, cubit di iOS Safari)
+    addEventListener("wheel", (event) => { if (event.ctrlKey) event.preventDefault(); }, { passive: false });
+    ["gesturestart", "gesturechange", "gestureend"].forEach((name) =>
+      document.addEventListener(name, (event) => event.preventDefault()));
 
     // --- Keyboard (saat viewer sedang fokus) ---
     dom.viewport.addEventListener("keydown", (event) => {
@@ -1836,22 +1815,6 @@
     $("#btn-zoom-out").onclick = () => zoomFromCenter(1 / BUTTON_ZOOM_STEP);
     $("#btn-fit").onclick      = () => fitToBox(currentMaterial().box);
     $("#btn-show-all").onclick = () => fitToBox([0, 0, IMAGE_WIDTH, IMAGE_HEIGHT]);
-    dom.btnExitZoom.onclick    = exitZoom;
-
-    // --- Cegah zoom SELURUH halaman ---
-    // Zoom hanya boleh terjadi di dalam area gambar (ditangani kode di atas).
-    // Safari iPhone/iPad memakai kejadian "gesture" untuk cubit:
-    ["gesturestart", "gesturechange", "gestureend"].forEach((name) => {
-      document.addEventListener(name, (event) => event.preventDefault(), { passive: false });
-    });
-    // Cubit dua jari di bagian mana pun (selain area gambar yang sudah punya zoom sendiri)
-    document.addEventListener("touchmove", (event) => {
-      if (event.touches.length > 1) event.preventDefault();
-    }, { passive: false });
-    // Ctrl + scroll / cubit trackpad di laptop
-    document.addEventListener("wheel", (event) => {
-      if (event.ctrlKey) event.preventDefault();
-    }, { passive: false });
 
     // Tombol sebelumnya/berikutnya (desktop & dock HP)
     $("#btn-prev").onclick = $("#btn-prev-mobile").onclick = () => goToMaterial(state.currentIndex - 1);
@@ -1866,7 +1829,6 @@
       button.setAttribute("aria-pressed", state.highlightEnabled);
 
       updateHighlight(currentMaterial());
-      updateHighlightFrame(false);
       updateBlurOverlay(false);
     };
 
@@ -1911,21 +1873,25 @@
     dom.btnPick.onclick = openDrawer;
     dom.backdrop.onclick = closeDrawer;
     addEventListener("keydown", (event) => {
-      if (event.key !== "Escape") return;
-      if (dom.sidebar.classList.contains("is-open")) closeDrawer();
-      else if (isZoomedIn()) exitZoom();   // Esc juga bisa dipakai untuk keluar zoom
+      if (event.key === "Escape") closeDrawer();
     });
 
     function hideHint() {
       dom.hint.style.opacity = 0;
     }
 
-    // Saat ukuran jendela berubah: sesuaikan ulang (ditunda agar tidak berulang-ulang)
-    let resizeTimer;
-    addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => fitToBox(currentMaterial().box, false), 150);
-    });
+    // Ukuran viewer berubah. Bilah alamat HP yang naik-turun hanya mengubah tinggi:
+    // zoom & posisi dipertahankan. Putar layar / ubah tata letak (lebar berubah): pas ulang.
+    let lastViewerSize = getViewportSize();
+    new ResizeObserver(() => {
+      const [width, height] = getViewportSize();
+      if (!width || !height) return;
+      const [oldWidth, oldHeight] = lastViewerSize;
+      lastViewerSize = [width, height];
+      if (Math.abs(width - oldWidth) > 40) { fitToBox(currentMaterial().box, false); return; }
+      view.y += (height - oldHeight) / 2;
+      applyView(false);
+    }).observe(dom.viewport);
 
     // Alamat berubah (#id): pindah ke materi tersebut
     addEventListener("hashchange", () => {
@@ -1941,13 +1907,6 @@
        ==================================================================== */
     const loadedTiles = new Map();   // kunci "halaman/level/x_y" -> data tile
     let tileUpdateScheduled = false;
-    let tileCleanupTimer = null;
-    let wantedTileKeys = [];         // tile yang dibutuhkan layar saat ini
-
-    const TILE_LOAD_MARGIN = 0.2;    // tile dimuat sampai 20% di luar layar
-    const TILE_KEEP_MARGIN = 0.5;    // tile baru dibuang bila lebih jauh dari 50% di luar layar
-    const TILE_CLEANUP_EVERY_MS = 350;
-    const TILE_FADE_MS = 300;        // lama tile muncul perlahan (sama dengan CSS .tile)
 
     /** Menjadwalkan pembaruan tile (maksimal sekali per frame). */
     function scheduleTileUpdate() {
@@ -1970,133 +1929,83 @@
       return 0; // gambar halaman biasa sudah cukup tajam
     }
 
-    /** Area layar dalam koordinat gambar: [kiri, atas, kanan, bawah], plus cadangan `margin`. */
-    function getVisibleRect(margin) {
-      const [width, height] = getViewportSize();
-      const marginX = (width / view.scale) * margin;
-      const marginY = (height / view.scale) * margin;
-      return [
-        -view.x / view.scale - marginX,
-        -view.y / view.scale - marginY,
-        (width - view.x) / view.scale + marginX,
-        (height - view.y) / view.scale + marginY,
-      ];
-    }
-
-    /** Memuat tile yang dibutuhkan layar. Pembuangan tile dilakukan terpisah (cleanupTiles). */
     function updateTiles() {
+      const [width, height] = getViewportSize();
       const level = getTileLevel();
       const page = state.currentPage;
-      wantedTileKeys = [];
 
-      if (level > 0) {
-        const [visibleLeft, visibleTop, visibleRight, visibleBottom] = getVisibleRect(TILE_LOAD_MARGIN);
-        const { factor, width: levelWidth, height: levelHeight } = ZOOM_LEVELS[level];
-        const tileSizeOnStage = TILE_SIZE / factor;
-        const layer = dom.tileLayers[page];
+      // Area yang terlihat di layar (dalam koordinat gambar) + cadangan 20%
+      const marginX = (width / view.scale) * 0.2;
+      const marginY = (height / view.scale) * 0.2;
+      const visibleLeft   = -view.x / view.scale - marginX;
+      const visibleTop    = -view.y / view.scale - marginY;
+      const visibleRight  = (width - view.x) / view.scale + marginX;
+      const visibleBottom = (height - view.y) / view.scale + marginY;
 
-        const firstColumn = Math.max(0, Math.floor(visibleLeft / tileSizeOnStage));
-        const lastColumn  = Math.min(Math.ceil(levelWidth / TILE_SIZE) - 1, Math.floor(visibleRight / tileSizeOnStage));
-        const firstRow    = Math.max(0, Math.floor(visibleTop / tileSizeOnStage));
-        const lastRow     = Math.min(Math.ceil(levelHeight / TILE_SIZE) - 1, Math.floor(visibleBottom / tileSizeOnStage));
-
-        for (let row = firstRow; row <= lastRow; row++) {
-          for (let column = firstColumn; column <= lastColumn; column++) {
-            const key = `${page}/${level}/${column}_${row}`;
-            wantedTileKeys.push(key);
-            if (loadedTiles.has(key)) continue;
-
-            // Ukuran tile (tile di tepi bisa lebih kecil dari 512)
-            const tileWidth  = Math.min(TILE_SIZE, levelWidth - column * TILE_SIZE);
-            const tileHeight = Math.min(TILE_SIZE, levelHeight - row * TILE_SIZE);
-            // Tile yang bukan di tepi dilebihkan 1px agar tidak ada garis tipis di sambungan
-            const extraX = column * TILE_SIZE + tileWidth < levelWidth ? 1 : 0;
-            const extraY = row * TILE_SIZE + tileHeight < levelHeight ? 1 : 0;
-
-            const rect = [
-              column * tileSizeOnStage,
-              row * tileSizeOnStage,
-              (column * TILE_SIZE + tileWidth) / factor,
-              (row * TILE_SIZE + tileHeight) / factor,
-            ];
-
-            const image = new Image();
-            image.className = "tile";
-            image.decoding = "async";
-            image.alt = "";
-            image.draggable = false;
-            Object.assign(image.style, {
-              left:   `${rect[0]}px`,
-              top:    `${rect[1]}px`,
-              width:  `${(tileWidth + extraX) / factor}px`,
-              height: `${(tileHeight + extraY) / factor}px`,
-              zIndex: level,
-            });
-
-            // `settled` = tile sudah selesai muncul sepenuhnya (atau gagal dimuat).
-            // Tile level lebih detail baru dibuang bila pengganti-nya sudah settled,
-            // sehingga tidak pernah ada momen "kosong" yang terlihat berkedip.
-            const tile = { element: image, page, level, rect, settled: false };
-            const settle = () => {
-              tile.settled = true;
-              scheduleTileCleanup();
-            };
-
-            image.onload = () => {
-              image.classList.add("is-loaded");
-              setTimeout(settle, TILE_FADE_MS);
-            };
-            image.onerror = () => {
-              // Gagal (mis. offline): lepas, dan boleh dicoba lagi nanti
-              image.remove();
-              settle();
-              setTimeout(() => {
-                if (loadedTiles.get(key) === tile) loadedTiles.delete(key);
-              }, 4000);
-            };
-
-            loadedTiles.set(key, tile);
-            image.src = `t/${page}/${level}/${column}_${row}.webp`;
-            layer.appendChild(image);
-          }
-        }
-      }
-
-      scheduleTileCleanup();
-    }
-
-    /** Menjadwalkan pembersihan tile (paling sering sekali per 350 ms). */
-    function scheduleTileCleanup() {
-      if (tileCleanupTimer) return;
-      tileCleanupTimer = setTimeout(() => {
-        tileCleanupTimer = null;
-        cleanupTiles();
-      }, TILE_CLEANUP_EVERY_MS);
-    }
-
-    /** Membuang tile yang tidak diperlukan lagi (hemat memori). */
-    function cleanupTiles() {
-      const level = getTileLevel();
-      const page = state.currentPage;
-      const [keepLeft, keepTop, keepRight, keepBottom] = getVisibleRect(TILE_KEEP_MARGIN);
-
-      // Semua tile yang dibutuhkan layar sudah tampil penuh?
-      const currentLevelReady = wantedTileKeys.every((key) => {
-        const tile = loadedTiles.get(key);
-        return tile && tile.settled;
-      });
-
+      // 1) Buang tile yang sudah tidak perlu
       for (const [key, tile] of loadedTiles) {
         const [tileLeft, tileTop, tileRight, tileBottom] = tile.rect;
         const isOtherPage   = tile.page !== page;
-        const isOffScreen   = tileRight < keepLeft || tileLeft > keepRight ||
-                              tileBottom < keepTop || tileTop > keepBottom;
-        // Tile terlalu detail (setelah zoom keluar) ditahan sampai penggantinya siap
-        const isTooDetailed = tile.level > level && currentLevelReady;
+        const isTooDetailed = tile.level > level;
+        const isOffScreen   = tileRight < visibleLeft || tileLeft > visibleRight ||
+                              tileBottom < visibleTop || tileTop > visibleBottom;
 
-        if (isOtherPage || isOffScreen || isTooDetailed) {
+        if (isOtherPage || isTooDetailed || isOffScreen) {
           tile.element.remove();
           loadedTiles.delete(key);
+        }
+      }
+
+      if (level === 0) return;
+
+      // 2) Hitung tile mana saja yang terlihat
+      const { factor, width: levelWidth, height: levelHeight } = ZOOM_LEVELS[level];
+      const tileSizeOnStage = TILE_SIZE / factor;
+      const layer = dom.tileLayers[page];
+
+      const firstColumn = Math.max(0, Math.floor(visibleLeft / tileSizeOnStage));
+      const lastColumn  = Math.min(Math.ceil(levelWidth / TILE_SIZE) - 1, Math.floor(visibleRight / tileSizeOnStage));
+      const firstRow    = Math.max(0, Math.floor(visibleTop / tileSizeOnStage));
+      const lastRow     = Math.min(Math.ceil(levelHeight / TILE_SIZE) - 1, Math.floor(visibleBottom / tileSizeOnStage));
+
+      // 3) Muat tile yang belum ada
+      for (let row = firstRow; row <= lastRow; row++) {
+        for (let column = firstColumn; column <= lastColumn; column++) {
+          const key = `${page}/${level}/${column}_${row}`;
+          if (loadedTiles.has(key)) continue;
+
+          // Ukuran tile (tile di tepi bisa lebih kecil dari 512)
+          const tileWidth  = Math.min(TILE_SIZE, levelWidth - column * TILE_SIZE);
+          const tileHeight = Math.min(TILE_SIZE, levelHeight - row * TILE_SIZE);
+          // Tile yang bukan di tepi dilebihkan 1px agar tidak ada garis tipis di sambungan
+          const extraX = column * TILE_SIZE + tileWidth < levelWidth ? 1 : 0;
+          const extraY = row * TILE_SIZE + tileHeight < levelHeight ? 1 : 0;
+
+          const rect = [
+            column * tileSizeOnStage,
+            row * tileSizeOnStage,
+            (column * TILE_SIZE + tileWidth) / factor,
+            (row * TILE_SIZE + tileHeight) / factor,
+          ];
+
+          const image = new Image();
+          image.className = "tile";
+          image.decoding = "async";
+          image.alt = "";
+          image.draggable = false;
+          Object.assign(image.style, {
+            left:   `${rect[0]}px`,
+            top:    `${rect[1]}px`,
+            width:  `${(tileWidth + extraX) / factor}px`,
+            height: `${(tileHeight + extraY) / factor}px`,
+            zIndex: level,
+          });
+          // Muncul perlahan setelah selesai diunduh
+          image.onload = () => image.classList.add("is-loaded");
+          image.src = `t/${page}/${level}/${column}_${row}.webp`;
+
+          layer.appendChild(image);
+          loadedTiles.set(key, { element: image, page, level, rect });
         }
       }
     }
