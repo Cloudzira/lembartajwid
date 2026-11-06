@@ -14,7 +14,7 @@
 
 // Naikkan angka versi SHELL bila index.html / file inti berubah,
 // supaya pengguna otomatis mendapat versi baru.
-const SHELL_CACHE = "tajwid-shell-v4";
+const SHELL_CACHE = "tajwid-shell-v5";
 
 // Nama TILE_CACHE harus sama dengan OFFLINE_CACHE_NAME di index.html.
 const TILE_CACHE = "tajwid-tiles-v3";

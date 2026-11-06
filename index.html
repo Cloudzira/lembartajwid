@@ -14,7 +14,7 @@
        ===================================================================== -->
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#8b7bdc">
 
   <title>Lembar Tajwid Tartili — Panduan Hukum Tajwid</title>
@@ -81,6 +81,10 @@
     html,
     body {
       height: 100%;
+      /* Halaman tidak boleh ikut ter-zoom oleh cubit / dobel-ketuk.
+         Zoom hanya terjadi di dalam area gambar (.viewport). */
+      touch-action: pan-x pan-y;
+      overscroll-behavior: none;
     }
 
     body {
@@ -578,15 +582,17 @@
     }
 
     /* --- Bingkai sorotan di sekeliling materi terpilih ---
-       Radius sudut diatur dari JavaScript (HIGHLIGHT_RADIUS). */
+       Posisi, ukuran, tebal garis, dan radius sudut dihitung dari JavaScript
+       (updateHighlightFrame). Bingkai ini TIDAK ikut diperbesar bersama panggung,
+       supaya bayangannya tidak ikut membesar (itu berat bagi GPU dan bisa
+       membuat layar berkedip / hitam saat zoom). */
     .highlight {
       position: absolute;
-      z-index: 6;
+      z-index: 1;
       display: none;
       border: 5px solid rgba(255, 255, 255, .92);
-      box-shadow: 0 0 0 3px rgba(116, 97, 207, .55), 0 0 36px rgba(116, 97, 207, .45);
+      box-shadow: 0 0 0 3px rgba(116, 97, 207, .55), 0 0 22px rgba(116, 97, 207, .45);
       pointer-events: none;
-      transition: .4s;
     }
 
     .highlight.is-visible {
@@ -611,6 +617,55 @@
       mask-repeat: no-repeat;
       -webkit-mask-composite: source-out, source-over, source-over, source-over, source-over, source-over, source-over;
       mask-composite: subtract, add, add, add, add, add, add;
+    }
+
+    /* --- Saat gambar sedang digeser / di-zoom ---
+       Blur latar (backdrop-filter) sangat berat bagi GPU bila dihitung ulang
+       di setiap frame, dan itu penyebab layar berkedip / hitam di HP.
+       Jadi selama bergerak, blur dimatikan dan diganti warna tipis yang mirip.
+       Begitu gerakan berhenti, blur dinyalakan lagi. */
+    .viewer-frame.is-moving .blur-overlay {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .62), rgba(205, 195, 255, .5) 55%, rgba(255, 255, 255, .58));
+    }
+
+    /* --- Tombol Keluar Zoom (muncul hanya saat gambar diperbesar) --- */
+    .exit-zoom {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 40px;
+      padding: 0 16px 0 12px;
+      border-radius: 999px;
+      font-size: var(--font-size-small);
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(135deg, #8f7fe6, #6d5bcb);
+      box-shadow: 0 6px 16px rgba(80, 60, 180, .38);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity .2s, transform .2s, visibility .2s;
+    }
+
+    .exit-zoom.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+
+    .exit-zoom:active {
+      transform: scale(.95);
+    }
+
+    .exit-zoom svg {
+      width: 16px;
+      height: 16px;
     }
 
     /* --- Petunjuk & penanda halaman --- */
@@ -1022,14 +1077,22 @@
             <img id="page-image-2" src="img/halaman-2.webp" alt="Lembar tajwid halaman 2: Sifat huruf, Qalqalah, Nun dan Mim, Waqaf">
             <div class="tile-layer" id="tiles-page-1"></div>
             <div class="tile-layer" id="tiles-page-2"></div>
-            <div class="highlight" id="highlight"></div>
           </div>
+
+          <!-- Bingkai sorotan (di atas panggung, posisinya dihitung ulang tiap zoom) -->
+          <div class="highlight" id="highlight"></div>
 
           <!-- Blur di luar materi terpilih (di atas panggung, tidak ikut bergeser) -->
           <div class="blur-overlay" id="blur-overlay"></div>
         </div>
 
         <div class="page-badge" id="page-badge"></div>
+
+        <!-- Muncul saat gambar diperbesar; ketuk untuk kembali ke ukuran pas -->
+        <button class="exit-zoom" id="btn-exit-zoom" aria-label="Keluar zoom" tabindex="-1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6"/><path d="M20 10h-6V4"/><path d="M14 10l7-7"/><path d="M3 21l7-7"/></svg>
+          <span>Keluar Zoom</span>
+        </button>
         <div class="hint" id="hint">Geser · cubit untuk zoom · ketuk 2×</div>
       </div>
     </main>
@@ -1205,6 +1268,11 @@
     // Animasi halus
     const EASING = "cubic-bezier(.2,.8,.2,1)";
 
+    // Di atas zoom ini, efek blur dimatikan selama gambar bergerak (hemat GPU)
+    const HEAVY_SCALE = 2.5;
+    // Tombol "Keluar Zoom" muncul bila zoom lebih besar dari ukuran pas x angka ini
+    const EXIT_ZOOM_THRESHOLD = 1.15;
+
     // Tile: gambar dipotong-potong per 512 px supaya zoom tetap tajam
     // tanpa memuat seluruh gambar beresolusi tinggi sekaligus.
     const TILE_SIZE = 512;
@@ -1254,6 +1322,7 @@
       blurOverlay:    $("#blur-overlay"),
       pageBadge:      $("#page-badge"),
       hint:           $("#hint"),
+      btnExitZoom:    $("#btn-exit-zoom"),
 
       // Indeks 1 dan 2 = halaman 1 dan 2 (indeks 0 sengaja kosong)
       pageImages:     [null, $("#page-image-1"), $("#page-image-2")],
@@ -1375,13 +1444,53 @@
      * Menerapkan posisi & zoom (`view`) ke tampilan.
      * @param {boolean} animate - true = bergerak halus, false = langsung
      */
-    function applyView(animate) {
+    function applyView(animate, calm = false) {
+      clampView(); // batas langsung dijaga supaya perhitungan berikutnya akurat
+
+      // Banyak peristiwa (mis. pointermove) bisa datang dalam 1 frame.
+      // Tampilan cukup digambar SEKALI per frame.
+      queuedAnimate = queuedAnimate || animate;
+      queuedCalm = queuedCalm || calm;
+      if (renderQueued) return;
+
+      renderQueued = true;
+      requestAnimationFrame(() => {
+        renderQueued = false;
+        const useAnimation = queuedAnimate;
+        const useCalm = queuedCalm;
+        queuedAnimate = false;
+        queuedCalm = false;
+        renderView(useAnimation, useCalm);
+      });
+    }
+
+    let renderQueued = false;
+    let queuedAnimate = false;
+    let queuedCalm = false;
+    let lastRenderedScale = 1;
+    let settleTimer;
+
+    /** Benar-benar menggambar posisi & zoom ke layar. */
+    function renderView(animate, calm) {
       dom.stage.style.transition = animate ? `transform .6s ${EASING}` : "none";
-      clampView();
       dom.stage.style.transform = `translate(${view.x}px, ${view.y}px) scale(${view.scale})`;
 
+      // Matikan blur sementara bila: digeser/dicubit, zoom lewat tombol, atau zoom sudah besar
+      const heavy = !animate || calm || Math.max(view.scale, lastRenderedScale) > HEAVY_SCALE;
+      if (heavy) markMoving(animate ? 750 : 200);
+      lastRenderedScale = view.scale;
+
+      updateHighlightFrame(animate);
       updateBlurOverlay(animate);
+      updateExitZoomButton();
       scheduleTileUpdate();
+    }
+
+    /** Menandai "sedang bergerak"; tanda dilepas sesudah gerakan berhenti. */
+    function markMoving(durationMs) {
+      dom.viewerFrame.classList.add("is-moving");
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(() => dom.viewerFrame.classList.remove("is-moving"), durationMs);
     }
 
     /**
@@ -1397,13 +1506,39 @@
       view.y = cy - (cy - view.y) * actualFactor;
       view.scale = newScale;
 
-      applyView(animate);
+      applyView(animate, true);
     }
 
     /** Zoom dengan pusat di tengah layar. */
     function zoomFromCenter(factor) {
       const [cx, cy] = getViewportCenter();
       zoomAt(factor, cx, cy, true);
+    }
+
+    /** Zoom yang membuat kotak `box` pas di layar (dengan ruang kosong `padding`). */
+    function getBoxFitScale(box, padding = FIT_PADDING) {
+      const [width, height] = getViewportSize();
+      return Math.min(
+        width / ((box[2] - box[0]) * (1 + 2 * padding)),
+        height / ((box[3] - box[1]) * (1 + 2 * padding))
+      );
+    }
+
+    /** Apakah gambar sedang diperbesar melebihi ukuran "Pas"? */
+    function isZoomedIn() {
+      return view.scale > getBoxFitScale(currentMaterial().box) * EXIT_ZOOM_THRESHOLD;
+    }
+
+    /** Menampilkan / menyembunyikan tombol Keluar Zoom. */
+    function updateExitZoomButton() {
+      const visible = isZoomedIn();
+      dom.btnExitZoom.classList.toggle("is-visible", visible);
+      dom.btnExitZoom.tabIndex = visible ? 0 : -1;
+    }
+
+    /** Keluar dari zoom: kembali ke ukuran pas materi yang sedang dipilih. */
+    function exitZoom() {
+      fitToBox(currentMaterial().box, true);
     }
 
     /**
@@ -1415,10 +1550,7 @@
       const boxWidth = box[2] - box[0];
       const boxHeight = box[3] - box[1];
 
-      view.scale = Math.min(
-        width / (boxWidth * (1 + 2 * padding)),
-        height / (boxHeight * (1 + 2 * padding))
-      );
+      view.scale = getBoxFitScale(box, padding);
       view.x = width / 2 - (box[0] + boxWidth / 2) * view.scale;
       view.y = height / 2 - (box[1] + boxHeight / 2) * view.scale;
 
@@ -1445,19 +1577,36 @@
        Materi terpilih diberi bingkai putih, dan area di luarnya di-blur.
        ==================================================================== */
 
-    /** Menempatkan bingkai sorotan di sekeliling materi. */
+    /** Menyalakan / mematikan bingkai sorotan (posisinya diatur updateHighlightFrame). */
     function updateHighlight(material) {
-      const box = material.box;
-      const visible = state.highlightEnabled && !isFullWidth(box);
-
+      const visible = state.highlightEnabled && !isFullWidth(material.box);
       dom.highlight.classList.toggle("is-visible", visible);
-      Object.assign(dom.highlight.style, {
-        left:   `${box[0] - HIGHLIGHT_PADDING}px`,
-        top:    `${box[1] - HIGHLIGHT_PADDING}px`,
-        width:  `${box[2] - box[0] + HIGHLIGHT_PADDING * 2}px`,
-        height: `${box[3] - box[1] + HIGHLIGHT_PADDING * 2}px`,
-        borderRadius: `${HIGHLIGHT_RADIUS}px`,
-      });
+    }
+
+    /**
+     * Menempatkan bingkai sorotan di layar, mengikuti posisi & zoom saat ini.
+     * Garis bingkai dibuat tipis-tetap (2,5–6 px) agar tetap rapi di zoom besar.
+     */
+    function updateHighlightFrame(animate) {
+      const box = currentMaterial().box;
+
+      const left   = view.x + (box[0] - HIGHLIGHT_PADDING) * view.scale;
+      const top    = view.y + (box[1] - HIGHLIGHT_PADDING) * view.scale;
+      const right  = view.x + (box[2] + HIGHLIGHT_PADDING) * view.scale;
+      const bottom = view.y + (box[3] + HIGHLIGHT_PADDING) * view.scale;
+      const radius = Math.max(1, Math.min(HIGHLIGHT_RADIUS * view.scale, (right - left) / 2, (bottom - top) / 2));
+      const borderWidth = Math.min(6, Math.max(2.5, 5 * view.scale));
+
+      const style = dom.highlight.style;
+      style.transition = animate
+        ? ["left", "top", "width", "height", "border-radius"].map((p) => `${p} .6s ${EASING}`).join(", ")
+        : "none";
+      style.left = `${left.toFixed(2)}px`;
+      style.top = `${top.toFixed(2)}px`;
+      style.width = `${(right - left).toFixed(2)}px`;
+      style.height = `${(bottom - top).toFixed(2)}px`;
+      style.borderRadius = `${radius.toFixed(2)}px`;
+      style.borderWidth = `${borderWidth.toFixed(2)}px`;
     }
 
     /**
@@ -1520,8 +1669,8 @@
       const overlay = dom.blurOverlay.style;
 
       overlay.transition = animate
-        ? `mask-size .6s ${EASING}, mask-position .6s ${EASING}, -webkit-mask-size .6s ${EASING}, -webkit-mask-position .6s ${EASING}, opacity .3s`
-        : "opacity .3s";
+        ? `mask-size .6s ${EASING}, mask-position .6s ${EASING}, -webkit-mask-size .6s ${EASING}, -webkit-mask-position .6s ${EASING}, opacity .3s, background .25s`
+        : "opacity .3s, background .25s";
 
       overlay.opacity = state.highlightEnabled && !isFullWidth(box) ? 1 : 0;
 
@@ -1687,6 +1836,22 @@
     $("#btn-zoom-out").onclick = () => zoomFromCenter(1 / BUTTON_ZOOM_STEP);
     $("#btn-fit").onclick      = () => fitToBox(currentMaterial().box);
     $("#btn-show-all").onclick = () => fitToBox([0, 0, IMAGE_WIDTH, IMAGE_HEIGHT]);
+    dom.btnExitZoom.onclick    = exitZoom;
+
+    // --- Cegah zoom SELURUH halaman ---
+    // Zoom hanya boleh terjadi di dalam area gambar (ditangani kode di atas).
+    // Safari iPhone/iPad memakai kejadian "gesture" untuk cubit:
+    ["gesturestart", "gesturechange", "gestureend"].forEach((name) => {
+      document.addEventListener(name, (event) => event.preventDefault(), { passive: false });
+    });
+    // Cubit dua jari di bagian mana pun (selain area gambar yang sudah punya zoom sendiri)
+    document.addEventListener("touchmove", (event) => {
+      if (event.touches.length > 1) event.preventDefault();
+    }, { passive: false });
+    // Ctrl + scroll / cubit trackpad di laptop
+    document.addEventListener("wheel", (event) => {
+      if (event.ctrlKey) event.preventDefault();
+    }, { passive: false });
 
     // Tombol sebelumnya/berikutnya (desktop & dock HP)
     $("#btn-prev").onclick = $("#btn-prev-mobile").onclick = () => goToMaterial(state.currentIndex - 1);
@@ -1701,6 +1866,7 @@
       button.setAttribute("aria-pressed", state.highlightEnabled);
 
       updateHighlight(currentMaterial());
+      updateHighlightFrame(false);
       updateBlurOverlay(false);
     };
 
@@ -1745,7 +1911,9 @@
     dom.btnPick.onclick = openDrawer;
     dom.backdrop.onclick = closeDrawer;
     addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeDrawer();
+      if (event.key !== "Escape") return;
+      if (dom.sidebar.classList.contains("is-open")) closeDrawer();
+      else if (isZoomedIn()) exitZoom();   // Esc juga bisa dipakai untuk keluar zoom
     });
 
     function hideHint() {
@@ -1773,6 +1941,13 @@
        ==================================================================== */
     const loadedTiles = new Map();   // kunci "halaman/level/x_y" -> data tile
     let tileUpdateScheduled = false;
+    let tileCleanupTimer = null;
+    let wantedTileKeys = [];         // tile yang dibutuhkan layar saat ini
+
+    const TILE_LOAD_MARGIN = 0.2;    // tile dimuat sampai 20% di luar layar
+    const TILE_KEEP_MARGIN = 0.5;    // tile baru dibuang bila lebih jauh dari 50% di luar layar
+    const TILE_CLEANUP_EVERY_MS = 350;
+    const TILE_FADE_MS = 300;        // lama tile muncul perlahan (sama dengan CSS .tile)
 
     /** Menjadwalkan pembaruan tile (maksimal sekali per frame). */
     function scheduleTileUpdate() {
@@ -1795,83 +1970,133 @@
       return 0; // gambar halaman biasa sudah cukup tajam
     }
 
-    function updateTiles() {
+    /** Area layar dalam koordinat gambar: [kiri, atas, kanan, bawah], plus cadangan `margin`. */
+    function getVisibleRect(margin) {
       const [width, height] = getViewportSize();
+      const marginX = (width / view.scale) * margin;
+      const marginY = (height / view.scale) * margin;
+      return [
+        -view.x / view.scale - marginX,
+        -view.y / view.scale - marginY,
+        (width - view.x) / view.scale + marginX,
+        (height - view.y) / view.scale + marginY,
+      ];
+    }
+
+    /** Memuat tile yang dibutuhkan layar. Pembuangan tile dilakukan terpisah (cleanupTiles). */
+    function updateTiles() {
       const level = getTileLevel();
       const page = state.currentPage;
+      wantedTileKeys = [];
 
-      // Area yang terlihat di layar (dalam koordinat gambar) + cadangan 20%
-      const marginX = (width / view.scale) * 0.2;
-      const marginY = (height / view.scale) * 0.2;
-      const visibleLeft   = -view.x / view.scale - marginX;
-      const visibleTop    = -view.y / view.scale - marginY;
-      const visibleRight  = (width - view.x) / view.scale + marginX;
-      const visibleBottom = (height - view.y) / view.scale + marginY;
+      if (level > 0) {
+        const [visibleLeft, visibleTop, visibleRight, visibleBottom] = getVisibleRect(TILE_LOAD_MARGIN);
+        const { factor, width: levelWidth, height: levelHeight } = ZOOM_LEVELS[level];
+        const tileSizeOnStage = TILE_SIZE / factor;
+        const layer = dom.tileLayers[page];
 
-      // 1) Buang tile yang sudah tidak perlu
-      for (const [key, tile] of loadedTiles) {
-        const [tileLeft, tileTop, tileRight, tileBottom] = tile.rect;
-        const isOtherPage   = tile.page !== page;
-        const isTooDetailed = tile.level > level;
-        const isOffScreen   = tileRight < visibleLeft || tileLeft > visibleRight ||
-                              tileBottom < visibleTop || tileTop > visibleBottom;
+        const firstColumn = Math.max(0, Math.floor(visibleLeft / tileSizeOnStage));
+        const lastColumn  = Math.min(Math.ceil(levelWidth / TILE_SIZE) - 1, Math.floor(visibleRight / tileSizeOnStage));
+        const firstRow    = Math.max(0, Math.floor(visibleTop / tileSizeOnStage));
+        const lastRow     = Math.min(Math.ceil(levelHeight / TILE_SIZE) - 1, Math.floor(visibleBottom / tileSizeOnStage));
 
-        if (isOtherPage || isTooDetailed || isOffScreen) {
-          tile.element.remove();
-          loadedTiles.delete(key);
+        for (let row = firstRow; row <= lastRow; row++) {
+          for (let column = firstColumn; column <= lastColumn; column++) {
+            const key = `${page}/${level}/${column}_${row}`;
+            wantedTileKeys.push(key);
+            if (loadedTiles.has(key)) continue;
+
+            // Ukuran tile (tile di tepi bisa lebih kecil dari 512)
+            const tileWidth  = Math.min(TILE_SIZE, levelWidth - column * TILE_SIZE);
+            const tileHeight = Math.min(TILE_SIZE, levelHeight - row * TILE_SIZE);
+            // Tile yang bukan di tepi dilebihkan 1px agar tidak ada garis tipis di sambungan
+            const extraX = column * TILE_SIZE + tileWidth < levelWidth ? 1 : 0;
+            const extraY = row * TILE_SIZE + tileHeight < levelHeight ? 1 : 0;
+
+            const rect = [
+              column * tileSizeOnStage,
+              row * tileSizeOnStage,
+              (column * TILE_SIZE + tileWidth) / factor,
+              (row * TILE_SIZE + tileHeight) / factor,
+            ];
+
+            const image = new Image();
+            image.className = "tile";
+            image.decoding = "async";
+            image.alt = "";
+            image.draggable = false;
+            Object.assign(image.style, {
+              left:   `${rect[0]}px`,
+              top:    `${rect[1]}px`,
+              width:  `${(tileWidth + extraX) / factor}px`,
+              height: `${(tileHeight + extraY) / factor}px`,
+              zIndex: level,
+            });
+
+            // `settled` = tile sudah selesai muncul sepenuhnya (atau gagal dimuat).
+            // Tile level lebih detail baru dibuang bila pengganti-nya sudah settled,
+            // sehingga tidak pernah ada momen "kosong" yang terlihat berkedip.
+            const tile = { element: image, page, level, rect, settled: false };
+            const settle = () => {
+              tile.settled = true;
+              scheduleTileCleanup();
+            };
+
+            image.onload = () => {
+              image.classList.add("is-loaded");
+              setTimeout(settle, TILE_FADE_MS);
+            };
+            image.onerror = () => {
+              // Gagal (mis. offline): lepas, dan boleh dicoba lagi nanti
+              image.remove();
+              settle();
+              setTimeout(() => {
+                if (loadedTiles.get(key) === tile) loadedTiles.delete(key);
+              }, 4000);
+            };
+
+            loadedTiles.set(key, tile);
+            image.src = `t/${page}/${level}/${column}_${row}.webp`;
+            layer.appendChild(image);
+          }
         }
       }
 
-      if (level === 0) return;
+      scheduleTileCleanup();
+    }
 
-      // 2) Hitung tile mana saja yang terlihat
-      const { factor, width: levelWidth, height: levelHeight } = ZOOM_LEVELS[level];
-      const tileSizeOnStage = TILE_SIZE / factor;
-      const layer = dom.tileLayers[page];
+    /** Menjadwalkan pembersihan tile (paling sering sekali per 350 ms). */
+    function scheduleTileCleanup() {
+      if (tileCleanupTimer) return;
+      tileCleanupTimer = setTimeout(() => {
+        tileCleanupTimer = null;
+        cleanupTiles();
+      }, TILE_CLEANUP_EVERY_MS);
+    }
 
-      const firstColumn = Math.max(0, Math.floor(visibleLeft / tileSizeOnStage));
-      const lastColumn  = Math.min(Math.ceil(levelWidth / TILE_SIZE) - 1, Math.floor(visibleRight / tileSizeOnStage));
-      const firstRow    = Math.max(0, Math.floor(visibleTop / tileSizeOnStage));
-      const lastRow     = Math.min(Math.ceil(levelHeight / TILE_SIZE) - 1, Math.floor(visibleBottom / tileSizeOnStage));
+    /** Membuang tile yang tidak diperlukan lagi (hemat memori). */
+    function cleanupTiles() {
+      const level = getTileLevel();
+      const page = state.currentPage;
+      const [keepLeft, keepTop, keepRight, keepBottom] = getVisibleRect(TILE_KEEP_MARGIN);
 
-      // 3) Muat tile yang belum ada
-      for (let row = firstRow; row <= lastRow; row++) {
-        for (let column = firstColumn; column <= lastColumn; column++) {
-          const key = `${page}/${level}/${column}_${row}`;
-          if (loadedTiles.has(key)) continue;
+      // Semua tile yang dibutuhkan layar sudah tampil penuh?
+      const currentLevelReady = wantedTileKeys.every((key) => {
+        const tile = loadedTiles.get(key);
+        return tile && tile.settled;
+      });
 
-          // Ukuran tile (tile di tepi bisa lebih kecil dari 512)
-          const tileWidth  = Math.min(TILE_SIZE, levelWidth - column * TILE_SIZE);
-          const tileHeight = Math.min(TILE_SIZE, levelHeight - row * TILE_SIZE);
-          // Tile yang bukan di tepi dilebihkan 1px agar tidak ada garis tipis di sambungan
-          const extraX = column * TILE_SIZE + tileWidth < levelWidth ? 1 : 0;
-          const extraY = row * TILE_SIZE + tileHeight < levelHeight ? 1 : 0;
+      for (const [key, tile] of loadedTiles) {
+        const [tileLeft, tileTop, tileRight, tileBottom] = tile.rect;
+        const isOtherPage   = tile.page !== page;
+        const isOffScreen   = tileRight < keepLeft || tileLeft > keepRight ||
+                              tileBottom < keepTop || tileTop > keepBottom;
+        // Tile terlalu detail (setelah zoom keluar) ditahan sampai penggantinya siap
+        const isTooDetailed = tile.level > level && currentLevelReady;
 
-          const rect = [
-            column * tileSizeOnStage,
-            row * tileSizeOnStage,
-            (column * TILE_SIZE + tileWidth) / factor,
-            (row * TILE_SIZE + tileHeight) / factor,
-          ];
-
-          const image = new Image();
-          image.className = "tile";
-          image.decoding = "async";
-          image.alt = "";
-          image.draggable = false;
-          Object.assign(image.style, {
-            left:   `${rect[0]}px`,
-            top:    `${rect[1]}px`,
-            width:  `${(tileWidth + extraX) / factor}px`,
-            height: `${(tileHeight + extraY) / factor}px`,
-            zIndex: level,
-          });
-          // Muncul perlahan setelah selesai diunduh
-          image.onload = () => image.classList.add("is-loaded");
-          image.src = `t/${page}/${level}/${column}_${row}.webp`;
-
-          layer.appendChild(image);
-          loadedTiles.set(key, { element: image, page, level, rect });
+        if (isOtherPage || isOffScreen || isTooDetailed) {
+          tile.element.remove();
+          loadedTiles.delete(key);
         }
       }
     }
