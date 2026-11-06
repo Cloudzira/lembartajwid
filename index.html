@@ -15,7 +15,7 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#7461cf">
+  <meta name="theme-color" content="#8b7bdc">
 
   <title>Lembar Tajwid Tartili — Panduan Hukum Tajwid</title>
   <meta name="description" content="Panduan hukum tajwid bergambar: Mad, Makhraj, Sifat Huruf, Qalqalah, Nun &amp; Mim, Waqaf.">
@@ -934,68 +934,7 @@
         grid-template-columns: 1fr;
       }
     }
-
-    /* ======================================================================
-       12. PENYEMPURNAAN TAMPILAN & ANTI ZOOM GANDA
-       ====================================================================== */
-    html, body { overscroll-behavior: none; touch-action: manipulation; -webkit-text-size-adjust: 100%; }
-    body {
-      height: 100dvh;
-      padding: max(18px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
-    }
-    .app { height: 100%; }
-    .viewer-frame, .viewport { touch-action: none; -webkit-tap-highlight-color: transparent; }
-    .stage { will-change: transform; }
-
-    .btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-    .btn.icon { display: grid; place-items: center; width: 44px; padding: 0; }
-    .toolbar .controls { align-items: center; gap: 8px; flex-wrap: nowrap; }
-    .seg { display: flex; padding: 3px; border-radius: 17px; background: rgba(255,255,255,.65); box-shadow: 0 4px 10px rgba(110,90,200,.12); }
-    .seg .btn { box-shadow: none; background: transparent; }
-    .seg .btn:hover { background: #fff; }
-    .btn:focus-visible { outline-offset: 1px; }
-
-    /* Panel zoom melayang di dalam viewer: satu tempat saja untuk semua kontrol zoom */
-    .zoom-dock {
-      position: absolute; right: 12px; bottom: 14px; z-index: 8;
-      display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px;
-      border-radius: 22px; background: rgba(255,255,255,.9);
-      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
-      box-shadow: 0 10px 28px rgba(80,60,180,.28), 0 0 0 1px rgba(116,97,207,.12);
-    }
-    .zoom-dock .btn { width: 42px; min-width: 0; height: 42px; box-shadow: none; background: transparent; border-radius: 14px; }
-    .zoom-dock .btn:hover { background: #f1edff; }
-    .zoom-level { min-width: 46px; padding: 2px 0; text-align: center; font-size: 11.5px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--color-primary); }
-    .hint { left: 14px; max-width: calc(100% - 96px); transform: none; }
-    .page-badge { top: 12px; right: 12px; font-size: 11.5px; }
-
-    @media (min-width: 901px) {
-      .app { grid-template-columns: clamp(264px, 24vw, 316px) 1fr; }
-    }
-
-    @media (max-width: 900px) {
-      body { padding: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) 0 max(8px, env(safe-area-inset-left)); }
-      .app { height: 100%; }
-      .content { height: calc(100% - 72px - env(safe-area-inset-bottom)); }
-      .toolbar { flex-wrap: nowrap; align-items: center; }
-      .title-block { min-width: 0; }
-      .title-block h1 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-      .toolbar .controls { width: auto; margin-left: auto; flex-shrink: 0; }
-      .toolbar .controls .btn { flex: none; height: 42px; padding: 0; font-size: 13px; }
-      .toolbar .controls .btn.icon { width: 42px; }
-      .toolbar .controls .btn.text { width: auto; padding: 0 14px; }
-      .seg { display: none; }
-      .zoom-dock { right: 8px; bottom: 10px; }
-    }
-
-    /* HP posisi mendatar / layar pendek */
-    @media (max-height: 520px) {
-      .eyebrow, .title-block p { display: none; }
-      .title-block h1 { font-size: 16px; }
-      .content { gap: 6px; padding: 8px; }
-      .zoom-dock { flex-direction: row; right: 10px; bottom: 10px; }
-      .zoom-level { min-width: 42px; }
-    }
+    html, body { overscroll-behavior: none; touch-action: manipulation; }
   </style>
 </head>
 
@@ -1020,7 +959,7 @@
       <div class="divider-ornament" aria-hidden="true">✦</div>
 
       <label class="search-box">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7461cf" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <span aria-hidden="true">🔍</span>
         <input id="search-input" type="search" placeholder="Cari materi…" autocomplete="off" aria-label="Cari materi">
       </label>
 
@@ -1063,13 +1002,15 @@
           <p id="material-description"></p>
         </div>
 
-        <div class="controls" role="group" aria-label="Kontrol materi">
-          <div class="seg">
-            <button class="btn icon" id="btn-prev" aria-label="Materi sebelumnya" title="Sebelumnya (PageUp)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
-            <button class="btn icon" id="btn-next" aria-label="Materi berikutnya" title="Berikutnya (PageDown)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
-          </div>
-          <button class="btn text is-active" id="btn-highlight" aria-pressed="true" aria-label="Sorot materi" title="Sorot materi">Sorot</button>
-          <button class="btn icon" id="btn-fullscreen" aria-label="Layar penuh" title="Layar penuh"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 00-2 2v3M21 8V5a2 2 0 00-2-2h-3M3 16v3a2 2 0 002 2h3M16 21h3a2 2 0 002-2v-3"/></svg></button>
+        <div class="controls" role="group" aria-label="Kontrol gambar">
+          <button class="btn" id="btn-prev" aria-label="Materi sebelumnya">‹</button>
+          <button class="btn" id="btn-next" aria-label="Materi berikutnya">›</button>
+          <button class="btn" id="btn-zoom-out" aria-label="Perkecil">−</button>
+          <button class="btn" id="btn-zoom-in" aria-label="Perbesar">+</button>
+          <button class="btn btn-primary" id="btn-fit" aria-label="Pas ke materi">Pas</button>
+          <button class="btn" id="btn-show-all" aria-label="Lihat seluruh halaman">Semua</button>
+          <button class="btn is-active" id="btn-highlight" aria-pressed="true" aria-label="Sorot materi">Sorot</button>
+          <button class="btn" id="btn-fullscreen" aria-label="Layar penuh">⤢</button>
         </div>
       </div>
 
@@ -1091,13 +1032,6 @@
 
         <div class="page-badge" id="page-badge"></div>
         <div class="hint" id="hint">Geser · cubit untuk zoom · ketuk 2×</div>
-        <div class="zoom-dock" role="group" aria-label="Zoom">
-          <button class="btn icon" id="btn-zoom-in" aria-label="Perbesar" title="Perbesar (+)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-          <output class="zoom-level" id="zoom-level" aria-live="off">100%</output>
-          <button class="btn icon" id="btn-zoom-out" aria-label="Perkecil" title="Perkecil (−)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
-          <button class="btn icon" id="btn-fit" aria-label="Pas ke materi" title="Pas ke materi (0)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V5a1 1 0 011-1h4M20 9V5a1 1 0 00-1-1h-4M4 15v4a1 1 0 001 1h4M20 15v4a1 1 0 01-1 1h-4"/></svg></button>
-          <button class="btn icon" id="btn-show-all" aria-label="Lihat seluruh halaman" title="Seluruh halaman"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
-        </div>
       </div>
     </main>
   </div>
@@ -1332,7 +1266,6 @@
       offlineStatus:  $("#offline-status"),
       btnPick:        $("#btn-pick"),
       toast:          $("#toast"),
-      zoomLevel:      $("#zoom-level"),
       splash:         $("#splash"),
     };
 
@@ -1450,7 +1383,6 @@
       dom.stage.style.transform = `translate(${view.x}px, ${view.y}px) scale(${view.scale})`;
 
       animatingUntil = animate ? performance.now() + 650 : 0;
-      updateZoomLabel();
       updateBlurOverlay(animate);
       scheduleTileUpdate();
     }
@@ -1656,13 +1588,6 @@
     const viewportRect = () => dom.viewport.getBoundingClientRect();
     const clampScale = (value) => Math.min(MAX_ZOOM, Math.max(getMinScale(), value));
 
-    /** Persentase zoom: 100% = seluruh halaman muat di layar. */
-    function updateZoomLabel() {
-      const [width, height] = getViewportSize();
-      const base = Math.min(width / IMAGE_WIDTH, height / IMAGE_HEIGHT) || 1;
-      dom.zoomLevel.textContent = `${Math.round(view.scale / base * 100)}%`;
-    }
-
     /** Bila animasi masih jalan, ambil posisi yang sedang terlihat agar tidak melompat. */
     function settleView() {
       if (performance.now() >= animatingUntil) return;
@@ -1834,7 +1759,7 @@
 
     // Tombol layar penuh
     $("#btn-fullscreen").onclick = () => {
-      const frame = dom.viewerFrame;
+      const frame = document.documentElement;
       try {
         if (document.fullscreenElement) {
           document.exitFullscreen();
