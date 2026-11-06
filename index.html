@@ -936,9 +936,33 @@
     }
     html, body { overscroll-behavior: none; touch-action: manipulation; }
     /* Sidebar bisa disembunyikan (desktop) */
-    body.sidebar-hidden .app { grid-template-columns: 1fr; }
-    body.sidebar-hidden .sidebar { display: none; }
+    @media (min-width: 901px) {
+      body.sidebar-hidden .app { grid-template-columns: 1fr; }
+      body.sidebar-hidden .sidebar { display: none; }
+    }
     @media (max-width: 900px) { #btn-sidebar { display: none; } }
+
+    /* HP: area gambar dibuat selebar & setinggi mungkin */
+    @media (max-width: 900px) {
+      body { padding: 6px 6px 0; }
+      .app { height: calc(100dvh - 6px); }
+      .content { height: calc(100dvh - 6px - 62px - env(safe-area-inset-bottom)); padding: 8px; gap: 6px; border-radius: 20px; }
+      .eyebrow { display: none; }
+      .title-block h1 { font-size: 16px; line-height: 1.25; }
+      .controls .btn { height: 38px; }
+      .viewer-frame { border-width: 2px; border-radius: 14px; }
+      .mobile-dock { left: 6px; right: 6px; bottom: calc(6px + env(safe-area-inset-bottom)); height: 52px; padding: 6px; border-radius: 18px; }
+      .mobile-dock .btn, .dock-pick { height: 40px; }
+    }
+    /* HP mendatar: judul & tombol dalam satu baris */
+    @media (max-width: 900px) and (max-height: 500px) {
+      .content { height: calc(100dvh - 6px - 58px - env(safe-area-inset-bottom)); }
+      .toolbar { flex-wrap: nowrap; }
+      .title-block { flex: 1; min-width: 0; }
+      .title-block h1 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .controls { width: auto; flex: none; }
+      .controls .btn { flex: none; padding: 0 10px; min-width: 40px; }
+    }
   </style>
 </head>
 
@@ -1201,7 +1225,7 @@
     const KEYBOARD_PAN_STEP = 60;
 
     // Ruang kosong di sekeliling materi saat "Pas" (5%)
-    const FIT_PADDING = 0.05;
+    const FIT_PADDING = matchMedia("(max-width: 900px)").matches ? 0.015 : 0.05;
 
     // Bingkai sorotan
     const HIGHLIGHT_PADDING = 8;     // jarak bingkai dari materi (piksel gambar)
